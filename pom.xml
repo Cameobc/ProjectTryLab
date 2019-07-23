@@ -20,6 +20,11 @@
 		</repository>
 	</repositories>
 	<dependencies>
+	<!-- 민지 -->
+	<!-- 상현 -->
+	<!-- 승현 -->
+	<!-- 하림 -->
+	<!-- 유라 -->
 		<!-- spring-aop -->
 		<dependency>
 			<groupId>org.springframework</groupId>
