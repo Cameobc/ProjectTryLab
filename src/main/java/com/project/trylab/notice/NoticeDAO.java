@@ -24,7 +24,6 @@ public class NoticeDAO {
 		return result;
 	}
 	
-	
 	//delete
 	public int setDelete(int num) throws Exception {
 		return sqlSession.delete(NAMESPACE+"setDelete", num);
@@ -39,7 +38,6 @@ public class NoticeDAO {
 	public NoticeVO getSelect(int num) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getSelect", num);
 	}
-	
 	
 	//list
 	public List<NoticeVO> getList(PageMaker pageMaker) throws Exception {

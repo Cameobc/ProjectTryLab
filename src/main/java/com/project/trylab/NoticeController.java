@@ -24,16 +24,24 @@ public class NoticeController {
 	
 	//write form
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
-	public String setWrite() throws Exception {
+	public String setWrite(NoticeVO noticeVO) throws Exception {
 		
 		return "notice/noticeWrite";
 	}
 	
 	//write
-	//public String setWrite(NoticeVO noticeVO, HttpSession session, Model model) throws Exception {
-		//int result = noticeService.setWrite(noticeVO);
-	//}
-	
+	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
+	public String setWrite(NoticeVO noticeVO, HttpSession session, Model model) throws Exception {
+		int result = noticeService.setWrite(noticeVO);
+		String view = "common/messageMove";
+		if(result>0) {
+			view = "redirect:./noticeList";
+		}else {
+			model.addAttribute("message", "글쓰기 실패");
+			model.addAttribute("path", "./noticeList");
+		}
+		return view;
+	}
 	
 	//delete
 	@RequestMapping(value = "noticeDelete")
@@ -46,9 +54,47 @@ public class NoticeController {
 		model.addAttribute("message", msg);
 		model.addAttribute("path", "./noticeList");
 		
-		return msg;
+		return "common/messageMove";
 	}
 	
+	//update
+	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
+	public String setUpdate(NoticeVO noticeVO, Model model) throws Exception {
+		int result = noticeService.setUpdate(noticeVO);
+		String view = "common/messageMove";
+		if(result>0) {
+			view = "redirect:./noticeList";
+		}else {
+			model.addAttribute("message", "수정 실패");
+			model.addAttribute("path", "./noticeList");
+		}
+		return view;
+	}
+	
+	//update
+	@RequestMapping(value = "noticeUpdate", method = RequestMethod.GET)
+	public String setUpdate(int num, Model model) throws Exception {
+		NoticeVO noticeVO = noticeService.getSelect(num);
+		model.addAttribute("dto", noticeVO);
+		//model.addAttribute("board", "notice");
+		
+		return "notice/noticeUpdate";
+	}
+	
+	//select
+	@RequestMapping(value = "noticeSelect", method = RequestMethod.GET)
+	public String getSelect(int num, Model model) throws Exception {
+		NoticeVO noticeVO = noticeService.getSelect(num);
+		String view = "common/messageMove";
+		if(noticeVO != null) {
+			view = "notice/noticeSelect";
+			model.addAttribute("dto", noticeVO);
+		}else {
+			model.addAttribute("message", "내용 없음");
+			model.addAttribute("path", "./noticeList");
+		}
+		return view;
+	}
 	
 	
 	//list

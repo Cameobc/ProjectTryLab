@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.trylab.util.PageMaker;
 
-
-
-
 @Service
 public class NoticeService {
 
@@ -21,11 +18,9 @@ public class NoticeService {
 	
 	//write
 	public int setWrite(NoticeVO noticeVO) throws Exception {
-		
 		int result = noticeDAO.setWrite(noticeVO);
 		return result;
 	}
-	
 	
 	//delete
 	public int setDelete(int num) throws Exception {

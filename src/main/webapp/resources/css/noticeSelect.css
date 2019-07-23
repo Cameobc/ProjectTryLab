@@ -1,0 +1,16 @@
+@charset "UTF-8";
+#notice {
+	width: 90%;
+	height: 30px;
+	margin-top:15%;
+	font-size: 15px;
+    color: #9c836a;
+    font-weight: bold;
+    border-bottom: 1px solid #e6e3df;
+    padding-bottom: 50px;
+}
+#title {
+	font-size: 24px;
+	font-weight: 400;
+    padding: 45px 193px 40px 0;
+}
