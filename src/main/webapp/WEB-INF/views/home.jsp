@@ -29,6 +29,12 @@
 						<a href="#main" class="more">Learn More</a>
 					</div>
 				</section>
+				
+			<!-- menu -->				
+				<div class="menu">
+					<div>CUSTOMER SERVICE</div>
+					<div><a href="./notice/noticeList">NOTICE</a></div>
+				</div>				
 
 			<!-- Main -->
 				<div id="main">

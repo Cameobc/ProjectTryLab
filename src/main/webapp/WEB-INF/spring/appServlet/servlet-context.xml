@@ -26,6 +26,10 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.project.trylab" />
+	<context:component-scan base-package="com.project.trylab.notice" />
+	<context:component-scan base-package="com.project.trylab.qna" />
+	<context:component-scan base-package="com.project.trylab.util"/>
+	
 	
 	
 	<!-- xml 파일 읽어들이기 -->
