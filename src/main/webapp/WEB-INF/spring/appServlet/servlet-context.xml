@@ -11,6 +11,7 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -29,7 +30,6 @@
 	<context:component-scan base-package="com.project.trylab.notice" />
 	<context:component-scan base-package="com.project.trylab.qna" />
 	<context:component-scan base-package="com.project.trylab.util"/>
-	
 	
 	
 	<!-- xml 파일 읽어들이기 -->
