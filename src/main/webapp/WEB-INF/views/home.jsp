@@ -34,6 +34,7 @@
 				<div class="menu">
 					<div>CUSTOMER SERVICE</div>
 					<div><a href="./notice/noticeList">NOTICE</a></div>
+					<div><a href="./qna/qnaList">QNA</a></div>
 				</div>				
 
 			<!-- Main -->

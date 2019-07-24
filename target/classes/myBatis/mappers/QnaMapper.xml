@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="QnaMapper">
+
+	<!-- write -->
+	
+	<!-- update -->
+	
+	<!-- delete -->
+	
+	<!-- select -->
+	
+	
+	
+	
+	
+	
+	<!-- list -->
+	<select id="getList" parameterType="com.project.trylab.util.PageMaker" resultType="com.project.trylab.qna.QnaVO" >
+		select * from
+		(select rownum R, Q.* from
+		(select * from qna where
+		<choose>
+			<when test="kind == 1">
+				title
+			</when>
+			<when test="kind == 2">
+				writer
+			</when>
+			<otherwise>
+				contents
+			</otherwise>
+		</choose>
+		like '%' || #{search} || '%'
+		order by ref desc, step asc) Q)
+		where R between #{startRow} and #{lastRow}
+	</select>
+
+	<!-- totalCount -->
+	<select id="getTotalCount" parameterType="com.project.trylab.util.PageMaker" resultType="java.lang.Integer">
+		select count(num) from qna
+		<choose>
+			<when test="kind == 1">
+				title
+			</when>
+			<when test="kind == 2">
+				writer
+			</when>
+			<otherwise>
+				contents
+			</otherwise>
+		</choose>
+		like '%' || #{search} || '%'
+	</select>
+
+
+
+</mapper>

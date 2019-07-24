@@ -13,7 +13,6 @@
 </head>
 <body>
 	<div class="container">
-	
 		<div class="header">
 			<div id="notice">공지사항</div>
 			<div id="notice_sub">
@@ -25,8 +24,7 @@
 				<div class="btn b1">
 					<div id="btn1" OnClick="location.href='./noticeWrite';">작성하기</div>
 				</div>
-			
-		</div>	<!-- header end -->
+		</div>	
 	
 	
 	  <table class="table table-hover">
@@ -43,18 +41,18 @@
 		    <tbody>
 		      <tr>
 		        <td style="padding-top: 20px">${dto.num}</td>
-		        <td style="padding-top: 20px"><a href="./noticeSelect?num=${dto.num}">${dto.title}</a></td>
-		        <td style="padding-top: 20px; text-align: center;">${dto.reg_date}</td>
+		        <%-- <td style="padding-top: 20px"><a href="./noticeSelect?num=${dto.num}">${dto.title}</a></td> --%>
+		        <td style="padding-top: 20px; padding-left:50px; cursor: pointer;" onclick="location.href='./noticeSelect?num=${dto.num}'">${dto.title}</td>
+		        <td style="padding-top: 20px; text-align: center; color: #999;">${dto.reg_date}</td>
 		        <td style="padding-top: 20px">${dto.hit}</td>
 		      </tr>
 		    </tbody>
 	  	</c:forEach>  
-	  
 	  </table>
-	</div>	
+	</div>	<!-- container end -->
 		
-	
-	
+		
+	<!-- 페이징처리 -->
 	
 	
 	

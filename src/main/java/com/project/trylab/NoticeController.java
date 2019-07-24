@@ -49,7 +49,7 @@ public class NoticeController {
 		int result = noticeService.setDelete(num);
 		String msg = "삭제 실패";
 		if(result>0) {
-			msg = "삭제 성공";
+			msg = "삭제하였습니다.";
 		}
 		model.addAttribute("message", msg);
 		model.addAttribute("path", "./noticeList");
@@ -76,7 +76,6 @@ public class NoticeController {
 	public String setUpdate(int num, Model model) throws Exception {
 		NoticeVO noticeVO = noticeService.getSelect(num);
 		model.addAttribute("dto", noticeVO);
-		//model.addAttribute("board", "notice");
 		
 		return "notice/noticeUpdate";
 	}
