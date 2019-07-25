@@ -6,6 +6,13 @@
 <mapper namespace="QnaMapper">
 
 	<!-- write -->
+	<insert id="setWrite" parameterType="com.project.trylab.qna.QnaVO">
+		<selectKey keyProperty="num" resultType="java.lang.Integer" order="BEFORE">
+			select qna_seq.nextval from dual
+		</selectKey>
+		insert into qna values(#{num}, #{title}, #{writer}, #{contents}, #{name}, #{email}, #{phone}, sysdate, 0, ${num}, 0, 0)
+	</insert>
+	
 	
 	<!-- update -->
 	
@@ -41,7 +48,7 @@
 
 	<!-- totalCount -->
 	<select id="getTotalCount" parameterType="com.project.trylab.util.PageMaker" resultType="java.lang.Integer">
-		select count(num) from qna
+		select count(num) from qna where
 		<choose>
 			<when test="kind == 1">
 				title

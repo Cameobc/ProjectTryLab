@@ -3,6 +3,7 @@ package com.project.trylab.qna;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,11 @@ public class QnaService {
 	
 	
 	//write
+	public int setWrite(QnaVO qnaVO, HttpSession session) throws Exception {
+		int result = qnaDAO.setWrite(qnaVO);
+		
+		return result;
+	}
 	
 	
 	

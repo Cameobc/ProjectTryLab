@@ -3,6 +3,7 @@ package com.project.trylab;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,25 @@ public class QnaController {
 	
 	
 	//write
+	@RequestMapping(value = "qnaWrite", method = RequestMethod.GET)
+	public String setWrite(QnaVO qnaVO) throws Exception {
+		return "qna/qnaWrite";
+	}
+	
+	//write
+	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
+	public ModelAndView setWrite(QnaVO qnaVO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = qnaService.setWrite(qnaVO, session);
+		if(result>0) {
+			mv.setViewName("redirect:./qnaList");
+		}else {
+			mv.addObject("message", "글쓰기 실패");
+			mv.addObject("path", "./qnaList");
+		}
+		return mv;
+	}
 	
 	//delete
 	
