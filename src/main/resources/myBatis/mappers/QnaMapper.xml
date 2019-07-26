@@ -10,7 +10,7 @@
 		<selectKey keyProperty="num" resultType="java.lang.Integer" order="BEFORE">
 			select qna_seq.nextval from dual
 		</selectKey>
-		insert into qna values(#{num}, #{title}, #{writer}, #{contents}, #{name}, #{email}, #{phone}, sysdate, 0, ${num}, 0, 0)
+		insert into qna values(#{num}, #{title}, #{writer}, #{contents}, #{email, jdbcType=VARCHAR}, sysdate, 0, ${num}, 0, 0)
 	</insert>
 	
 	

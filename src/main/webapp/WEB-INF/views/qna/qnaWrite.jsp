@@ -17,7 +17,7 @@
 	  <div id="qna">1:1 문의</div>
 	  <br>
 	  
-	<form>
+	<form action="./qnaWrite" method="post">
 	  <label for="title" style="color:#9c836a;">제목</label>
 	  <div>
 	  	<input type="text" id="title" name="title">
@@ -29,9 +29,9 @@
 	  </div><br>
 	  
 	  <div style="float: left">
-		  <label for="name" style="color:#9c836a;">이름</label>
+		  <label for="writer" style="color:#9c836a;">이름</label>
 		  <div>
-		  	<input type="text" id="name" name="name">
+		  	<input type="text" id="writer" name="writer">
 		  </div>	  	  
 	  </div>
 	
@@ -40,8 +40,9 @@
 		  <div>
 		  	<input type="text" id="email" name="email">
 		  </div>
-	  </div>
+	  </div><br><br><br>
 
+<!-- 
 	  <div>
 	  	<label for="phone" style="color:#9c836a;">휴대폰 번호</label>
 	  	<div>
@@ -50,6 +51,7 @@
 			<input type="text" id="phone" name="phone">
 	  	</div>
 	  </div>	
+ -->
 		
 		<div id="line"></div>
 	  
@@ -58,9 +60,7 @@
 	  	</div>
 	  	
 	  	<div id="c2"><input type="checkbox"> 동의함</div>
-	  	<br>
-
-	
+		<br><br><br>	
 		<div id="agree_text">
 			<textarea rows="10" cols="111" style="padding-left: 10px;">
 

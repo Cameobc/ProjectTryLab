@@ -3,6 +3,7 @@ package com.project.trylab;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class QnaController {
 	
 	//write
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
-	public ModelAndView setWrite(QnaVO qnaVO, HttpSession session) throws Exception {
+	public ModelAndView setWrite(QnaVO qnaVO, HttpSession session, HttpServletRequest request ) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = qnaService.setWrite(qnaVO, session);

@@ -30,6 +30,7 @@
 	<context:component-scan base-package="com.project.trylab.notice" />
 	<context:component-scan base-package="com.project.trylab.qna" />
 	<context:component-scan base-package="com.project.trylab.util"/>
+	<context:component-scan base-package="com.project.trylab.file" />
 	
 	
 	<!-- xml 파일 읽어들이기 -->
