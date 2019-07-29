@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileSaver {
 	// 파일 저장
-	
+	//
 	//1. Spring에서 제공하는 FileCopyUtils 클래스의 copy 메서드 사용
 	// 저장경로, MultipartFile
 	public String saveFile(String realPath, MultipartFile multipartFile) throws Exception {
