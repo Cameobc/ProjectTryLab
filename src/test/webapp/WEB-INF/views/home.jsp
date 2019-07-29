@@ -1,4 +1,7 @@
 <!DOCTYPE HTML>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <!--
 	Full Motion by TEMPLATED
 	templated.co @templatedco
@@ -10,9 +13,29 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="./resources/assets/css/main.css" />
+<c:import url="./temp/header.jsp"  />
+<style type="text/css">
+	
+	ul {
+		margin: 0;
+	}
+	.category_wrap {
+		width: 85%; height: 100px; margin: 0 auto;
+	}
+	.category {
+		width : 80%; list-style: none; text-align: center; height: 50px; margin: 0 auto;
+	}
+	.cate {
+		width : 140px; height:50px; border: 1px black;
+		 background: #e6e6e6; float: left; vertical-align: middle;
+	} 
+	.cate>a {
+		color :black; vertical-align: middle; text-align: center; line-height: 3em; font-weight: normal; font-size: 16px;
+	}
+
+</style>
 	</head>
 	<body id="top">
-
 			<!-- Banner -->
 			<!--
 				To use a video as your background, set data-video to the name of your video without
@@ -22,9 +45,8 @@
 				<section id="banner" data-video="images/banner">
 					<div class="inner">
 						<header>
-							<h1>Full Motion</h1>
-							<p>A responsive video gallery template with a functional lightbox<br />
-							designed by <a href="https://templated.co/">Templated</a> and released under the Creative Commons License.</p>
+							<h1>TryLab</h1>
+
 						</header>
 						<a href="#main" class="more">Learn More</a>
 					</div>
@@ -38,6 +60,18 @@
 
 			<!-- Main -->
 				<div id="main">
+					<div class="category_wrap">
+						<ul class ="category">
+							<li class="cate"><a>디자인</a></li>
+							<li class="cate"><a>실무역량</a></li>
+							<li class="cate"><a>뷰티</a></li>
+							<li class="cate"><a>영상</a></li>
+							<li class="cate"><a>외국어</a></li>
+							<li class="cate"><a>음악</a></li>
+							<li class="cate"><a>라이프스타일</a></li>
+							<li class="cate"><a>재테크</a></li>
+						</ul>
+					</div>
 					<div class="inner">
 
 					<!-- Boxes -->
@@ -71,7 +105,7 @@
 							</div>
 
 							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
+								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="./resources/images/pic04.jpg" alt="" /></a>
 								<div class="inner">
 									<h3>Nascetur nunc varius commodo</h3>
 									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
@@ -80,7 +114,7 @@
 							</div>
 
 							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="./resources/images/pic05.jpg" alt="" /></a>
+								<a href="https://youtu.be/s6zR2T9vn2c" class="./resources/image fit"><img src="images/pic05.jpg" alt="" /></a>
 								<div class="inner">
 									<h3>Nascetur nunc varius commodo</h3>
 									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
@@ -102,29 +136,7 @@
 					</div>
 				</div>
 
-			<!-- Footer -->
-				<footer id="footer">
-					<div class="inner">
-						<h2>Etiam veroeros lorem</h2>
-						<p>Pellentesque eleifend malesuada efficitur. Curabitur volutpat dui mi, ac imperdiet dolor tincidunt nec. Ut erat lectus, dictum sit amet lectus a, aliquet rutrum mauris. Etiam nec lectus hendrerit, consectetur risus viverra, iaculis orci. Phasellus eu nibh ut mi luctus auctor. Donec sit amet dolor in diam feugiat venenatis. </p>
-
-						<ul class="icons">
-							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-						<p class="copyright">&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com/">Unsplash</a>. Videos: <a href="http://coverr.co/">Coverr</a>.</p>
-					</div>
-				</footer>
-
-		<!-- Scripts -->
-			<script src="./resources/assets/js/jquery.min.js"></script>
-			<script src="./resources/assets/js/jquery.scrolly.min.js"></script>
-			<script src="./resources/assets/js/jquery.poptrox.min.js"></script>
-			<script src="./resources/assets/js/skel.min.js"></script>
-			<script src="./resources/assets/js/util.js"></script>
-			<script src="./resources/assets/js/main.js"></script>
+<c:import url="./temp/footer.jsp" />
 
 	</body>
 </html>
