@@ -15,7 +15,21 @@
  	delete member where id = #{id}
  </delete>
  
-
+	<resultMap type="MemberVO" id="member">
+		<id property="id" column="id" />
+		<result property="pw" column="pw"/>
+		<result property="name" column="name" />
+		<result property="email" column="email"/>
+		<result property="gender" column="gender" />
+		<result property="grade" column="grade"/>
+ 		<association property="memberFileVO" resultMap="fileResult" javaType="com.project.file.MemberFileVO" />
+ 	 
+ </resultMap>
+ <resultMap type="com.project.file.MemberFileVO" id="fileResult">
+ 	<id property="fnum"	column="fnum" />
+ 	<result property="fname" column="fname" />
+ 	<result property="oname" column="oname" />
+ </resultMap>
  
  <select id="getSelect" resultMap="member" parameterType="MemberVO" resultType="MemberVO">
  	select M.*, F.*
