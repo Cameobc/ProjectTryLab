@@ -22,27 +22,7 @@
 	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
-	
-	<!-- myBatis -->
-	
-		<!-- connection - properties 파일 사용  -->
-	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
-		<property name="username" value="${oracle.user}"  />
-		<property name="password" value="${oracle.pw}"/>
-		<property name="url" value="${oracle.url}" />
-		<property name="driverClassName" value="${oracle.driver}" />
-	</bean>
-	
-	<!-- connection, xml -->
-	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:/myBatis/mappers/**/*Mapper.xml" />
-		<property name="configLocation" value="classpath:/myBatis/config/myBatisConfig.xml" />
-	</bean>
-		<!-- 최종 mapping -->
-	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
-	</bean>	
+
 	
 	<!-- transaction 관리 -->
 	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="dataSourceTransactionManager">
