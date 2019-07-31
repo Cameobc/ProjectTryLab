@@ -7,7 +7,6 @@
 	<!-- src/main/resources/properties/message.properties -->
 		<!-- <property name="basename" value="/properties/message"></property> --> <!-- 파일이 하나 -->
 		
-	
 	<bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource">
 		<!-- <property name="basename" value="classpath:/properties/message"></property> -->
 		 <property name="basenames">

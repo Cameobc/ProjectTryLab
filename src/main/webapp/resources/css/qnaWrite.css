@@ -40,6 +40,9 @@
   padding-left: 20px;
   border: 1px solid #c0c0c0;
 }
+#add {
+	margin-top: 10px;
+}
 /*
 #phone {
   padding: 12px 64px;
@@ -51,7 +54,7 @@
 */
 #line {
 	width: 70%;
-	margin-top : 4%;
+	margin-top : 2%;
 	border-bottom: 1px solid #e6e3df;
 }
 #agree {

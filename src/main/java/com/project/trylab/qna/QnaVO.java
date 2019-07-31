@@ -1,6 +1,9 @@
 package com.project.trylab.qna;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
+import com.project.trylab.file.FileVO;
 
 
 public class QnaVO {
@@ -9,15 +12,21 @@ public class QnaVO {
 	private String title;
 	private String writer;
 	private String contents;
-	private String email; //
+	private String email;
 	private Date reg_date;
 	private int hit;
 	private int step;
 	private int ref;
 	private int depth;
-	//private ArrayList<FileDTO> files;
+	private ArrayList<FileVO> files;
 	
 	
+	public ArrayList<FileVO> getFiles() {
+		return files;
+	}
+	public void setFiles(ArrayList<FileVO> files) {
+		this.files = files;
+	}
 	public int getNum() {
 		return num;
 	}

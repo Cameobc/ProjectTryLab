@@ -21,6 +21,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
 	<!-- configurer -->
 	<beans:bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<beans:property name="location" value="classpath:/properties/DataSource.properties"/>

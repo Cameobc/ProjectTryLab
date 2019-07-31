@@ -17,7 +17,7 @@
 	  <div id="qna">1:1 문의</div>
 	  <br>
 	  
-	<form action="./qnaWrite" method="post">
+	<form action="./qnaWrite" method="post" enctype="multipart/form-data">
 	  <label for="title" style="color:#9c836a;">제목</label>
 	  <div>
 	  	<input type="text" id="title" name="title">
@@ -52,6 +52,10 @@
 	  	</div>
 	  </div>	
  -->
+		<div>
+			<input type="file" id="add" value="파일 추가">
+		</div>
+
 		
 		<div id="line"></div>
 	  

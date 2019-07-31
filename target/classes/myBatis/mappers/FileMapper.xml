@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FileMapper">
+
+	<!-- write -->
+	<insert id="setWrite" parameterType="java.util.List">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select qna_seq.nextval as id from dual
+		</selectKey>
+		insert all
+		<foreach collection="list" item="item" separator=" " index="i">
+			into files values(qna_seq.nextval +#{i}, #{item.num}, #{item.fname}, #{item.oname})
+		</foreach>
+		select * from dual
+	</insert>
+	
+	<!-- delete -->
+	<delete id="setDelete" parameterType="java.lang.Integer">
+		delete files where fnum=#{fnum}
+	</delete>
+	
+	<!-- delete All -->
+	<delete id="setDeleteAll" parameterType="java.lang.Integer">
+		delete files where num=#{num}
+	</delete>
+
+	<!-- list -->
+	<select id="getList" parameterType="java.lang.Integer" resultType="com.project.trylab.file.FileVO">
+		select * from files where num=#{num}	
+	</select>	
+		
+	<!-- update -->
+	<!-- 
+	<update id="setUpdate" parameterType="com.project.trylab.file.FileVO">
+		update files set fname=#{fname}, oname=#{oname} where fnum=#{fnum}
+	</update>
+	 -->	
+	
+	<!-- select -->
+	<!-- 
+	<select id="getSelect" parameterType="java.lang.Integer" resultType="com.project.trylab.file.FileVO">
+		select * from files where fnum=#{fnum}
+	</select>
+	 -->
+	
+	
+
+	
+
+
+
+</mapper>

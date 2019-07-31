@@ -13,16 +13,47 @@
 		insert into qna values(#{num}, #{title}, #{writer}, #{contents}, #{email, jdbcType=VARCHAR}, sysdate, 0, ${num}, 0, 0)
 	</insert>
 	
-	
 	<!-- update -->
+	<update id="setUpdate" parameterType="com.project.trylab.qna.QnaVO">
+		update qna set title=#{title}, contents=#{contents} where num=#{num}
+	</update>
 	
 	<!-- delete -->
+	<delete id="setDelete" parameterType="java.lang.Integer">
+		delete qna where num=#{num}
+	</delete>
 	
-	<!-- select -->
+	<!-- select --> <!-- 밑에 resultmap id불러옴(qnaResult) -->
+	<select id="getSelect" parameterType="java.lang.Integer" resultMap="qnaResult">
+		select * from qna Q FULL JOIN files F
+		on (Q.num = F.num)
+		where Q.num=#{num}
+	</select>
 	
 	
+	<!-- result map -->
+	<!-- property:VO변수명
+		 column:DB컬럼명 -->
+	<resultMap type="com.project.trylab.qna.QnaVO" id="qnaResult">
+		<id property="num" column="num" /> 		<!-- pk -->
+		<result property="title" column="title"/>
+		<result property="writer" column="writer"/>
+		<result property="contents" column="contents"/>
+		<result property="reg_date" column="reg_date"/>
+		<result property="hit" column="hit"/>
+		<result property="ref" column="ref"/>
+		<result property="step" column="step"/>
+		<result property="depth" column="depth"/>
+		<collection property="files" resultMap="fileResult" javaType="java.util.List" ofType="com.project.trylab.file.FileVO" />
+	</resultMap>
 	
-	
+	<!-- fileResult -->
+	<resultMap type="com.project.trylab.file.FileVO" id="fileResult">
+		<id property="fnum" column="fnum"/>
+		<result property="num" column="num"/>
+		<result property="fname" column="fname"/>
+		<result property="oname" column="oname"/>
+	</resultMap>
 	
 	
 	<!-- list -->
