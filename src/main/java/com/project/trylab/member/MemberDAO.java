@@ -12,7 +12,7 @@ import com.project.trylab.member.MemberVO;
 import com.project.trylab.util.PageMaker;
 
 
-
+@Repository
 public class MemberDAO {
 
 	@Inject

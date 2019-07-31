@@ -11,15 +11,15 @@
 		id, pw, name, email, grade
 	</sql>
 	
-	<select id="getId" resultType="com.project.trylab.memberVO" parameterType="com.project.trylab.memberVO">
+	<select id="getId" resultType="com.project.trylab.member.memberVO" parameterType="com.project.trylab.member.memberVO">
 		select id from member where id=#{id} 
 	</select>
 	
-	<insert id="setWrite" parameterType="com.project.trylab.memberVO">
+	<insert id="setWrite" parameterType="com.project.trylab.member.memberVO">
 		insert into member  (<include refid="colums" />) values(#{id}, #{pw}, #{name}, #{email}, 3)
 	</insert>
 	
-	<resultMap type="com.project.trylab.memberVO" id="member">
+	<resultMap type="com.project.trylab.member.memberVO" id="member">
 		<id property="id" column="id"/>
 		<result property="pw" column="pw"/>
 		<result property="name" column="name"/>
@@ -35,7 +35,7 @@
 		<result property="oname" column="oname"/>
 	</resultMap> -->
 	
-	<select id="getSelect" resultMap="member" parameterType="com.project.trylab.memberVO">
+	<select id="getSelect" resultMap="member" parameterType="com.project.trylab.member.memberVO">
 		select M.*, F.*
 		from member M FULL join MEMBERFILE F
 		on (M.id=F.id)
