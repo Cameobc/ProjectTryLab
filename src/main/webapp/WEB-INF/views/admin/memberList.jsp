@@ -6,10 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../resources/assets/css/main.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 <c:import url="../temp/header.jsp" />
+
 <style type="text/css">
 	body { 
 		background-color: white;
@@ -18,19 +20,43 @@
 		color : black;
 	}
 
-
 </style>
+
 </head>
 <body>
 	<div class="container">
 		
+	<h1>memberList Page</h1>	 
+	
+	<form action="./memberList" id="frm" method="post">	
+	  <table class="table table-hover">
+		<tr>
+			<td>ID</td>
+			<td>PW</td>
+			<td>NAME</td>
+			<td>PHONE</td>
+			<td>EMAIL</td>
+			<td>GENDER</td>
+			<td>GRADE</td>
+		</tr>
+			<c:forEach items="${list }" var="dto">
+				<tr>
+					<td>${dto.id }</td>
+					<td>${dto.pw }</td>
+					<td>${dto.name }</td>
+					<td>${dto.phone }</td>
+					<td>${dto.email}</td>
+					<td>${dto.gender }</td>
+					<td>${dto.grade }</td>
+				</tr>
+			</c:forEach>	
 	
 	
+	   </table>
 	
+	</form>
 	
-	
-	
-	
+
 	
 	</div>
 	

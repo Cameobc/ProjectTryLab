@@ -13,7 +13,9 @@
 	<typeAlias type="com.project.member.MemberVO" alias="MemberVO"/>
 	<typeAlias type="com.project.util.PageMaker" alias="PageMaker"/>
 	<typeAlias type="com.project.file.MemberFileVO" alias="MemberFileVO"/>
-
+	<typeAlias type="com.project.approval.ApprovalVO" alias="ApprovalVO"/>
+	<typeAlias type="com.project.license.LicenseVO" alias="LicenseVO" />
+	
 
 
 

@@ -7,10 +7,30 @@
  <mapper namespace="MemberMapper">
 
 
+<select id="getCount" resultType="java.lang.Integer" parameterType="PageMaker">
+	select count(id) from member
+	where grade!=0 and
+	<choose>
+	<when test="kind==1">
+		id
+	</when>
+	<when test="kind==2">
+		email
+	</when>
+	<otherwise>
+		grade
+	</otherwise>
+	</choose>
+	like '%'||#{search}||'%'
+
+</select>
+
+<!-- 회원 가입 -->
 <insert id="setWrite" parameterType="MemberVO">
 	 insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{gender}, 2)
 </insert>
  
+ <!-- 탈퇴 -->
  <delete id="setDelete" parameterType="java.util.List">
  	delete member where id = #{id}
  </delete>
@@ -20,6 +40,7 @@
 		<result property="pw" column="pw"/>
 		<result property="name" column="name" />
 		<result property="email" column="email"/>
+		<result property="phone" column="phone" />
 		<result property="gender" column="gender" />
 		<result property="grade" column="grade"/>
  		<association property="memberFileVO" resultMap="fileResult" javaType="com.project.file.MemberFileVO" />
@@ -27,6 +48,7 @@
  </resultMap>
  <resultMap type="com.project.file.MemberFileVO" id="fileResult">
  	<id property="fnum"	column="fnum" />
+
  	<result property="fname" column="fname" />
  	<result property="oname" column="oname" />
  </resultMap>
@@ -37,16 +59,6 @@
  	where M.id=#{id} and M.pw=#{pw}
 
  </select>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
  
  </mapper>

@@ -14,7 +14,7 @@ public class MemberFileDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
-	private static final String NAMESPACE ="MemberfileMapper.";
+	private static final String NAMESPACE ="MemberFileMapper.";
 	
 	public int setWrite(MemberFileVO memberFileVO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"setWrite", memberFileVO);

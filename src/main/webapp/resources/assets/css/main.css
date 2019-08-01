@@ -21,7 +21,7 @@
 	}
 
 	a { 
-		text-decoration: none; border-bottom: 0px; 
+		text-decoration: none; border-bottom: 0px;
 	}
 	h {
 		color : black;
@@ -370,9 +370,7 @@
 	input[type="tel"],
 	select,
 	textarea {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
+
 		appearance: none;
 		background: rgba(144, 144, 144, 0.075);
 		border-radius: 4px;
@@ -523,29 +521,28 @@
 	input[type="radio"] + label:before {
 		border-radius: 100%;
 	}
-
 	::-webkit-input-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
+		color: black !important;
 		opacity: 1.0;
 	}
 
 	:-moz-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
+		color:gray;
 		opacity: 1.0;
 	}
 
 	::-moz-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
+		color:gray;
 		opacity: 1.0;
 	}
 
 	:-ms-input-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
+		color:gray;
 		opacity: 1.0;
 	}
 
 	.formerize-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
+		color:gray;
 		opacity: 1.0;
 	}
 
