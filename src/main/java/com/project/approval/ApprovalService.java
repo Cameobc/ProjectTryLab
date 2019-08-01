@@ -41,7 +41,9 @@ public class ApprovalService {
 		certificateVO.setFname(fname);
 		certificateVO.setOname(oname);
 		
-		fname = fileSaver.saveFile(realPath2, license);
+		/////////////////////////////////////////////////////
+		
+		fname = fileSaver.saveFile2(realPath2, license);
 		System.out.println("fname2=" + fname);
 		
 		oname=license.getOriginalFilename();
