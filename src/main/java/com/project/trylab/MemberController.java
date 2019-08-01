@@ -19,6 +19,12 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
+	
+	@RequestMapping(value = "memberOrder")
+	public void order() throws Exception{
+		
+	}
+	
 	@RequestMapping(value="memberJoin", method = RequestMethod.POST)
 	public ModelAndView setWrite(MemberVO memberVO, MultipartFile photo, HttpSession session )throws Exception {
 		ModelAndView mv = new ModelAndView();
