@@ -131,6 +131,5 @@
 				</div>
 
 <c:import url="./temp/footer.jsp" />
-
 	</body>
 </html>

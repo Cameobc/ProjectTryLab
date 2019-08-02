@@ -9,8 +9,6 @@
 <link rel="stylesheet" href="../resources/assets/css/main.css" />
 <c:import url="../temp/header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 @import 
@@ -164,6 +162,7 @@ url(//fonts.googleapis.com/earlyaccess/hanna.css);
 					<input type="radio" class="checks" id="payment1" name="payment" value="1"> 무통장 입금 &nbsp; &nbsp; &nbsp; &nbsp;
 					<input type="radio" class="checks" id="payment2" name="payment" value="2"> 카드 결제
 				</div>
+				<h1><spring  </h1>
 			</div>
 			<div class="btn_div">
 				<input type="button" value="결제하기" class="pay">
@@ -177,7 +176,11 @@ url(//fonts.googleapis.com/earlyaccess/hanna.css);
 		if(payment==1){
 			
 		}else if(payment==2){
-			
+			$.ajax({
+				url:"../pay/payment",
+				type:"POST",
+				
+			});
 		}else{
 			
 		}
