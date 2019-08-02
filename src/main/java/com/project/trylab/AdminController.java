@@ -14,7 +14,7 @@ import com.project.member.MemberVO;
 import com.project.util.PageMaker;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/")
 public class AdminController {
 	
 	@Inject

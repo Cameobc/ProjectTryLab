@@ -1,7 +1,5 @@
 package com.project.file;
 
-import org.springframework.stereotype.Component;
-
 
 public class MemberFileVO {
 

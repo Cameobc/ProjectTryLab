@@ -3,7 +3,6 @@ package com.project.license;
 public class LicenseVO {
 	private int num;
 	private String id;
-	private String kind;
 	private String fname;
 	private String oname;
 	
@@ -20,12 +19,7 @@ public class LicenseVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getKind() {
-		return kind;
-	}
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
+
 	public String getFname() {
 		return fname;
 	}

@@ -22,4 +22,8 @@ public class MemberFileDAO {
 	public MemberFileVO getSelect(MemberVO memberVO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getSelect", memberVO);
 	}
+	public int profileUpdate(String id) throws Exception {
+		return sqlSession.update(NAMESPACE+"profileUpdate", id);
+	}
+	
 }

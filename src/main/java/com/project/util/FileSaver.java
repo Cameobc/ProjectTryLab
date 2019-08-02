@@ -36,6 +36,28 @@ public class FileSaver {
 		
 	}
 	
+	public String saveFile_test(String realPath, MultipartFile multipartFile, MultipartFile multipartFile2) throws Exception {
+		File file = new File(realPath);
+		if(!file.exists()) {
+			file.mkdirs();
+		}
+		
+		//a. 저장할 파일명 생성 (중복이 없어야 함)
+		// 	 UUID 클래스 사용 (Universal Unique ID)
+		// 저장될 이름
+		String fileSystemName= UUID.randomUUID().toString();
+		String originalName = multipartFile.getOriginalFilename();
+		originalName = originalName.substring(originalName.lastIndexOf("."));	// 확장자
+		
+		fileSystemName = fileSystemName + originalName;
+		
+		//b. 저장
+		file = new File(realPath, fileSystemName);
+		FileCopyUtils.copy(multipartFile.getBytes(), file);
+		
+		return fileSystemName;
+		
+	}
 	
 	//2. OutputStream 연결
 	public String saveFile2(String realPath, MultipartFile multipartFile) throws Exception {

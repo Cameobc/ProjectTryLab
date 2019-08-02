@@ -38,24 +38,28 @@
 	 }
 	 .input{
 	 	width: 100px;
+
 	 }
 	::-webkit-input-placeholder {
 		color:gray !important;
 		opacity: 1.0;
 	}
 	.label { 
-		width:80px; margin-right: 30px; display:inline-block; 
+		width:100px; margin-right: 30px; display:inline-block; 
 	}
 
 </style>
 </head>
 <body>
 <div class="container">
-		<div class="form-group">
-			<label> 프로필 사진</label>
-			<input type="image" src="../resources/member/">
+		<div>
+			<input type="hidden" value="${member.id }">
+			<label for="profile" class="label">프로필 사진</label>
+			
+			<img src="../resources/member/${member.memberFileVO.fname}" style="width:100px; height:100px;">
+		
 		</div>
-	<form:form commandName="approvalVO" id="frm">
+		<form:form commandName="approvalVO" id="frm" enctype="multipart/form-data">
 	
 		<div class="form-group">
 			<label for="id" class="label">ID : </label>
@@ -89,42 +93,24 @@
 			<input type="text" name="kind" class="form-control input" placeholder="예) 토플, 입상 경력, GTQ 1급 ,..."/>
 			<input type="file" class="file" id="license" name="license">
 		</div>	
-		<form:button> 승인 요청 </form:button>
-	
-	
+
+			<form:button >승인 요청</form:button>
+
+		
 	</form:form>
 
 </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+<script type="text/javascript">
+
+</script>
 	
 	
 	
 	
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
 
 
 

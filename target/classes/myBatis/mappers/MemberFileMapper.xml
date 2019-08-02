@@ -13,7 +13,11 @@
 		select * from memberFile where id=#{id}
 	</select>
 
-
+	<update id="profileUpdate" parameterType="java.lang.String">
+		update memberFile set fname=#{fname}, oname=#{oname} where id=#{id}
+		
+	</update>
+	
 
 
 </mapper>

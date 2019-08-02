@@ -1,5 +1,7 @@
 package com.project.approval;
 
+
+
 import com.project.certificate.CertificateVO;
 import com.project.license.LicenseVO;
 
@@ -9,12 +11,19 @@ public class ApprovalVO {
 	private String confirmType;
 	private String college;
 	private String major;
+	private String kind;
 	private String colStatus;
 	private CertificateVO certificateVO;
 	private LicenseVO licenseVO;
 	
 	
 	
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 	public CertificateVO getCertificateVO() {
 		return certificateVO;
 	}

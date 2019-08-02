@@ -77,11 +77,7 @@ public class MemberController {
 		
 		int result = approvalService.tutorRequest(approvalVO, certificate, license, session);
 		String message= "승인 요청 실패";
-		
-		if(result<0) {
-			System.out.println("result = 0");
-		}
-		
+
 		if(result>0) {
 			message = "승인 요청 완료";
 		}

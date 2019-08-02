@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+  
 <mapper namespace="ApprovalMapper">
+
 	<insert id="tutorRequest" parameterType="ApprovalVO">
 		insert into approval 
-		values (#{id}, #{nickName}, #{confirmType}, #{college}, #{major}, #{colStatus})
+		values (#{id}, #{nickName}, #{confirmType}, #{college}, #{major}, #{kind}, #{colStatus})
 	</insert>
+<!-- 
+	<select id="tutorApproval" parameterType="PageMaker" resultType="ApprovalVO">
+		select * from
+		(select rownum R, A.* from 
+		(select * from approval
+		order
+		)
+	
+	
+	
+	</select>
 
-
-
-
-
+-->
 
 
 

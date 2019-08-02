@@ -15,13 +15,13 @@
 	body { 
 		margin:  0px;
 		background-color: white;
-		color:black;
+		
 	}
 	label {
 		color:black;
 	} 
 
-	a { 
+	 a { 
 		text-decoration: none; border-bottom: none;
 		    transition: 0.2s ease-in-out;
 	
@@ -30,7 +30,9 @@
 		text-decoration: none; list-style: none;
 	}
 	
-	
+	.container {
+		color: black;
+	}
 	
 	.black { color: black;}
 	

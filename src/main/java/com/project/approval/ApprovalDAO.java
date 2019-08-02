@@ -10,9 +10,11 @@ public class ApprovalDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
-	private final static String NAMESPACE="ApprovalMapper.";
+	private static final String NAMESPACE="ApprovalMapper.";
 	
 	public int tutorRequest(ApprovalVO approvalVO) {
 		return sqlSession.insert(NAMESPACE+"tutorRequest", approvalVO); 
 	}
+	
+
 }

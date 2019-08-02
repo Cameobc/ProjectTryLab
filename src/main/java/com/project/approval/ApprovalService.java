@@ -51,10 +51,12 @@ public class ApprovalService {
 		licenseVO.setId(approvalVO.getId());
 		licenseVO.setFname(fname);
 		licenseVO.setOname(oname);
-		
+
+
 		int result = approvalDAO.tutorRequest(approvalVO);
 		result = certificateDAO.setWrite(certificateVO);
 		result = licenseDAO.setWrite(licenseVO);
+		System.out.println("result=" + result);
 		
 		return result;
 

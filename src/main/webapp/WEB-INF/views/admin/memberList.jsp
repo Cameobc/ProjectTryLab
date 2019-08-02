@@ -15,9 +15,10 @@
 <style type="text/css">
 	body { 
 		background-color: white;
+		color: black;
 	}
-	h1 {
-		color : black;
+	h1, a {
+		color : black !important;
 	}
 
 </style>
@@ -56,7 +57,7 @@
 	
 	</form>
 	
-
+	<a href="./adminMain"> 뒤로 가기 </a>
 	
 	</div>
 	
