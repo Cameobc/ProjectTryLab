@@ -10,12 +10,12 @@
 
 
 	<!-- 유라 -->
-	<typeAlias type="com.project.util.PageMaker" alias="PageMaker"/>
+	
 	
 	
 	
 	<!-- 성현  -->
-	<typeAlias type="com.project.file.FileVO" alias="FileVO"/>
+	
 
 	
 	
