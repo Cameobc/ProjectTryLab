@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.trylab.notice.NoticeService;
-import com.project.trylab.notice.NoticeVO;
-import com.project.trylab.util.PageMaker;
+import com.project.board.notice.NoticeService;
+import com.project.board.notice.NoticeVO;
+import com.project.util.PageMaker;
 
 @Controller
 @RequestMapping(value = "/notice/")

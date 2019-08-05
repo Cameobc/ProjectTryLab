@@ -1,4 +1,4 @@
-package com.project.trylab.notice;
+package com.project.board.notice;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.project.trylab.util.PageMaker;
+import com.project.util.PageMaker;
 
 
 @Repository

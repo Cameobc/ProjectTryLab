@@ -1,26 +1,23 @@
 package com.project.file;
 
-import org.springframework.stereotype.Component;
-
-
-public class MemberFileVO {
+public class FileVO {
 
 	private int fnum;
-	private String id;
+	private int num;
 	private String fname;
 	private String oname;
-
+	
 	public int getFnum() {
 		return fnum;
 	}
 	public void setFnum(int fnum) {
 		this.fnum = fnum;
 	}
-	public String getId() {
-		return id;
+	public int getNum() {
+		return num;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setNum(int num) {
+		this.num = num;
 	}
 	public String getFname() {
 		return fname;
@@ -34,6 +31,7 @@ public class MemberFileVO {
 	public void setOname(String oname) {
 		this.oname = oname;
 	}
+	
 	
 	
 }

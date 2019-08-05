@@ -6,8 +6,8 @@
 <mapper namespace="FileMapper">
 
 	<!-- write -->
-	<insert id="setWrite" parameterType="java.util.List">
-		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+	<insert id="setWrite" parameterType="List">
+		<selectKey keyProperty="id" resultType="Integer" order="BEFORE">
 			select qna_seq.nextval as id from dual
 		</selectKey>
 		insert all
@@ -18,27 +18,27 @@
 	</insert>
 	
 	<!-- delete -->
-	<delete id="setDelete" parameterType="java.lang.Integer">
+	<delete id="setDelete" parameterType="Integer">
 		delete files where fnum=#{fnum}
 	</delete>
 	
 	<!-- delete All -->
-	<delete id="setDeleteAll" parameterType="java.lang.Integer">
+	<delete id="setDeleteAll" parameterType="Integer">
 		delete files where num=#{num}
 	</delete>
 
 	<!-- list -->
-	<select id="getList" parameterType="java.lang.Integer" resultType="com.project.trylab.file.FileVO">
+	<select id="getList" parameterType="Integer" resultType="FileVO">
 		select * from files where num=#{num}	
 	</select>	
 		
 	<!-- update -->
-	<update id="setUpdate" parameterType="com.project.trylab.file.FileVO">
+	<update id="setUpdate" parameterType="FileVO">
 		update files set fname=#{fname}, oname=#{oname} where fnum=#{fnum}
 	</update>
 	
 	<!-- select -->
-	<select id="getSelect" parameterType="java.lang.Integer" resultType="com.project.trylab.file.FileVO">
+	<select id="getSelect" parameterType="Integer" resultType="FileVO">
 		select * from files where fnum=#{fnum}
 	</select>
 	

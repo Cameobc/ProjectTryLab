@@ -1,4 +1,4 @@
-package com.project.trylab.notice;
+package com.project.board.notice;
 
 import java.sql.Date;
 

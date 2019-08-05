@@ -1,9 +1,9 @@
-package com.project.trylab.qna;
+package com.project.board.qna;
 
 import java.sql.Date;
 import java.util.ArrayList;
 
-import com.project.trylab.file.FileVO;
+import com.project.file.FileVO;
 
 
 public class QnaVO {

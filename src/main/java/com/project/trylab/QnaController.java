@@ -13,9 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.project.trylab.qna.QnaService;
-import com.project.trylab.qna.QnaVO;
-import com.project.trylab.util.PageMaker;
+import com.project.board.qna.QnaService;
+import com.project.board.qna.QnaVO;
+import com.project.util.PageMaker;
 
 @Controller
 @RequestMapping(value = "/qna/")

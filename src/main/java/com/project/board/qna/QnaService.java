@@ -1,4 +1,4 @@
-package com.project.trylab.qna;
+package com.project.board.qna;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.trylab.file.FileDAO;
-import com.project.trylab.file.FileVO;
-import com.project.trylab.util.FileSaver;
-import com.project.trylab.util.PageMaker;
+import com.project.file.FileDAO;
+import com.project.file.FileVO;
+import com.project.util.FileSaver;
+import com.project.util.PageMaker;
 
 @Service
 public class QnaService {

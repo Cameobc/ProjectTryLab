@@ -8,5 +8,6 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	
+	<bean class="com.project.util.FileSaver" id="fileSaver"> </bean>	
 </beans>

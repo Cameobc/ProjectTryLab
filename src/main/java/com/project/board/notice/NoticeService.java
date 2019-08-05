@@ -1,4 +1,4 @@
-package com.project.trylab.notice;
+package com.project.board.notice;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
-import com.project.trylab.util.PageMaker;
+import com.project.util.PageMaker;
 
 @Service
 public class NoticeService {
