@@ -9,10 +9,5 @@
 		<property name="maxUploadSize" value="1048576000" />
 	</bean>
 	
-	
-	
-	
 
-	
-	
 </beans>
