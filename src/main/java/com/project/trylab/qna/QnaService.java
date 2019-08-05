@@ -108,7 +108,13 @@ public class QnaService {
 	}
 	
 	//reply
-	
+	public int setReply(QnaVO qnaVO) throws Exception {
+		int result = qnaDAO.setReplyUpdate(qnaVO);
+		result = qnaDAO.setReply(qnaVO);
+		
+		return result;
+
+	}
 	
 	
 	

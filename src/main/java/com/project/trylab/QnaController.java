@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.trylab.qna.QnaService;
 import com.project.trylab.qna.QnaVO;
@@ -105,10 +106,29 @@ public class QnaController {
 	}
 	
 	//reply
-	
-	
+	@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
+	public ModelAndView setReply(QnaVO qnaVO, RedirectAttributes rd) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = qnaService.setReply(qnaVO);
+		String msg = "댓글작성 실패";
+		if(result>0) {
+			msg = "댓글작성 성공";
+		}
+		rd.addFlashAttribute("msg",msg);
+		mv.setViewName("redirect:./qnaList");
+		
+		return mv;
+	}
+
 	//reply form
-	
+	@RequestMapping(value = "qnaReply", method = RequestMethod.GET)
+	public ModelAndView setReply(int num) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("num", num);
+		mv.setViewName("qna/qnaReply");
+		
+		return mv;
+	}
 	
 	
 	

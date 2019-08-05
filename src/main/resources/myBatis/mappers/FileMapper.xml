@@ -33,18 +33,14 @@
 	</select>	
 		
 	<!-- update -->
-	<!-- 
 	<update id="setUpdate" parameterType="com.project.trylab.file.FileVO">
 		update files set fname=#{fname}, oname=#{oname} where fnum=#{fnum}
 	</update>
-	 -->	
 	
 	<!-- select -->
-	<!-- 
 	<select id="getSelect" parameterType="java.lang.Integer" resultType="com.project.trylab.file.FileVO">
 		select * from files where fnum=#{fnum}
 	</select>
-	 -->
 	
 	
 

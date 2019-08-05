@@ -11,9 +11,4 @@
 	
 	<bean class="com.project.trylab.util.FileSaver" id="fileSaver"></bean>
 	
-	<!-- 
-	<bean class="com.project.trylab.qna.QnaService" id="qnaService" name="qnaService"></bean>
-	<bean class="com.project.trylab.qna.QnaDAO" id="qnaDAO"></bean>
-	 -->
-	
 </beans>

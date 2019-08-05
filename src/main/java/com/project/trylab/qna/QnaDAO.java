@@ -48,9 +48,14 @@ public class QnaDAO {
 	}
 	
 	//reply
-	
+	public int setReply(QnaVO qnaVO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setReply", qnaVO);
+	}
 	
 	//replyUpdate
+	public int setReplyUpdate(QnaVO qnaVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnaVO);
+	}
 	
 	
 }

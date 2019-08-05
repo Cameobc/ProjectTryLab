@@ -38,7 +38,9 @@
 		    <tbody>
 		      <tr>
 		        <td style="padding-top: 20px">${dto.num}</td>
-		        <td style="padding-top: 20px; padding-left:50px; cursor: pointer;" onclick="location.href='./qnaSelect?num=${dto.num}'">${dto.title}</td>
+		        <td style="padding-top: 20px; padding-left:50px; cursor: pointer;" onclick="location.href='./qnaSelect?num=${dto.num}'">${dto.title}
+		        	<c:forEach begin="1" end="${dto.depth}">RE:</c:forEach>
+		        </td>
 		        <td style="padding-top: 20px; text-align: center; color: #999;">${dto.writer}</td>
 		        <td style="padding-top: 20px; text-align: center; color: #999;">${dto.reg_date}</td>
 		        <td style="padding-top: 20px">${dto.hit}</td>

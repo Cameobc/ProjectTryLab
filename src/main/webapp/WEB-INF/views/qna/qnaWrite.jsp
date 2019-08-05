@@ -56,14 +56,13 @@
 			<input type="file" id="add" value="파일 추가">
 		</div>
 
-		
 		<div id="line"></div>
 	  
 	  	<div id="c1">
 	  		<div id="agree">필수적 개인정보 수집 및 이용에 대한 동의 <span>(필수)</span></div>
 	  	</div>
 	  	
-	  	<div id="c2"><input type="checkbox"> 동의함</div>
+	  	<div id="c2"><input type="checkbox" name="chk" id="chk1"> 동의함</div>
 		<br><br><br>	
 		<div id="agree_text">
 			<textarea rows="10" cols="111" style="padding-left: 10px;">
@@ -106,7 +105,35 @@
 	
 	</div> <!-- container end -->	
 		
-		
+<script type="text/javascript">
+/* 	function chk() {
+	 	if(document.getElementById("chk").checked == true) {
+			alert('약관 동의하였습니다.');
+		} else {
+			alert('약관 동의해주세요.');
+		}
+	} */
+	
+/* 	function chk() {
+		var chkbox = document.getElementsById('chk');
+		var chk = false;
+		for(var i=0; i<chkbox.length; i++) {
+			if(chkbox[i].checked) {
+				chk = true;
+			} else {
+				chk = false;
+			}
+		}
+		if(chk) {
+			alert('약관 동의하였습니다.');
+			return false;
+		} else {
+			alert('약관 동의해주세요');
+		}
+	}
+	 */
+	
+</script>		
 		
 		
 </body>

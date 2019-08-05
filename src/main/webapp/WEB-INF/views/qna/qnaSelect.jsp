@@ -5,27 +5,66 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
-<c:import url="../temp/boot.jsp"/>
 <link rel="stylesheet" href="../resources/css/qnaSelect.css" />
 
 </head>
 <body>
 
 	<div class="container">
-	
+		<div id="qna">FAQ</div>
+
+	<div id="title">
+	<table>
+		<tr>
+			<td width="70%">${dto.title}</td>
+			<td width="30%" id="date">${dto.reg_date}</td>
+		</tr>
+	</table>
+	</div>
+	<br>
+		<div class="buttons">
+			<a href="./qnaUpdate?num=${dto.num}"><button type="button" class="btn btn-outline-dark">수정</button></a>
+			<a href="./qnaDelete?num=${dto.num}"><button type="button" class="btn btn-outline-danger">삭제</button></a>
+		</div>
+		<div id="contents">${dto.contents}</div>
+	<br><br>
+		<div id="line"></div>
+	<br>	
+		<div id="reply">
+			<a href="./qnaReply?num=${dto.num}" class="btn btn-outline-dark">댓글</a>
+		</div>
+		<div id="btn" OnClick="location.href='./qnaList';">목록</div>
+
+
+<!-- 
 		<h1>제목 : ${dto.title}</h1>
+		<h1>작성자 : ${dto.writer}</h1>
 		<h1>내용 : ${dto.contents}</h1>
 		
 		<c:forEach items="${dto.files}" var="file">
-			<a href="../resources/upload/${file.fname}">${file.oname}</a>
+			<input type="button" title="${file.fname}" value="${file.oname}">
 		</c:forEach>
-	
-	
-	
+ -->	
 	
 	</div> <!-- container end -->
 
+<script type="text/javascript">
+	/* function deleteCheck() {
+		var msg = confirm("정말 삭제하시겠습니까?");
+		if(msg == true) {
+			alert("삭제되었습니다.");
+		}else {
+			return false;
+		}
+	} */
+
+</script>
 
 </body>
 </html>

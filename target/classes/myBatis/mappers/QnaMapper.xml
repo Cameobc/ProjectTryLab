@@ -94,6 +94,35 @@
 		like '%' || #{search} || '%'
 	</select>
 
+	<!-- 댓글작업 -->	
+	<!-- CDATA 쿼리문 -->
+	<sql id="subRef">
+	<![CDATA[
+		select ref from qna where num=#{num}
+	]]>
+	</sql>
+	
+	<sql id="subStep">
+		select step from qna where num=#{num}
+	</sql>
+	
+	<!-- reply -->
+	<insert id="setReply" parameterType="com.project.trylab.qna.QnaVO">
+		insert into qna values 
+		(
+			qna_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0,
+			(<include refid="subRef" />),
+			(<include refid="subStep" />)+1,
+			(select depth from qna where num=#{num})+1
+		)
+	</insert>
+	
+	<!-- replyUpdate -->
+	<update id="setReplyUpdate" parameterType="com.project.trylab.qna.QnaVO">
+		update qna set step=step+1
+		where ref=(<include refid="subRef" />)
+		and step>(<include refid="subStep" />)
+	</update>
 
 
 </mapper>
