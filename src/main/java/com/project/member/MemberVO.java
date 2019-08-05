@@ -1,12 +1,23 @@
 package com.project.member;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.project.memberProfile.MemberFileVO;
 
 public class MemberVO {
 
+	
+	
+	
+	@NotNull
+	@Size(min= 6, max = 15)
 	private String id;
+	@Size(min= 6, max = 12)
 	private String pw;
+	@Size(min= 6, max = 12)
 	private String pw2;
+	@Size(min=6)
 	private String name;
 	private String phone;
 	private String email;
