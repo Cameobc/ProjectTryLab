@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +11,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/noticeSelect.css" />
+<link rel="stylesheet" href="../resources/css/qnaSelect.css" />
+
 </head>
 <body>
+
 	<div class="container">
-		<div id="notice">공지사항</div>	
-	
+		<div id="qna">FAQ</div>
+
 	<div id="title">
 	<table>
 		<tr>
@@ -27,26 +29,42 @@
 	</div>
 	<br>
 		<div class="buttons">
-			<a href="./noticeUpdate?num=${dto.num}"><button type="button" class="btn btn-outline-dark">수정</button></a>
-			<a href="./noticeDelete?num=${dto.num}"><button type="button" class="btn btn-outline-danger">삭제</button></a>
+			<a href="./qnaUpdate?num=${dto.num}"><button type="button" class="btn btn-outline-dark">수정</button></a>
+			<a href="./qnaDelete?num=${dto.num}"><button type="button" class="btn btn-outline-danger">삭제</button></a>
 		</div>
 		<div id="contents">${dto.contents}</div>
 	<br><br>
 		<div id="line"></div>
-	<br><br>
-		<div id="btn" OnClick="location.href='./noticeList';">목록</div>
-	
-	
+	<br>	
+		<div id="reply">
+			<a href="./qnaReply?num=${dto.num}" class="btn btn-outline-dark">댓글</a>
+		</div>
+		<div id="btn" OnClick="location.href='./qnaList';">목록</div>
+
+
+<!-- 
+		<h1>제목 : ${dto.title}</h1>
+		<h1>작성자 : ${dto.writer}</h1>
+		<h1>내용 : ${dto.contents}</h1>
+		
+		<c:forEach items="${dto.files}" var="file">
+			<input type="button" title="${file.fname}" value="${file.oname}">
+		</c:forEach>
+ -->	
 	
 	</div> <!-- container end -->
-	
-	
-	
+
 <script type="text/javascript">
-	var str = document.getElementById("contents").value;
-	str = str.replaceAll("<br/>", "\r\n");
-	document.getElementById("contents").value = str;
-</script>	
+	/* function deleteCheck() {
+		var msg = confirm("정말 삭제하시겠습니까?");
+		if(msg == true) {
+			alert("삭제되었습니다.");
+		}else {
+			return false;
+		}
+	} */
+
+</script>
 
 </body>
 </html>

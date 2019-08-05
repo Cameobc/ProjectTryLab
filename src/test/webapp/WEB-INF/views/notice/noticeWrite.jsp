@@ -20,7 +20,7 @@
 	    </div>
 	    <div class="form-group">
 	      <label for="writer">작성자</label>
-	      <input type="text" class="form-control" id="writer" name="writer">
+	      <input type="text" class="form-control" id="writer" name="writer" value="admin" readonly="readonly">
 	    </div>
 	    <div class="form-group">
 	      <label for="contents">내용</label>
@@ -31,7 +31,12 @@
 	  
 	  
 	</div>	
-	
+
+<script type="text/javascript">
+	var str = $('#contents').val();
+	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+	$('#contents').val(str);
+</script>		
 	
 </body>
 </html>

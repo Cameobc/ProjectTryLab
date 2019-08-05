@@ -1,5 +1,6 @@
 @charset "UTF-8";
-#notice {
+
+#qna {
 	width: 90%;
 	height: 30px;
 	margin-top:15%;
@@ -39,6 +40,9 @@ table {
 #line {
 	width: 90%;
 	border-bottom: 1px solid #e6e3df;
+}
+#reply {
+	margin-left: 85%;	
 }
 #btn {
 	width:12%;
