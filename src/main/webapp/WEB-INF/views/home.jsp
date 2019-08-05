@@ -52,6 +52,20 @@
 					</div>
 				</section>
 
+				
+			<!-- menu -->				
+				<div class="menu">
+					<div><a href="./notice/noticeList">NOTICE </a></div>
+					<div><a href="./qna/qnaList">QNA</a></div>
+					<div><a href="./member/memberlogoin">Login</a></div>	
+					<div><a href="./member/memberjoin">JOIN</a></div>
+				
+				</div>				
+				
+				
+
+
+
 			<!-- Main -->
 				<div id="main">
 					<div class="category_wrap">
