@@ -16,8 +16,7 @@
 	
 	<!-- 성현  -->
 	<typeAlias type="com.project.file.FileVO" alias="FileVO"/>
-	<typeAlias type="com.project.board.notice.NoticeVO" alias="NoticeVO"/>
-	<typeAlias type="com.project.board.qna.QnaVO" alias="QnaVO"/>
+
 	
 	
 	<!-- 승한 -->
