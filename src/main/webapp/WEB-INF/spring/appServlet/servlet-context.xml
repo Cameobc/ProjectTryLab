@@ -32,7 +32,15 @@
 		<beans:property name="locations" value="classpath:properties/*.properties" />
 	</beans:bean>	
 	
-
+	<!-- 하림 -->
+	
+	
+	<!-- 성현 -->
+	
+	
+	<!-- 승한 -->
+	
+	<!-- 유라 -->
 	<context:component-scan base-package="com.project.trylab" />
 	<context:component-scan base-package="com.project.member" />
 	<context:component-scan base-package="com.project.memberProfile" />

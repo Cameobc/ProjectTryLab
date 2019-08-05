@@ -16,6 +16,14 @@
 	<typeAlias type="com.project.approval.ApprovalVO" alias="ApprovalVO"/>
 	<typeAlias type="com.project.certificate.CertificateVO" alias="CertificateVO"/>
 	<typeAlias type="com.project.license.LicenseVO" alias="LicenseVO"/>
+	
+	<!-- 하림 -->
+	
+	
+	<!-- 성현 -->
+	
+	
+	<!-- 승한 -->
 
 
 
