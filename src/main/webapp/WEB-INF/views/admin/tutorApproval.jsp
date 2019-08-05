@@ -24,16 +24,18 @@
 <h1>tutorApproval Page</h1>
 	<div class="container">
 		 <div class="row">
-    		<div class="col-md-4">
+		 <c:forEach items="${request }" var="dto">
+		 	<div class="col-md-4">
       			<div class="thumbnail">
-       	 			<a href="/w3images/lights.jpg" target="_blank">
-          			<img src="/w3images/lights.jpg" alt="Lights" style="width:100%">
+       	 			<a href="" target="_blank">
+          			<img src="../resources/license/${dto.licenseVO.fname}" alt="Lights" style="width:100%">
           			<div class="caption">
-            			<p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+            			<p>${dto.id } 의 승인 요청입니다.</p>
         			</div>
 					</a>
 				</div>
 			</div>
+		</c:forEach>
 		</div>
 	</div>
 		

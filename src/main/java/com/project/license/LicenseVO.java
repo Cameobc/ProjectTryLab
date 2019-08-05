@@ -1,5 +1,8 @@
 package com.project.license;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class LicenseVO {
 	private int num;
 	private String id;

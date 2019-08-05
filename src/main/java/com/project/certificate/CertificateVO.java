@@ -1,5 +1,8 @@
 package com.project.certificate;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CertificateVO {
 	private int num;
 	private String id;

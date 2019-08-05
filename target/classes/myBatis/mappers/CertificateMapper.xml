@@ -5,7 +5,7 @@
   
 <mapper namespace="CertificateMapper">
 	<insert id="setWrite" parameterType="com.project.certificate.CertificateVO">
-		insert into certificate values(certificate_seq.nextval, #{id}, #{fname}, #{oname})
+		insert into certificate values(certificate_seq.nextval, #{id}, #{oname}, #{fname})
 	</insert>
 
 

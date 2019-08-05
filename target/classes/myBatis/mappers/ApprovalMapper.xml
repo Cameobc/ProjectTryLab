@@ -6,25 +6,54 @@
   
 <mapper namespace="ApprovalMapper">
 
+	<select id="getTotalCount" resultType="Integer">
+		select count(id) from approval
+	</select>
+
+
 	<insert id="tutorRequest" parameterType="ApprovalVO">
 		insert into approval 
 		values (#{id}, #{nickName}, #{confirmType}, #{college}, #{major}, #{kind}, #{colStatus})
 	</insert>
-<!-- 
-	<select id="tutorApproval" parameterType="PageMaker" resultType="ApprovalVO">
+
+	<select id="tutorApproval" parameterType="PageMaker" resultMap="ApprovalList">
 		select * from
-		(select rownum R, A.* from 
-		(select * from approval
-		order
-		)
-	
-	
+		(select rownum R, T.* from 
+		(select A.id, A.nickname, A.confirmType, A.college, A.major, A.kind, A.colstatus, L.oname, L.fname from approval A, License L, Certificate C
+        where A.id=L.id
+        and L.id=C.id
+		order by C.num asc) T)
+		where R between #{startRow} and #{lastRow}
 	
 	</select>
 
--->
+	<resultMap type="ApprovalVO" id="ApprovalList">
+		<id property="id" column="id" />
+		<result property="nickName"	column="nickName" />
+		<result property="confirmType"	column="confirmType" />
+		<result property="college"	column="college" />
+		<result property="major"	column="major" />
+		<result property="kind"	column="kind" />
+		<result property="colStatus"	column="colStatus" />
+		<association property="licenseVO" resultMap="licenseResult" javaType="LicenseVO" >
+		</association>
+		<association property="certificateVO" resultMap="certificateResult" javaType="CertificateVO">
 
+		</association>
 
+	</resultMap>
+	<resultMap type="LicenseVO" id="licenseResult">
+			<id property="num" column="num" />
+			<result property="id" column="id"/>
+			<result property="oname" column="oname" />
+			<result property="fname" column="fname"/>
+	</resultMap>
+	<resultMap type="CertificateVO" id="certificateResult">
+			<id property="num" column="num" />
+			<result property="id" column="id"/>
+			<result property="oname" column="oname" />
+			<result property="fname" column="fname"/>
+	</resultMap>
 
 
 

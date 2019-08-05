@@ -27,7 +27,6 @@ public class MemberController {
 	@RequestMapping(value="memberJoin", method = RequestMethod.POST)
 	public ModelAndView setWrite(MemberVO memberVO, MultipartFile photo, HttpSession session )throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
 		int result = memberService.setWrite(memberVO, photo, session);
 		String message="Join Fail";
 		if(result>0) {

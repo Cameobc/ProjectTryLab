@@ -1,5 +1,7 @@
 package com.project.approval;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import com.project.certificate.CertificateVO;
 import com.project.license.LicenseDAO;
 import com.project.license.LicenseVO;
 import com.project.util.FileSaver;
+import com.project.util.PageMaker;
 
 @Service
 public class ApprovalService {
@@ -61,6 +64,29 @@ public class ApprovalService {
 		return result;
 
 	}
+	
+	public List<ApprovalVO> tutorApproval(PageMaker pageMaker) throws Exception {
+		pageMaker.makeRow();
+		List<ApprovalVO> request = approvalDAO.tutorApproval(pageMaker);
+		int totalCount = approvalDAO.getTotalCount();
+		pageMaker.makePage(totalCount);
+		
+		return request;
+	
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

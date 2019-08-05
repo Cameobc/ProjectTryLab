@@ -1,11 +1,6 @@
 package com.project.member;
 
 
-
-
-
-import org.springframework.stereotype.Component;
-
 import com.project.file.MemberFileVO;
 
 

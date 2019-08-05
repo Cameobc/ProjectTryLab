@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="LicenseMapper">
-	<insert id="setWrite" parameterType="com.project.license.LicenseVO">
-		insert into license values(license_seq.nextval, #{id}, #{fname}, #{oname})
+	<insert id="setWrite" parameterType="LicenseVO">
+		insert into license values(license_seq.nextval, #{id}, #{oname}, #{fname} )
 	</insert>
  
 

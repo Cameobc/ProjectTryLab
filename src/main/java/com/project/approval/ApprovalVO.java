@@ -2,9 +2,11 @@ package com.project.approval;
 
 
 
+import org.springframework.stereotype.Component;
+
 import com.project.certificate.CertificateVO;
 import com.project.license.LicenseVO;
-
+@Component
 public class ApprovalVO {
 	private String id;
 	private String nickName;
@@ -30,6 +32,7 @@ public class ApprovalVO {
 	public void setCertificateVO(CertificateVO certificateVO) {
 		this.certificateVO = certificateVO;
 	}
+
 	public LicenseVO getLicenseVO() {
 		return licenseVO;
 	}

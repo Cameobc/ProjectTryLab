@@ -52,13 +52,16 @@
 </head>
 <body>
 <div class="container">
+		<!-- 
 		<div>
 			<input type="hidden" value="${member.id }">
-			<label for="profile" class="label">프로필 사진</label>
+			<label for="profile" class="label" >프로필 사진</label>
 			
-			<img src="../resources/member/${member.memberFileVO.fname}" style="width:100px; height:100px;">
-		
+			<img id="profile" src="../resources/member/${member.memberFileVO.fname}" style="width:100px; height:100px;">
+			<input type="file" name="photo" id="photo">
 		</div>
+		
+		-->
 		<form:form commandName="approvalVO" id="frm" enctype="multipart/form-data">
 	
 		<div class="form-group">
@@ -103,6 +106,8 @@
 
 
 <script type="text/javascript">
+
+
 
 </script>
 	
