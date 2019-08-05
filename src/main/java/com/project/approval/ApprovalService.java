@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.certificate.CertificateDAO;
 import com.project.certificate.CertificateVO;
@@ -72,10 +73,10 @@ public class ApprovalService {
 		pageMaker.makePage(totalCount);
 		
 		return request;
+	}
 	
-		
-		
-		
+	public ApprovalVO getSelect(String id) throws Exception {
+		return approvalDAO.getSelect(id);
 	}
 	
 	

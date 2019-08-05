@@ -3,6 +3,7 @@ package com.project.approval;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -27,4 +28,10 @@ public class ApprovalDAO {
 	public int getTotalCount() throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getTotalCount");
 	}
+
+	public ApprovalVO getSelect(String id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getSelect", id);
+	}
+	
+	
 }

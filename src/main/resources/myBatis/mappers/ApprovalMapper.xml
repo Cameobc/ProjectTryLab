@@ -19,7 +19,7 @@
 	<select id="tutorApproval" parameterType="PageMaker" resultMap="ApprovalList">
 		select * from
 		(select rownum R, T.* from 
-		(select A.id, A.nickname, A.confirmType, A.college, A.major, A.kind, A.colstatus, M.fname from approval A, License L, Certificate C, MemberFile M
+		(select A.id, A.nickname, A.confirmType, A.college, A.major, A.kind, A.colstatus, L.fname Lfname, C.fname Cfname, M.fname Mfname from approval A, License L, Certificate C, MemberFile M
         where A.id=L.id
         and L.id=C.id
         and C.id=M.id
@@ -44,21 +44,39 @@
 			<id property="num" column="num" />
 			<result property="id" column="id"/>
 			<result property="oname" column="oname" />
-			<result property="fname" column="fname"/>
+			<result property="fname" column="Lfname"/>
 	</resultMap>
 	<resultMap type="CertificateVO" id="certificateResult">
 			<id property="num" column="num" />
 			<result property="id" column="id"/>
 			<result property="oname" column="oname" />
-			<result property="fname" column="fname"/>
+			<result property="fname" column="Cfname"/>
 	</resultMap>
 	<resultMap type="MemberFileVO" id="memberFile">
 		<id property="fnum" column="fnum" />
 		<result property="id" column="id"/>
-		<result property="fname" column="fname"/>
+		<result property="fname" column="Mfname"/>
 		<result property="oname" column="oname"/> 
 	
 	</resultMap>
+
+	<select id="getSelect" parameterType="String" resultMap="ApprovalList" resultType="ApprovalVO">
+		select A.id, A.nickname, A.confirmType, A.college, A.major, A.kind, A.colstatus, 
+		L.fname Lfname, C.fname Cfname, M.fname Mfname from approval A, License L, Certificate C, MemberFile M
+        where A.id=L.id
+        and L.id=C.id
+        and C.id=M.id
+        and A.id=#{id}
+        
+	
+	
+	
+	
+	
+	</select>
+
+
+
 
 
 
