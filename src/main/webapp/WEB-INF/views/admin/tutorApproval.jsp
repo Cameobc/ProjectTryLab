@@ -25,8 +25,8 @@
 		 <c:forEach items="${request }" var="dto">
 		 	<div class="col-md-4">
       			<div class="thumbnail">
-       	 			<a href="" target="_blank">
-          			<img src="../resources/member/${dto.memberFileVO.fname}" alt="Lights" style="width:100%">
+       	 			<a href="../tutorDetail?id=${member.id }" target="_blank">
+          			<img src="../resources/member/${dto.memberFileVO.fname}" alt="Lights" style="width:100%; height:250px">
           			<div class="caption">
             			<p>${dto.id } 의 승인 요청입니다.</p>
         			</div>
