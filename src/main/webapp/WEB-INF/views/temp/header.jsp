@@ -116,10 +116,11 @@
 			<a href="/trylab"><img id="logo" src = "/trylab/resources/images/header_logo.png"></a>
 			</div>
 					<ul class="menu_list">
-						<li class="menu"><a class="black">공지사항</a>
+						<li class="menu"><a href="${pageContext.request.contextPath}/notice/noticeList" class="black">공지사항</a>
 						<li class="menu"><a class="black">서비스 소개</a>
 						<li class="menu"><a class="black">VOD 강의</a>
 						<li class="menu"><a href="${pageContext.request.contextPath }/member/tutorRequest" class="black">튜터 등록</a>
+						<li class="menu"><a href="${pageContext.request.contextPath }/qna/qnaList" class="black">Q&A</a>
 					</ul>
 
 			</div>
