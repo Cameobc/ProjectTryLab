@@ -28,6 +28,7 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
 	</bean>
 
+
 	
 	
 	<!-- transaction  관리 -->
