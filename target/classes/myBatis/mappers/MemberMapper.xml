@@ -50,3 +50,99 @@
  
  
  </mapper>
+
+  
+
+<mapper namespace="MemberMapper">
+
+	<sql id="colums">
+		id, pw, name, email, grade
+	</sql>
+	
+	<select id="getId" resultType="com.project.trylab.member.memberVO" parameterType="com.project.trylab.member.memberVO">
+		select id from member where id=#{id} 
+	</select>
+	
+	<insert id="setWrite" parameterType="com.project.trylab.member.memberVO">
+		insert into member  (<include refid="colums" />) values(#{id}, #{pw}, #{name}, #{email}, 3)
+	</insert>
+	
+	<resultMap type="com.project.trylab.member.memberVO" id="member">
+		<id property="id" column="id"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="grade" column="grade"/>
+		<!-- <association property="memberFileDTO" resultMap="fileResult" javaType="com.iu.file.MemberFileDTO">
+		</association> -->
+	</resultMap>
+	
+	<!-- <resultMap type="com.iu.file.MemberFileDTO" id="fileResult">
+		<id property="num" column="num"/>
+		<result property="fname" column="fname"/>
+		<result property="oname" column="oname"/>
+	</resultMap> -->
+	
+	<select id="getSelect" resultMap="member" parameterType="com.project.trylab.member.memberVO">
+		select M.*, F.*
+		from member M FULL join MEMBERFILE F
+		on (M.id=F.id)
+		where M.id=#{id} and M.pw=#{pw}
+	</select>
+	<select id="getList" resultMap="member" parameterType="PageMaker">
+		select * from
+			(select rownum R, MEM.* from
+				(select M.* , F.num, F.fname, F.oname
+				from MEMBER M Full join MemberFile F
+				on (M.id = F.id) 
+				where M.grade != 0 and
+				 <choose>
+				 	<when test="kind ==1">
+				 		M.id 
+				 	</when>
+				 	<when test="kind ==2">
+				 		M.email
+				 	</when>
+				 	<otherwise>
+				 		M.grade
+				 	</otherwise>
+				 </choose>
+				 like '%' || #{search} || '%'
+				order by M.id asc)
+			MEM)
+		where R between #{startRow} and #{lastRow}
+	</select>
+	
+	<select id="getCount" parameterType="PageMaker" resultType="Integer">
+		select count(id) from member
+		where grade != 0 and
+		<choose>
+			<when test="kind ==1">
+				id 
+			</when>
+			<when test="kind ==2">
+				email
+			</when>
+			<otherwise>
+				grade
+			</otherwise>
+		</choose>
+			 like '%' || #{search} || '%'
+	</select>
+	
+	<delete id="setDelete" parameterType="java.util.List">
+		delete member where id in
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+</mapper>
+
+
+
+
+
+
+
+
