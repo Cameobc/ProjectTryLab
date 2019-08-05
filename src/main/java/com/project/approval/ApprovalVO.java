@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.project.certificate.CertificateVO;
 import com.project.license.LicenseVO;
+import com.project.memberProfile.MemberFileVO;
 @Component
 public class ApprovalVO {
 	private String id;
@@ -17,9 +18,15 @@ public class ApprovalVO {
 	private String colStatus;
 	private CertificateVO certificateVO;
 	private LicenseVO licenseVO;
+	private MemberFileVO memberFileVO;
 	
 	
-	
+	public MemberFileVO getMemberFileVO() {
+		return memberFileVO;
+	}
+	public void setMemberFileVO(MemberFileVO memberFileVO) {
+		this.memberFileVO = memberFileVO;
+	}
 	public String getKind() {
 		return kind;
 	}

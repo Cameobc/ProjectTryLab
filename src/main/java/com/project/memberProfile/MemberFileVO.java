@@ -1,8 +1,6 @@
-package com.project.file;
-
+package com.project.memberProfile;
 
 public class MemberFileVO {
-
 	private int fnum;
 	private String id;
 	private String fname;
@@ -32,6 +30,5 @@ public class MemberFileVO {
 	public void setOname(String oname) {
 		this.oname = oname;
 	}
-	
 	
 }

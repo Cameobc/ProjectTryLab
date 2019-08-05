@@ -6,8 +6,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.project.file.MemberFileDAO;
-import com.project.file.MemberFileVO;
+import com.project.memberProfile.MemberFileDAO;
+import com.project.memberProfile.MemberFileVO;
 import com.project.util.FileSaver;
 
 @Service

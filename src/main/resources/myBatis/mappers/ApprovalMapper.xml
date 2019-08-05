@@ -19,9 +19,10 @@
 	<select id="tutorApproval" parameterType="PageMaker" resultMap="ApprovalList">
 		select * from
 		(select rownum R, T.* from 
-		(select A.id, A.nickname, A.confirmType, A.college, A.major, A.kind, A.colstatus, L.oname, L.fname from approval A, License L, Certificate C
+		(select A.id, A.nickname, A.confirmType, A.college, A.major, A.kind, A.colstatus, M.fname from approval A, License L, Certificate C, MemberFile M
         where A.id=L.id
         and L.id=C.id
+        and C.id=M.id
 		order by C.num asc) T)
 		where R between #{startRow} and #{lastRow}
 	
@@ -35,12 +36,9 @@
 		<result property="major"	column="major" />
 		<result property="kind"	column="kind" />
 		<result property="colStatus"	column="colStatus" />
-		<association property="licenseVO" resultMap="licenseResult" javaType="LicenseVO" >
-		</association>
-		<association property="certificateVO" resultMap="certificateResult" javaType="CertificateVO">
-
-		</association>
-
+		<association property="licenseVO" resultMap="licenseResult" javaType="LicenseVO" />
+		<association property="certificateVO" resultMap="certificateResult" javaType="CertificateVO" />
+		<association property="memberFileVO" resultMap="memberFile" javaType="MemberFileVO"></association>
 	</resultMap>
 	<resultMap type="LicenseVO" id="licenseResult">
 			<id property="num" column="num" />
@@ -54,7 +52,13 @@
 			<result property="oname" column="oname" />
 			<result property="fname" column="fname"/>
 	</resultMap>
-
+	<resultMap type="MemberFileVO" id="memberFile">
+		<id property="fnum" column="fnum" />
+		<result property="id" column="id"/>
+		<result property="fname" column="fname"/>
+		<result property="oname" column="oname"/> 
+	
+	</resultMap>
 
 
 

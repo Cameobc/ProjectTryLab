@@ -1,4 +1,4 @@
-package com.project.file;
+package com.project.memberProfile;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -9,7 +9,6 @@ import com.project.util.FileSaver;
 
 @Service
 public class MemberFileService {
-
 	@Inject
 	private MemberFileDAO memberFileDAO;
 	@Inject
@@ -22,5 +21,4 @@ public class MemberFileService {
 		
 		return memberFileDAO.profileUpdate(id);
 	}
-	
 }

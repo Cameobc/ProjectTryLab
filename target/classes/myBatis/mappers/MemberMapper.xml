@@ -43,10 +43,10 @@
 		<result property="phone" column="phone" />
 		<result property="gender" column="gender" />
 		<result property="grade" column="grade"/>
- 		<association property="memberFileVO" resultMap="fileResult" javaType="com.project.file.MemberFileVO" />
+ 		<association property="memberFileVO" resultMap="fileResult" javaType="MemberFileVO" />
  	 
  </resultMap>
- <resultMap type="com.project.file.MemberFileVO" id="fileResult">
+ <resultMap type="MemberFileVO" id="fileResult">
  	<id property="fnum"	column="fnum" />
 
  	<result property="fname" column="fname" />

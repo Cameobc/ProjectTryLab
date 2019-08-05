@@ -12,9 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-	h1, a {
-		color:black;
-	}
+
 
 </style>
 
@@ -28,7 +26,7 @@
 		 	<div class="col-md-4">
       			<div class="thumbnail">
        	 			<a href="" target="_blank">
-          			<img src="../resources/license/${dto.licenseVO.fname}" alt="Lights" style="width:100%">
+          			<img src="../resources/member/${dto.memberFileVO.fname}" alt="Lights" style="width:100%">
           			<div class="caption">
             			<p>${dto.id } 의 승인 요청입니다.</p>
         			</div>

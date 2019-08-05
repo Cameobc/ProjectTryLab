@@ -1,8 +1,6 @@
 package com.project.member;
 
-
-import com.project.file.MemberFileVO;
-
+import com.project.memberProfile.MemberFileVO;
 
 public class MemberVO {
 

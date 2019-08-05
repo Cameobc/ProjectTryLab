@@ -1,4 +1,4 @@
-package com.project.file;
+package com.project.memberProfile;
 
 import javax.inject.Inject;
 
@@ -7,10 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.project.member.MemberVO;
 
-
 @Repository
 public class MemberFileDAO {
-
 	
 	@Inject
 	private SqlSession sqlSession;
@@ -25,5 +23,4 @@ public class MemberFileDAO {
 	public int profileUpdate(String id) throws Exception {
 		return sqlSession.update(NAMESPACE+"profileUpdate", id);
 	}
-	
 }
