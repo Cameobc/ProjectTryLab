@@ -3,10 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
-
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
@@ -19,20 +22,36 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="1"/>
 
 	</beans:bean>
 	
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0" />
+	
+	</beans:bean>
+
 		<!-- properties 파일 설정 -->
 	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
 		<beans:property name="locations" value="classpath:properties/*.properties" />
 	</beans:bean>	
 	
-
+	<!-- 성현    --> 
 	<context:component-scan base-package="com.project.trylab" />
+	<context:component-scan base-package="com.project.util" />
+	
+	<!-- 유라    --> 
+	
+	<!-- 하림    --> 
+	
+	<!-- 승한    --> 
+
 
 	
+	<!-- 공통  -->
 	
 	<!-- xml 파일 읽어들이기 -->
 	<beans:import resource="classpath:/spring/*"/>
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 	
 </beans:beans>

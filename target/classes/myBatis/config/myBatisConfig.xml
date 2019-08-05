@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
 
 <!DOCTYPE configuration
     PUBLIC "-//mybatis.org//DTD config 3.0//EN"
@@ -10,9 +11,27 @@
 
 	<!-- 유라 -->
 	
-	<typeAlias type="com.project.member.MemberVO" alias="MemberVO"/>
-	<typeAlias type="com.project.util.PageMaker" alias="PageMaker"/>
-	<typeAlias type="com.project.file.MemberFileVO" alias="MemberFileVO"/>
+	
+	
+	
+	<!-- 성현  -->
+	
+
+	
+	
+	<!-- 승한 -->
+	
+	
+	
+	<!--  하림   -->
+	
+	
+	
+	<!-- 공통(각자 만든 패키지 말고 기본 제공되는 것들) -->
+	<typeAlias type="java.lang.String" alias="String"/>
+	<typeAlias type="java.lang.Integer" alias="Integer"/>
+	<typeAlias type="java.util.List" alias="List"/>
+	
 
 
 
@@ -22,5 +41,8 @@
 
     
     
-    
+  
+	
+	
+
 </configuration>

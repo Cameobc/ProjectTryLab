@@ -9,8 +9,5 @@
 		<property name="maxUploadSize" value="1048576000" />
 	</bean>
 	
-	<bean class="com.project.trylab.util.FileSaver" id="fileSaver"></bean>
-	
-	
 	
 </beans>
