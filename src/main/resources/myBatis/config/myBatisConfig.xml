@@ -18,7 +18,9 @@
 	<typeAlias type="com.project.license.LicenseVO" alias="LicenseVO"/>
 	
 	<!-- 하림 -->
-	
+	<typeAlias type="com.project.lesson.LessonVO" alias="LessonVO"/>
+	<typeAlias type="java.util.List" alias="List"/>
+	<typeAlias type="java.lang.Integer" alias="Integer"/>
 	
 	<!-- 성현 -->
 	
