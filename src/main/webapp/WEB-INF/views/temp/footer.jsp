@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	
 <style type="text/css">
 	.footer_text {
 		float: left; margin: 0px;
 	}
-	a { 
-		text-decoration: none; border-bottom: none;
-	}
+
 </style>
 </head>
 <body>
