@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<spring:eval expression="@purchase['iamprot.code']" var="code"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,10 @@
 <link rel="stylesheet" href="../resources/assets/css/main.css" />
 <c:import url="../temp/header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 @import 
@@ -163,7 +168,6 @@ url(//fonts.googleapis.com/earlyaccess/hanna.css);
 					<input type="radio" class="checks" id="payment1" name="payment" value="1"> 무통장 입금 &nbsp; &nbsp; &nbsp; &nbsp;
 					<input type="radio" class="checks" id="payment2" name="payment" value="2"> 카드 결제
 				</div>
-				<h1><spring:eval expression="@purchase.getProperty('iamprot.code')"></spring:eval></h1>
 			</div>
 			<div class="btn_div">
 				<input type="button" value="결제하기" class="pay">
@@ -172,16 +176,28 @@ url(//fonts.googleapis.com/earlyaccess/hanna.css);
 	</form>
 </div>	
 <script type="text/javascript">
+	
+	var a = '${code}';
+	var IMP = window.IMP;
+	IMP.init(a);
+	
 	$('.pay').click(function() {
 		var payment = $('input[name="payment"]:checked').val();
 		if(payment==1){
 			
 		}else if(payment==2){
-			$.ajax({
-				url:"../pay/payment",
-				type:"POST",
-				
-			});
+			IMP.request_pay({
+				merchant_uid:'merchant_'+ new Date().getTime(),
+				name : 'test',
+				amount : '100',
+				buyer_tel:'00000000000'
+			},function(rsp){
+				if(rsp.success){
+					alert('success');
+					
+				}
+			}
+			)
 		}else{
 			
 		}
