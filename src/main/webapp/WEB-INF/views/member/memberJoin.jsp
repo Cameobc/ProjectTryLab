@@ -10,6 +10,9 @@
 
 <c:import url="../temp/header.jsp" />
 <style type="text/css">
+@import 
+url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr * 
+
 	*{
 		margin: 0;
 		padding: 0;
@@ -97,6 +100,13 @@
 	    width: 35%;
 	}
 	
+	
+	input::placeholder {
+	  color: #d2d2d2;
+	  font-style: italic;
+	  font-family: 'Noto Sans KR', sans-serif;
+	}
+	
 	.member-input2{
 		width: 28% !important;
 		float: right;
@@ -129,6 +139,11 @@
 	    font-family: BMJUA;
 	    font-size: 1.5em;
 	}
+	.form-info{
+		margin-left:37%;
+		font-size: 0.8em;
+		text-align: left;
+	}
 	
 </style>
 </head>
@@ -150,7 +165,8 @@
 				</div>
 				<div class="member-form">
 			    	<span class="member-label">PASSWORD</span>
-			    	<form:password path="pw" cssClass="member-input"/>
+			    	<form:password path="pw" cssClass="member-input"/><br>
+			    	<div class="form-info">'영어 대소문자, 숫자, 특수문자 포함 8~16글자'</div>
 			  	</div> 
 				<div class="member-form">
 			    	<span class="member-label">PASSWORD CONFIRM</span>
@@ -165,10 +181,11 @@
 				<div class="member-form">
 			    	<span class="member-label">PHONE</span>
 			    	<form:input path="phone" cssClass="member-input"/>
+			    	<div class="form-info">'010-1234-5678 형식을 지켜주세요'</div>
 			  	</div> 
 				<div class="member-form">
 				    <span class="member-label">EMAIL</span>
-				    <form:input path="email" cssClass="member-input"/>
+				    <form:input path="email" cssClass="member-input"/><br>
 				    <form:errors path="email"></form:errors>
 				</div>
 				<div class="member-form">
