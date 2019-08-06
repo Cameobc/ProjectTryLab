@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-     <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <c:import url="../temp/header.jsp" />
 <style type="text/css">
 @import 
@@ -52,6 +52,7 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 	    left: 0;
 	    background: url(../resources/images/profilesub.png) 0 0;
 	    background-repeat: no-repeat;
+	    cursor:pointer;
 	}
 	
 		input[type="radio"] { 
@@ -145,18 +146,30 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 		text-align: left;
 	}
 	
+	#photo{
+		position: absolute;
+	    overflow: hidden;
+	    clip: rect(0,0,0,0);
+	    width: 1px;
+	    height: 1px;
+	    margin: -1px;
+	    padding: 0;
+	    border: 0;
+	}
+	
+	
 </style>
 </head>
 <body>
-
 	<div class="container">
 		<h1>Member Join Form</h1>
 		
 		<div class="join_all">
 			<form:form commandName="memberVO" id="frm" enctype="multipart/form-data">
 				<div class="member_thumbnail">
-					<img src="../resources/images/profile.png" width="100" height="100">
+					<img id="thumbnail" src="../resources/images/profile.png" width="100" height="100">
 					<span class="mask"></span>
+					<input type="file" id="photo" name="photo">
 				</div>		  		
 				<div class="member-form">
 			    	<span class="member-label">ID </span>
@@ -200,8 +213,11 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 			</form:form>
 		</div>	
 	</div>
-
-
+<script type="text/javascript">
+	$('.mask').click(function() {
+		alert('hi');
+	});
+</script>
 <c:import url="../temp/footer.jsp" />
 </body>
 </html>
