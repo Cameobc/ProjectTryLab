@@ -25,10 +25,8 @@ public class MemberController {
 	private ApprovalService approvalService;
 	
 	
-	
 	@RequestMapping(value = "memberOrder")
 	public void memberOrder() throws Exception{
-		
 	}
 	
 	

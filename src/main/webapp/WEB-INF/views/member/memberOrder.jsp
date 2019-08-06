@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,7 +163,7 @@ url(//fonts.googleapis.com/earlyaccess/hanna.css);
 					<input type="radio" class="checks" id="payment1" name="payment" value="1"> 무통장 입금 &nbsp; &nbsp; &nbsp; &nbsp;
 					<input type="radio" class="checks" id="payment2" name="payment" value="2"> 카드 결제
 				</div>
-				<h1></h1>
+				<h1><spring:eval expression="@purchase.getProperty('iamprot.code')"></spring:eval></h1>
 			</div>
 			<div class="btn_div">
 				<input type="button" value="결제하기" class="pay">
