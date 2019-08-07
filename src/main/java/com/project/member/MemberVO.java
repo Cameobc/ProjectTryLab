@@ -12,18 +12,11 @@ public class MemberVO {
 	private String email;
 	private String gender;
 	private int grade;
-	private String salt;
 	private String mail_key;
 	private MemberFileVO memberFileVO;
 	
 	
 	
-	public String getSalt() {
-		return salt;
-	}
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
 	public String getMail_key() {
 		return mail_key;
 	}
