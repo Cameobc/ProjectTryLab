@@ -214,8 +214,24 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 		</div>	
 	</div>
 <script type="text/javascript">
+	//동그란 형식으로 파일 바꾸는 것
 	$('.mask').click(function() {
-		alert('hi');
+		$('#photo').click();
+	});
+	//파일 바뀔 때마다 미리보기 변경
+	$('#photo').change(function() {
+		//files -> photo에 업로드 된 파일의 모음. 여기는 한개만 업로드 가능하여 한개만 뜬다.
+		//this.files->인덱스, 파일, 길이 순으로 뜨는 것 같음.
+		//this.files[0]-> 0번 인덱스에 저장된 파일의 정보가 나타난다.
+		//FileReader -> 비동기적으로 데이터를읽기 위하여 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 함.
+		//FileReader.onload -> 읽기 동작이 성공적으로 발생했을 경우 발생된다.
+		if(this.files && this.files[0]){
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$('#thumbnail').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(this.files[0]);
+		}
 	});
 </script>
 <c:import url="../temp/footer.jsp" />
