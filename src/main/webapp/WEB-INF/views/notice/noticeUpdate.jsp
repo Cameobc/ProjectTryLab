@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <c:import url="../temp/boot.jsp"/>
 <link rel="stylesheet" href="../resources/css/noticeUpdate.css" />
+<c:import url="../temp/header.jsp" />
 </head>
 <body>
 
@@ -33,6 +34,6 @@
 	  
 	</div>	
 	
-	
+<c:import url="../temp/footer.jsp"/>	
 </body>
 </html>

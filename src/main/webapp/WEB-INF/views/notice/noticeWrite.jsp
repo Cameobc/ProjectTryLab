@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <c:import url="../temp/boot.jsp"/>
 <link rel="stylesheet" href="../resources/css/noticeWrite.css" />
+<c:import url="../temp/header.jsp" />
 </head>
 <body>
 
@@ -37,6 +38,6 @@
 	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 	$('#contents').val(str);
 </script>		
-	
+<c:import url="../temp/footer.jsp"/>	
 </body>
 </html>

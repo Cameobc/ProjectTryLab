@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <c:import url="../temp/boot.jsp"/>
 <link rel="stylesheet" href="../resources/css/qnaWrite.css">
+<c:import url="../temp/header.jsp" />
 </head>
 <body>
 	
@@ -42,16 +43,6 @@
 		  </div>
 	  </div><br><br><br>
 
-<!-- 
-	  <div>
-	  	<label for="phone" style="color:#9c836a;">휴대폰 번호</label>
-	  	<div>
-			<input type="text" id="phone" name="phone">&nbsp;-&nbsp;
-			<input type="text" id="phone" name="phone">&nbsp;-&nbsp;
-			<input type="text" id="phone" name="phone">
-	  	</div>
-	  </div>	
- -->
 		<div>
 			<input type="file" id="add" value="파일 추가">
 		</div>
@@ -62,10 +53,10 @@
 	  		<div id="agree">필수적 개인정보 수집 및 이용에 대한 동의 <span>(필수)</span></div>
 	  	</div>
 	  	
-	  	<div id="c2"><input type="checkbox" name="chk" id="chk1"> 동의함</div>
+	  	<div id="c2"><input type="checkbox" name="chk"> 동의함</div>
 		<br><br><br>	
 		<div id="agree_text">
-			<textarea rows="10" cols="111" style="padding-left: 10px;">
+			<textarea rows="10" cols="111" style="padding-left: 10px; width: 780px;">
 
 파라다이스시티는 귀하의 개인정보를 소중하게 생각하며, 서비스제공을 위해 개인정보보호법 제 15조 및 제22조에 따라 귀하의 동의를 받고자 합니다.
 
@@ -135,6 +126,6 @@
 	
 </script>		
 		
-		
+<c:import url="../temp/footer.jsp"/>		
 </body>
 </html>

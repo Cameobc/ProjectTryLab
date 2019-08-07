@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <c:import url="../temp/boot.jsp"/>
 <link rel="stylesheet" href="../resources/css/qnaList.css" />
+<c:import url="../temp/header.jsp" />
 </head>
 <body>
 
@@ -53,5 +54,6 @@
 	
 	
 	</div> <!-- container end -->
+<c:import url="../temp/footer.jsp"/>	
 </body>
 </html>

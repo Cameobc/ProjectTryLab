@@ -5,9 +5,11 @@ import java.io.FileOutputStream;
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+@Repository
 public class FileSaver {
 	// 파일 저장
 	//

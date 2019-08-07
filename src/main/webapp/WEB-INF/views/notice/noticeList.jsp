@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <c:import url="../temp/boot.jsp"/>
 <link rel="stylesheet" href="../resources/css/noticeList.css" />
-
+<c:import url="../temp/header.jsp" />
 
 </head>
 <body>
@@ -29,7 +29,7 @@
 	
 	  <table class="table table-hover">
 	    <thead>
-	      <tr class="title" style="border-top: 1px solid #9c836a;">
+	      <tr class="title" style="border-top: 1px solid #9c836a; font-size: 17px;">
 	        <th style="padding-top: 15px; padding-bottom: 15px;">번호</th>
 	        <th style="padding-top: 15px; padding-bottom: 15px;">제목</th>
 	        <th style="padding-top: 15px; padding-bottom: 15px;">작성일</th>
@@ -56,6 +56,6 @@
 	
 	
 	
-	
+<c:import url="../temp/footer.jsp"/>	
 </body>
 </html>

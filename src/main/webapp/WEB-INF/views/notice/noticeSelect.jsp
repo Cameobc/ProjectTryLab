@@ -12,15 +12,16 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/noticeSelect.css" />
+<c:import url="../temp/header.jsp" />
 </head>
 <body>
 	<div class="container">
 		<div id="notice">공지사항</div>	
 	
 	<div id="title">
-	<table>
+	<table style="margin-bottom: 0px;">
 		<tr>
-			<td width="70%">${dto.title}</td>
+			<td width="70%" style="padding-left: 0px;">${dto.title}</td>
 			<td width="30%" id="date">${dto.reg_date}</td>
 		</tr>
 	</table>
@@ -33,9 +34,8 @@
 		<div id="contents">${dto.contents}</div>
 	<br><br>
 		<div id="line"></div>
-	<br><br>
+	<br>
 		<div id="btn" OnClick="location.href='./noticeList';">목록</div>
-	
 	
 	
 	</div> <!-- container end -->
@@ -43,10 +43,10 @@
 	
 	
 <script type="text/javascript">
-	var str = document.getElementById("contents").value;
+ 	var str = document.getElementById("contents").value;
 	str = str.replaceAll("<br/>", "\r\n");
 	document.getElementById("contents").value = str;
 </script>	
-
+<c:import url="../temp/footer.jsp"/>
 </body>
 </html>

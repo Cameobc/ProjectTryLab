@@ -6,7 +6,7 @@
     /* margin-left:20%; */
     margin-top: 7%;
     font-size: 15px;
-    color: #9c836a;
+    color: #ff005a;
     font-weight: bold;
     /* border: 1px solid red; */
 }
@@ -29,6 +29,7 @@
 	text-align: center;
 	font-size:14px;
     cursor: pointer; /* 마우스 손가락모양 */
+    margin-bottom: 20px;
 }
 /* #line {
 	width: 60%;
@@ -41,6 +42,9 @@ tr {
 	font-size:15px;
 	height: 60px;
 	padding-top: 5px;
+}
+td {
+	background-color: white;
 }
 .title th{
 	color: #9c836a;

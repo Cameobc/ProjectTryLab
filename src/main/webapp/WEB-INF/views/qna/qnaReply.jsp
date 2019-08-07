@@ -34,6 +34,12 @@
 	
 	
 	</div> <!-- container end -->
+	
+<script type="text/javascript">
+	$("#write").click(function() {
+		$("#frm").submit();
+	});
+</script>	
 
 </body>
 </html>

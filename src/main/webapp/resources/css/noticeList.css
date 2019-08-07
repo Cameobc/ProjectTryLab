@@ -1,11 +1,14 @@
 @charset "UTF-8";
 
+.container {
+	width: 65%;
+}
 #notice {
 	width: 200px;
 	height: 30px;
-	margin-top:7%;
+	margin-top:4%;
 	font-size: 15px;
-    color: #9c836a;
+    color: #ff005a;
     font-weight: bold;
     /* border: 1px solid red; */
 }
@@ -19,7 +22,7 @@
 	/* border: 1px solid red; */
 }
 tr {
-	font-size:15px;
+	/* font-size:10px; */
 	height: 60px;
 	padding-top: 5px;
 }
@@ -28,6 +31,9 @@ tr {
 	text-align: center;
 	padding-top: 15px;
     padding-bottom: 15px;
+}
+td {
+	background-color: white;
 }
 td:first-child {
 	text-align: center;

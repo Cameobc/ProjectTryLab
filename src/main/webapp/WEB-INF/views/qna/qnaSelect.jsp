@@ -12,7 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/qnaSelect.css" />
-
+<c:import url="../temp/header.jsp" />
 </head>
 <body>
 
@@ -20,9 +20,9 @@
 		<div id="qna">FAQ</div>
 
 	<div id="title">
-	<table>
+	<table style="margin-bottom: 0px;">
 		<tr>
-			<td width="70%">${dto.title}</td>
+			<td width="70%" style="padding-left: 0px;">${dto.title}</td>
 			<td width="30%" id="date">${dto.reg_date}</td>
 		</tr>
 	</table>
@@ -65,6 +65,6 @@
 	} */
 
 </script>
-
+<c:import url="../temp/footer.jsp"/>
 </body>
 </html>
