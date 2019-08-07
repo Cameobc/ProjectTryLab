@@ -25,10 +25,17 @@
 	</repositories>
 	<dependencies>
 	<!-- 민지 -->
+	<!-- iamport 결제모듈 -->
 		<dependency>
 		    <groupId>com.github.iamport</groupId>
 	   		<artifactId>iamport-rest-client-java</artifactId>
-	    <version>0.2.3</version>
+	    	<version>0.2.3</version>
+	</dependency>
+	<!-- jackson databind -->
+	<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.8</version>
 	</dependency>
 	<!-- 상현 -->
 	<!-- 승현 -->

@@ -30,6 +30,22 @@
 	 insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{gender}, 3, #{salt}, #{mail_key})
 </insert>
  
+ <!-- 중복확인 -->
+ <select id="checkMember" parameterType="java.util.Map" resultType="Integer">
+ 	SELECT COUNT(*) FROM MEMBER WHERE
+ 	<choose>
+ 		<when test="name=='id'">
+ 		ID=#{id}
+ 		</when>
+		<when test="name=='phone'">
+		PHONE=#{id}
+		</when>
+		<otherwise>
+		EMAIL=#{id}
+		</otherwise>
+ 	</choose>
+ </select>
+
  <!-- 탈퇴 -->
  <delete id="setDelete" parameterType="java.util.List">
  	delete member where id = #{id}

@@ -25,7 +25,9 @@
 	
 	<!-- 승한 -->
 
-
+	<!-- 민지 -->
+	<typeAlias type="java.lang.String" alias="String"/>
+	<typeAlias type="java.lang.Integer" alias="Integer"/>
 
 </typeAliases>
 

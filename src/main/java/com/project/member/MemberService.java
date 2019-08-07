@@ -1,5 +1,7 @@
 package com.project.member;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -42,5 +44,9 @@ public class MemberService {
 	public MemberVO getSelect(MemberVO memberVO) throws Exception {
 		return memberVO=memberDAO.getSelect(memberVO);
 		
+	}
+	
+	public int checkMember(Map<String, Object> map) throws Exception{
+		return memberDAO.checkMember(map);
 	}
 }

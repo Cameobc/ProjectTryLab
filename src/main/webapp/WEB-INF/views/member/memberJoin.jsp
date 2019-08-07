@@ -140,11 +140,6 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 	    font-family: BMJUA;
 	    font-size: 1.5em;
 	}
-	.form-info{
-		margin-left:37%;
-		font-size: 0.8em;
-		text-align: left;
-	}
 	
 	#photo{
 		position: absolute;
@@ -157,6 +152,12 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 	    border: 0;
 	}
 	
+	.input_rex{
+		margin-left:38%;
+		font-size: 1em;
+		text-align: left;
+		font-weight: lighter;
+	}
 	
 </style>
 </head>
@@ -169,46 +170,49 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 				<div class="member_thumbnail">
 					<img id="thumbnail" src="../resources/images/profile.png" width="100" height="100">
 					<span class="mask"></span>
-					<input type="file" id="photo" name="photo">
+					<input type="file" id="photo" name="photo" accept="image/*">
 				</div>		  		
 				<div class="member-form">
 			    	<span class="member-label">ID </span>
-					<form:input path="id" cssClass="member-input"/>
+					<form:input path="id" cssClass="member-input" id="id"/>
+					<div class="input_rex id_text"></div>
 					<form:errors path="id"></form:errors>
 				</div>
 				<div class="member-form">
 			    	<span class="member-label">PASSWORD</span>
-			    	<form:password path="pw" cssClass="member-input"/><br>
-			    	<div class="form-info">'영어 대소문자, 숫자, 특수문자 포함 8~16글자'</div>
+			    	<form:password path="pw" cssClass="member-input" id="pw"/><br>
+			    	<div class="input_rex pw_text">영어 대소문자, 숫자, 특수문자 포함 8~16글자</div>
 			  	</div> 
 				<div class="member-form">
 			    	<span class="member-label">PASSWORD CONFIRM</span>
-			    	<form:password path="pw2" cssClass="member-input"/>
+			    	<form:password path="pw2" cssClass="member-input" id="pw2"/>
 			    	<form:errors path="pw2"></form:errors>
 			  	</div> 
 				<div class="member-form">
 				    <span class="member-label">NAME</span>
-				    <form:input path="name" cssClass="member-input"/>
+				    <form:input path="name" cssClass="member-input" id="name"/>
+				    <div class="input_rex name_text"></div>
 				    <form:errors path="name"></form:errors>
 				</div>		
 				<div class="member-form">
 			    	<span class="member-label">PHONE</span>
-			    	<form:input path="phone" cssClass="member-input"/>
-			    	<div class="form-info">'010-1234-5678 형식을 지켜주세요'</div>
+			    	<form:input path="phone" cssClass="member-input" id="phone"/>
+			    	<div class="input_rex phone_text">01012345678 형식을 지켜주세요</div>
 			  	</div> 
 				<div class="member-form">
 				    <span class="member-label">EMAIL</span>
-				    <form:input path="email" cssClass="member-input"/><br>
+				    <form:input path="email" cssClass="member-input" id="email"/><br>
+				    <div class="input_rex email_text"></div>
 				    <form:errors path="email"></form:errors>
 				</div>
 				<div class="member-form">
 			    	<span class="member-label2">GENDER</span>
-			    	<form:radiobutton path="gender" value="f" id="gender1"/> F &nbsp;&nbsp;&nbsp;&nbsp;
-			    	<form:radiobutton path="gender" value="m" id="gender2"/> M
+			    	<form:radiobutton path="gender" cssClass="gender" value="f" id="gender1"/> F &nbsp;&nbsp;&nbsp;&nbsp;
+			    	<form:radiobutton path="gender" cssClass="gender" value="m" id="gender2"/> M
 			    	<div class="member-input2" ></div>
 			  	</div> 
 				<div class="member-form">
-					<form:button cssClass="btn"> JOIN </form:button>
+					<input type="button" Class="btn" value="JOIN">
 				</div>  
 			</form:form>
 		</div>	
@@ -233,6 +237,170 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 			reader.readAsDataURL(this.files[0]);
 		}
 	});
+	
+	//프론트단에서 유효성 검사
+	$('#id').change(function() {
+		var idRex = /^[a-z0-9][a-z0-9_]{5,20}$/;
+		if(!idRex.test($('#id').val())){
+			$('#id').val('');
+			$('.id_text').html('영어, 숫자, 특수문자 _ 가 들어간 6~20자리 형식만 가능합니다.');
+			$('.id_text').css('color', 'red');
+		}else{
+			var data = {};
+			data["id"] = $('#id').val();
+			data["name"]= 'id';
+			$.ajax({
+				contentType:'application/json',
+				dataType:'json',
+				data:JSON.stringify(data),
+				url:"../ajax/checkMember",
+				type:"POST",
+				success:function(data){
+					if(data==0){
+						$('.id_text').html('멋진 아이디네요!');
+						$('.id_text').css('color', '#f6755e');
+					}else{
+						$('#id').val('');
+						$('.id_text').html('이미 사용 중인 아이디입니다.');
+						$('.id_text').css('color', 'red');
+					}
+				}
+			});
+		}
+	});
+	
+	//pw 유효성검사+ pw&pw2 일치 여부 검사	
+	$('#pw2').change(function() {
+		var pw=$('#pw').val();
+		var pw2=$('#pw2').val();
+		var pwRex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\W])[a-zA-Z0-9\W]{8,20}$/;
+		if(pw==pw2){
+			if(!pwRex.test($('#pw2').val())){
+				$('#pw').val('');
+				$('#pw2').val('');
+				$('.pw_text').html('영어 대소문자, 숫자, 특수문자 포함 8~16글자');
+				$('.pw_text').css('color', '#f6755e');
+			}else{
+				$('.pw_text').html('사용할 수 있는 비밀번호 입니다.');
+				$('.pw_text').css('color', '#f6755e');
+			}
+		}else{
+			$('#pw').val('');
+			$('#pw2').val('');
+			$('.pw_text').html('비밀번호가 일치하지 않습니다.');
+			$('.pw_text').css('color', '#f6755e');
+		}
+		
+	});
+	$('#pw').change(function() {
+		var pw=$('#pw').val();
+		var pw2=$('#pw2').val();
+		if(pw2.length>0 && pw!=pw2){
+			$('#pw').val('');
+			$('#pw2').val('');
+			$('.pw_text').html('비밀번호가 일치하지 않습니다.');
+			$('.pw_text').css('color', '#f6755e');
+		}
+	});	
+		
+	//name
+	$('#name').change(function() {
+		var nameRex = /^[가-힣]{2,20}$/;
+		var nameRex2 = /^[a-zA-Z]{2,20}$/;
+		if(nameRex.test($('#name').val())|| nameRex2.test($('#name').val())){
+			$('.name_text').html('아름다운 이름이네요.');
+			$('.name_text').css('color', '#f6755e');
+		}else{
+			$('#name').val('');
+			$('.name_text').html('한글이나 영어로 적어주세요.');
+			$('.name_text').css('color', 'red');
+		}
+	});
+	//phone
+	$('#phone').change(function() {
+		var phoneRex=/^01(?:1|0|[6-9])[0-9]{6,8}$/;
+		if(phoneRex.test($('#phone').val())){
+			var data = {};
+			data["id"] = $('#phone').val();
+			data["name"]= 'phone';
+			console.log(data);
+			$.ajax({
+				contentType:'application/json',
+				dataType:'json',
+				data:JSON.stringify(data),
+				url:"../ajax/checkMember",
+				type:"POST",
+				success:function(data){
+					if(data==1){
+						$('#phone').val('');
+						$('.phone_text').html('등록된 번호입니다.');
+						$('.phone_text').css('color', 'red');
+					}else{
+						$('.phone_text').html('사용할 수 있는 번호입니다.');
+						$('.phone_text').css('color', '#f6755e');
+					}
+				}
+			});
+		}else{
+			$('#phone').val('');
+			$('.phone_text').html('양식을 지켜주세요.');
+			$('.phone_text').css('color', 'red');
+		}
+	});
+	//email
+	$('#email').change(function() {
+		var emailRex=/^[a-zA-Z0-9_]+@[a-z]+\.[a-z]{2,4}$/;
+		if(emailRex.test($('#email').val())){
+			var data = {};
+			data["id"] = $('#email').val();
+			data["name"]= 'email';
+			$.ajax({
+				contentType:'application/json',
+				dataType:'json',
+				data:JSON.stringify(data),
+				url:"../ajax/checkMember",
+				type:"POST",
+				success:function(data){
+					if(data==1){
+						$('#email').val('');
+						$('.email_text').html('등록된 이메일 입니다.');
+						$('.email_text').css('color', 'red');
+					}else{
+						$('.email_text').html('사용할 수 있는 이메일입니다.');
+						$('.email_text').css('color', '#f6755e');
+					}
+				}
+			});
+		}else{
+			$('#email').val('');
+			$('.email_text').html('이메일 형식에 맞게 작성해주세요.');
+			$('.email_text').css('color', 'red');
+		}
+	});
+	
+	$('.btn').click(function() {
+		var check = true;
+		$('.member-input').each(function() {
+			if($(this).val('')){
+				check=false;
+			}
+		});
+		
+		var check2 = false;
+			
+		$('.gender').each(function() {
+			if($(this).prop('checked')){
+				check2 = true;
+			}
+		});
+		
+		if(check&&check2){
+			$('#frm').submit();
+		}else{
+			alert('폼을 모두 채워주세요.');
+		}
+	});
+	
 </script>
 <c:import url="../temp/footer.jsp" />
 </body>
