@@ -56,11 +56,9 @@ public class ApprovalService {
 		licenseVO.setFname(fname);
 		licenseVO.setOname(oname);
 
-
 		int result = approvalDAO.tutorRequest(approvalVO);
 		result = certificateDAO.setWrite(certificateVO);
 		result = licenseDAO.setWrite(licenseVO);
-		System.out.println("result=" + result);
 		
 		return result;
 
@@ -79,8 +77,9 @@ public class ApprovalService {
 		return approvalDAO.getSelect(id);
 	}
 	
-	
-	
+	public int regDelete(String id) throws Exception {
+		return approvalDAO.regDelete(id);
+	}
 	
 	
 	

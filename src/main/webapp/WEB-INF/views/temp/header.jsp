@@ -8,78 +8,14 @@
 <title>Insert title here</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="../resources/assets/css/main.css" />
-	
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header_css.css" />
 <style type="text/css">
-	body { 
-		margin:  0px;
-		background-color: white;
-		
-	}
-	label {
-		color:black;
-	} 
 
-	 a { 
-		text-decoration: none; border-bottom: none;
-		    transition: 0.2s ease-in-out;
-	
-	}
-	ul {
-		text-decoration: none; list-style: none;
-	}
-	
-	.container {
-		color: black;
-	}
-	
-	.black { color: black;}
-	
-	.wrap{
-		width: 100%; height: 100%; margin : 0; padding: 0; 
-	}
 
-	.header_wrap { 
-		width:100%; height: 155px;  box-shadow: inset 0 -1px 0px 0 #EAEAEA;
-	}
-	.header_gray {
-		width:100%; height: 48px; background-color : #ffdb4d; 
-	}
-	.gray_wrap {
-		width:100%; height:48px; padding : 0 10%; 
-		margin: 0 auto;
-	}
-	.menu_wrap {
-		width: 100%; height: 107px; background: white;   
-	}
-	.menu_con{
-		margin: 0 auto; height: 107px; padding: 0 10%; margin: 0 auto; 
-	}
-	.list_wrap {
-		height: 108px;  margin: 0 30%; border-bottom: gray;
-	}
 	
-	.top_list{
-		text-decoration: none; list-style: none; margin:0; 
-		float:right; line-height: 2.7em; 
-	} 
-	.top_menu {
-		float: left; margin-right: 20px; font-size: 14px; font-weight: bold;
-	}
-	.menu_list {
-		list-style: none; width:50%; height: 107px; line-height: 6em; margin:0 auto; padding: 0; text-align: center; 
-	}
-	.menu {
-		 display: inline-block; text-align: center; margin: 0 auto; padding-right: 40px;
-		 font-size: 18px; font-weight: bold; color: navy;
-	}
-	.logo_wrap {
-		padding: 40px 0; width:130px; height: 107px; margin: 0; display: inline-block; float: left;
-	}
-	#logo {
-		width: 120px; height: 30px; display: inline-block; float: left; vertical-align: middle;
-	}
 </style>
 
 </head>
@@ -88,6 +24,23 @@
 	<div class="header_wrap">
 		<div class="header_gray">
 			<div class="gray_wrap">
+			<form class="form-inline" action="./classList" style="width: 1000px; height:48px; margin: 0px; display: inline-block;">
+				<div class="form-group search_wrap">
+					<select class="form-control" id="option" name = "kind">
+						<option class="k" value="0">전체</option>
+						<option class="k" value="1">카테고리</option>
+						<option class="k" value="2">클래스명</option>
+						<option class="k" value="3">닉네임</option>
+					</select>
+				</div>
+				<div class="form-group search_wrap">
+					<input type="text" id="search" class="form-control" value="${pager.search }" name="search" placeholder="검색할 단어를 입력하세요.">
+				</div>
+				<button class="search_btn">검색</button>
+
+
+			</form>
+			
 				<ul class="top_list">
 					<c:if test="${empty member }">
 					<li class="top_menu"><a href="${pageContext.request.contextPath}/member/memberLogin">로그인  </a></li>
@@ -119,7 +72,18 @@
 						<li class="menu"><a class="black">공지사항</a>
 						<li class="menu"><a class="black">서비스 소개</a>
 						<li class="menu"><a class="black">VOD 강의</a>
-						<li class="menu"><a href="${pageContext.request.contextPath }/member/tutorRequest" class="black">튜터 등록</a>
+						<c:forEach items="${approvalVO}" var="vo">
+							<c:if test="${member.id ne vo.id }">
+								<li class="menu"><a href="${pageContext.request.contextPath }/member/tutorRequest" class="black">튜터 등록</a>			
+							
+							</c:if>
+							<c:if test="${member.id eq vo.id }">
+								<li class="menu"><a class="black">테스트</a>			
+							
+							</c:if>
+						
+						</c:forEach>
+						
 					</ul>
 
 			</div>

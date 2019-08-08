@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.project.certificate.CertificateVO;
 import com.project.license.LicenseVO;
+import com.project.member.MemberVO;
 import com.project.memberProfile.MemberFileVO;
 @Component
 public class ApprovalVO {
@@ -19,8 +20,15 @@ public class ApprovalVO {
 	private CertificateVO certificateVO;
 	private LicenseVO licenseVO;
 	private MemberFileVO memberFileVO;
+	private MemberVO memberVO;
 	
 	
+	public MemberVO getMemberVO() {
+		return memberVO;
+	}
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
+	}
 	public MemberFileVO getMemberFileVO() {
 		return memberFileVO;
 	}

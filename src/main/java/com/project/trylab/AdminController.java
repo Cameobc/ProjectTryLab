@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.admin.AdminService;
@@ -42,7 +43,6 @@ public class AdminController {
 	@RequestMapping(value="tutorApproval", method =RequestMethod.GET)
 	public ModelAndView tutorApproval(PageMaker pageMaker) throws Exception {
 		List<ApprovalVO> request = approvalService.tutorApproval(pageMaker);
-		System.out.println(request.size());
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("request", request);
 		
@@ -60,11 +60,33 @@ public class AdminController {
 			mv.setViewName("./tutorApproval");
 		}
 		return mv;
-		
-		
-		
-		
 	}
+	
+	@RequestMapping(value="gradeUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public int gradeUpdate(String id) throws Exception {
+		int result = adminService.gradeUpdate(id);
+		return result;
+	}
+	
+	@RequestMapping(value="regDelete", method=RequestMethod.POST)
+	@ResponseBody
+	public int regDelete(String id) throws Exception {
+		return approvalService.regDelete(id);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -32,6 +32,8 @@ public class ApprovalDAO {
 	public ApprovalVO getSelect(String id) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getSelect", id);
 	}
-	
+	public int regDelete(String id) throws Exception {
+		return sqlSession.delete(NAMESPACE+"regDelete", id);
+	}
 	
 }
