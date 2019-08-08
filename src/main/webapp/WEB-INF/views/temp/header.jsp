@@ -72,17 +72,11 @@
 						<li class="menu"><a class="black">공지사항</a>
 						<li class="menu"><a class="black">서비스 소개</a>
 						<li class="menu"><a class="black">VOD 강의</a>
-						<c:forEach items="${approvalVO}" var="vo">
-							<c:if test="${member.id ne vo.id }">
-								<li class="menu"><a href="${pageContext.request.contextPath }/member/tutorRequest" class="black">튜터 등록</a>			
-							
-							</c:if>
-							<c:if test="${member.id eq vo.id }">
-								<li class="menu"><a class="black">테스트</a>			
-							
-							</c:if>
-						
-						</c:forEach>
+					<c:forEach items="${approvalVO }" var="dto">
+						<a class="black">ddd</a>
+					</c:forEach>
+						<li class="menu"><a href="${pageContext.request.contextPath }/member/tutorRequest" class="black">튜터 등록</a>			
+
 						
 					</ul>
 
