@@ -1,11 +1,12 @@
 package com.project.file;
 
 public class FileVO {
-	
+
 	private int fnum;
 	private int num;
 	private String fname;
 	private String oname;
+
 	public int getFnum() {
 		return fnum;
 	}
@@ -32,4 +33,5 @@ public class FileVO {
 	}
 	
 	
+
 }
