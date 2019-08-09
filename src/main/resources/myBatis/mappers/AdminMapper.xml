@@ -50,7 +50,6 @@
   
   <update id="gradeUpdate" parameterType="String">
   	update member set grade=1 where id=#{id} 
-  
   </update>
   
   

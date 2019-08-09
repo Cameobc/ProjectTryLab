@@ -85,7 +85,14 @@
 		delete from approval where id=#{id}
 
 	</delete>
-
+	
+ 	<update id="tutorUpdate" parameterType="String">
+ 		update approval
+ 		set confirmType=#{confirmType}, 
+ 		
+ 		where id=#{id}
+ 	</update>
+ 
 
 
 

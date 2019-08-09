@@ -57,8 +57,12 @@
  	select M.*, F.*
  	from member M Full Join MemberFile F on (M.id=F.id)
  	where M.id=#{id} and M.pw=#{pw}
-
  </select>
+
+ 
+ 
+ 
+ 
 
  
  </mapper>
