@@ -14,7 +14,7 @@
 
 	<div class="container">
 	  <h2>작성하기</h2>
-	  <form action="./noticeWrite" method="post">
+	  <form action="./noticeWrite" id="frm" method="post">
 	    <div class="form-group">
 	      <label for="title">제목</label>
 	      <input type="text" class="form-control" id="title" name="title">
@@ -27,7 +27,11 @@
 	      <label for="contents">내용</label>
 	      <textarea class="form-control" rows="10" id="contents" name="contents"></textarea>
 	    </div>	    
-		<button type="submit" class="btn btn-default">등록</button>
+		<div id="submit" class="btn btn-default">등록</div>
+		
+		<%-- <button type="submit" class="btn btn-default">등록</button>
+		<a href="./qnaReply?num=${dto.num}" class="btn btn-outline-dark">댓글</a>
+		 --%>
 	  </form>
 	  
 	  
@@ -37,6 +41,12 @@
 	var str = $('#contents').val();
 	str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 	$('#contents').val(str);
+	
+	$("#submit").click(function() {
+		$("#frm").submit();
+	});	
+	
+	
 </script>		
 <c:import url="../temp/footer.jsp"/>	
 </body>

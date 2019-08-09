@@ -17,6 +17,11 @@ public class QnaDAO {
 	private static final String NAMESPACE = "QnaMapper.";
 	
 	
+	//hit
+	public void updateHit(int num) throws Exception {
+		sqlSession.update(NAMESPACE+"updateHit", num);
+	}
+	
 	//write
 	public int setWrite(QnaVO qnaVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setWrite", qnaVO);

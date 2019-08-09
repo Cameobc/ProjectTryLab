@@ -29,15 +29,19 @@
 	</div>
 	<br>
 		<div class="buttons">
-			<a href="./qnaUpdate?num=${dto.num}"><button type="button" class="btn btn-outline-dark">수정</button></a>
-			<a href="./qnaDelete?num=${dto.num}"><button type="button" class="btn btn-outline-danger">삭제</button></a>
+			<a href="./qnaUpdate?num=${dto.num}" class="btn btn-outline-dark">수정</a>
+			<a href="./qnaDelete?num=${dto.num}" class="btn btn-outline-danger">삭제</a>
+		
+		
+			<%-- <a href="./qnaUpdate?num=${dto.num}"><button type="button" class="btn btn-outline-dark">수정</button></a>
+			<a href="./qnaDelete?num=${dto.num}"><button type="button" class="btn btn-outline-danger">삭제</button></a> --%>
 		</div>
 		<div id="contents">${dto.contents}</div>
 	<br><br>
 		<div id="line"></div>
 	<br>	
 		<div id="reply">
-			<a href="./qnaReply?num=${dto.num}" class="btn btn-outline-dark">댓글</a>
+			<a href="./qnaReply?num=${dto.num}" class="btn btn-outline-dark">답글 작성</a>
 		</div>
 		<div id="btn" OnClick="location.href='./qnaList';">목록</div>
 

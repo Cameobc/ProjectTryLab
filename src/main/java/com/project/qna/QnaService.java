@@ -26,6 +26,11 @@ public class QnaService {
 	@Inject
 	private FileSaver fileSaver;
 	
+	//hit
+	public void updateHit(int num) throws Exception {
+		qnaDAO.updateHit(num);
+	}
+	
 	
 	//write
 	public int setWrite(QnaVO qnaVO, HttpSession session, List<MultipartFile> multipartFiles) throws Exception {

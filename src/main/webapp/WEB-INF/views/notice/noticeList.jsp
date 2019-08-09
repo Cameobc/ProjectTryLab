@@ -53,6 +53,21 @@
 		
 		
 	<!-- 페이징처리 -->
+	<div>
+		<ul class="pager">
+			<c:if test="${pager.curBlock>1}">
+		    	<li><a href="./noticeList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" style="color: black;">뒤로</a></li>
+			</c:if>
+			
+			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+				<li><a href="./noticeList?curPage=${i}&kind=${pager.kind}&search=${pager.search}" style="color: black;">${i}</a></li>
+			</c:forEach>
+			
+			<c:if test="${pager.curBlock < pager.totalBlock}">
+				<li><a href="./noticeList?curPage=${pager.startNum+1}&kind=${pager.kind}&search=${pager.search}" style="color: black;">다음</a></li>
+			</c:if>
+  		</ul>
+	</div>	
 	
 	
 	

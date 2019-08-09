@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,9 @@ public class QnaController {
 	
 	@Inject
 	private QnaService qnaService;
+	
+	//hit
+	
 	
 	
 	//write
@@ -71,7 +75,7 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView();
 		QnaVO qnaVO = qnaService.getSelect(num);
 		
-		System.out.println("board size:"+qnaVO.getFiles().size());
+		//System.out.println("board size:"+qnaVO.getFiles().size());
 		
 		mv.addObject("dto", qnaVO);
 		mv.setViewName("qna/qnaUpdate");
@@ -110,11 +114,11 @@ public class QnaController {
 	public ModelAndView setReply(QnaVO qnaVO, RedirectAttributes rd) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		int result = qnaService.setReply(qnaVO);
-		String msg = "댓글작성 실패";
+		String message = "댓글작성 실패";
 		if(result>0) {
-			msg = "댓글작성 성공";
+			message = "댓글작성 성공";
 		}
-		rd.addFlashAttribute("msg",msg);
+		rd.addFlashAttribute("msg",message);
 		mv.setViewName("redirect:./qnaList");
 		
 		return mv;

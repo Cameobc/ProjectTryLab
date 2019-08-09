@@ -5,6 +5,13 @@
   
 <mapper namespace="QnaMapper">
 
+
+	<!-- hit -->
+	<update id="updateHit" parameterType="Integer">
+		update qna set hit = hit + 1
+		where num=#{num}
+	</update>
+
 	<!-- write -->
 	<insert id="setWrite" parameterType="QnaVO">
 		<selectKey keyProperty="num" resultType="Integer" order="BEFORE">
@@ -39,6 +46,7 @@
 		<result property="title" column="title"/>
 		<result property="writer" column="writer"/>
 		<result property="contents" column="contents"/>
+		<result property="email" column="email"/>
 		<result property="reg_date" column="reg_date"/>
 		<result property="hit" column="hit"/>
 		<result property="ref" column="ref"/>
@@ -72,8 +80,7 @@
 				contents
 			</otherwise>
 		</choose>
-		like '%' || #{search} || '%'
-		order by ref desc, step asc) Q)
+		like '%'||#{search}||'%' order by num desc, step asc) Q)
 		where R between #{startRow} and #{lastRow}
 	</select>
 
@@ -110,7 +117,7 @@
 	<insert id="setReply" parameterType="QnaVO">
 		insert into qna values 
 		(
-			qna_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0,
+			qna_seq.nextval, #{title}, #{writer}, #{contents}, #{email, jdbcType=VARCHAR}, sysdate, 0,
 			(<include refid="subRef" />),
 			(<include refid="subStep" />)+1,
 			(select depth from qna where num=#{num})+1
