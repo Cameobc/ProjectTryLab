@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" href="../resources/css/style.css">
 <c:import url="../temp/boot.jsp" />
-<c:import url="../temp/header2.jsp" />
+<c:import url="../temp/header.jsp" />
 <c:import url="../temp/summernote.jsp" />
 
 <style type="text/css">
