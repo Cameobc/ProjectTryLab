@@ -4,12 +4,59 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="LessonMapper">
- 	
- 	<insert id="setWrite" parameterType="LessonVO">
- 		insert into classes values(#{class_id},#{category},#{tid},#{title},#{contents},#{price},sysdate,0)
+ 
+ 	<insert id="setTimetable" parameterType="LessonVO">
+ 		insert into timetable values(#{class_id},#{class_date},#{location},#{startTime},#{endTime})	
  	</insert>
  
- 	<select id="getCategory" resultType="LessonVO">
+ 	<insert id="setWrite" parameterType="LessonVO">
+ 		insert into classes values(#{class_id},#{category_id},#{tid},#{title},#{contents},#{price},sysdate,0,#{time})
+ 	</insert>
+ 
+ 	<select id="getSelect" parameterType="String" resultMap="LessonResult">
+ 		select * from classes C inner join lessonfiles L
+ 		on (C.class_id = L.class_id)
+ 		join timetable T
+ 		on (C.class_id=T.class_id) 
+ 		where C.class_id=#{class_id} order by C.reg_date desc, L.fnum asc 
+ 	</select>
+ 	
+ 	<select id="getCategory" resultType="CategoryVO">
  		select * from classCategory
  	</select>
+ 	
+ 	<select id="getList" resultMap="LessonResult">
+ 		select * from classes C inner join lessonfiles L
+ 		on (C.class_id = L.class_id)
+ 		order by reg_date desc
+ 	</select>
+ 	
+ 	<resultMap type="LessonVO" id="LessonResult">
+ 		<id property="class_id" column="class_id"/>
+ 		<result property="category_id" column="category_id"/>
+ 		<result property="tid" column="tid"/>
+ 		<result property="title" column="title"/>
+ 		<result property="price" column="price"/>
+ 		<result property="contents" column="contents"/>
+ 		<result property="reg_date" column="reg_date"/>
+ 		<result property="hit" column="hit"/>
+ 		<result property="location" column="location"/>
+ 		<result property="class_date" column="class_date"/>
+ 		<result property="startTime" column="startTime"/>
+ 		<result property="endTime" column="endTime"/>
+ 		<result property="time" column="time"/>
+ 		<collection property="file" javaType="List" ofType="LessonFileVO" resultMap="LessonFileResult">
+ 		
+ 		</collection>
+ 	</resultMap>
+ 	
+ 	<resultMap type="LessonFileVO" id="LessonFileResult">
+ 		<id property="fnum" column="fnum"/>
+		<result property="class_id" column="class_id"/>
+		<result property="fname" column="fname"/>
+		<result property="oname" column="oname"/>
+		<result property="thumbnail" column="thumbnail"/>
+ 	</resultMap>
+ 	
+ 	
  </mapper>

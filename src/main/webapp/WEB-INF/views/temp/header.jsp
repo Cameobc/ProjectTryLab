@@ -120,6 +120,7 @@
 						<li class="menu"><a class="black">서비스 소개</a>
 						<li class="menu"><a class="black">VOD 강의</a>
 						<li class="menu"><a href="${pageContext.request.contextPath }/member/tutorRequest" class="black">튜터 등록</a>
+						<li class="menu"><a href="${pageContext.request.contextPath }/lessons/lessonList" class="black">클래스</a>
 					</ul>
 
 			</div>

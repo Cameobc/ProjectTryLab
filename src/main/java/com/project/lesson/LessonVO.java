@@ -1,22 +1,24 @@
 package com.project.lesson;
 
 import java.sql.Date;
+import java.util.List;
 
 public class LessonVO {
 
 	private String class_id;
-	private String category;
+	private String category_id;
 	private String tid;
 	private String title;
 	private int price;
 	private String contents;
 	private Date reg_date;
 	private int hit;
-	private String roadFullAddr;
+	private String location;
 	private String class_date;
 	private String startTime;
 	private String endTime;
-	
+	private int time;
+	private List<LessonFileVO> file;
 	
 	public String getClass_id() {
 		return class_id;
@@ -24,11 +26,12 @@ public class LessonVO {
 	public void setClass_id(String class_id) {
 		this.class_id = class_id;
 	}
-	public String getCategory() {
-		return category;
+	
+	public String getCategory_id() {
+		return category_id;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategory_id(String category_id) {
+		this.category_id = category_id;
 	}
 	public String getTid() {
 		return tid;
@@ -68,11 +71,12 @@ public class LessonVO {
 	}
 	
 	
-	public String getRoadFullAddr() {
-		return roadFullAddr;
+	
+	public String getLocation() {
+		return location;
 	}
-	public void setRoadFullAddr(String roadFullAddr) {
-		this.roadFullAddr = roadFullAddr;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	public String getStartTime() {
 		return startTime;
@@ -92,6 +96,21 @@ public class LessonVO {
 	public void setClass_date(String class_date) {
 		this.class_date = class_date;
 	}
+	
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
+	}
+	public List<LessonFileVO> getFile() {
+		return file;
+	}
+	public void setFile(List<LessonFileVO> file) {
+		this.file = file;
+	}
+	
+	
 	
 	
 	

@@ -24,15 +24,19 @@
 	font-style: normal;
 }
 
-.main {
-	width: 100%;
-	padding-top: 50px;
-}
 
 body {
 	background-color: #ffeeeb;
 }
-
+.container{
+	padding-top: 50px;
+	height:2000px;
+}
+.main {
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 50px;
+}
 .lcontainer {
 	width: 50%;
 	float: left;
@@ -63,7 +67,10 @@ label {
 	font-weight: 500;
 	display: block;
 }
-
+.step{
+	font-family: BMHANNAPro;
+	color: #f6755e;
+}
 .tdWidth{
 	width: 10%;
 	background-color: #ffd6cf; 
@@ -71,7 +78,7 @@ label {
 	
 }
 .container {
-	height: 1500px;
+
 }
 
 .note-editable{
@@ -112,18 +119,18 @@ label {
 			detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn,
 			buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.form.roadFullAddr.value = roadFullAddr;
-
+		document.form.location2.value = roadFullAddr;
+		document.form.location.value = sggNm;
 	}
 </script>
 </head>
 <body>
 
 	<div class="container">
-	sdfsdf
+		<h2 class="step">Step1. 수업 정보 입력</h2>
 		<div class="main">
 			<div>
-				<form name="form" id="form" method="post">
+				<form name="form" id="form" method="post" enctype="multipart/form-data">
 					<table id="frmTable" class="table" style="background-color: #ffffff; padding:5px;">
 					<tr>
 						<td class="tdWidth"><label>수업명</label></td>
@@ -135,19 +142,24 @@ label {
 						<td class="tdWidth"><label>가격</label></td>
 						<td><input type="text" name="price" class="form-control"/></td>
 						<td class="tdWidth"><label>수업 시간(분)</label></td>
-						<td><input type="text" name="endTime" class="form-control" /></td>
+						<td><input type="text" name="time" id="time" class="form-control" /></td>
+						<!-- <td><input type="text" name="endTime" id="endTime" class="form-control" /></td> -->
 						<td class="tdWidth"><label>Category</label></td>
 						<td>
-							<select name="category" class="form-control" >
+							<select name="category_id" class="form-control" >
 							<c:forEach items="${category }" var="c">
-								<option value="${c.category }">${c.category }</option>
+								<option value="${c.category_id }">${c.category }</option>
 							</c:forEach>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td class="tdWidth"><label>수업 장소</label></td> 
-						<td colspan="7"><input type="text" id="roadFullAddr" name="roadFullAddr" onclick="goPopup();" class="form-control"/></td>
+						<td colspan="7">
+							<input type="text" id="location2" name="location2" onclick="goPopup();" class="form-control"/>
+							<input type="hidden" id="location" name="location" class="form-control"/>
+						</td>
+						
 					</tr>
 					<tr>
 						<td class="tdWidth"><label>설명</label></td>
@@ -155,7 +167,7 @@ label {
 					</tr>		
 					<tr>
 						<td class="tdWidth"><label>썸네일</label></td>
-						<td colspan="7"><div class="input-group col-lg-9"><input type="file" name="f1" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-remove del"></i></span></div></td>
+						<td colspan="7"><div class="input-group col-lg-9"><input type="file" name="thumbnail" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-remove del"></i></span></div></td>
 					</tr>
 					<tr>
 						<td class="tdWidth"><label>사진1</label></td>
@@ -169,7 +181,10 @@ label {
 					</tr>	
 					</table>
 					
-					<div class="btnField"><button class="btn btn-primary">등록</button></div>
+					<!-- <div class="btnField"><button class="btn btn-primary">등록</button></div> -->
+					<input type="hidden" id="class_date" name="class_date"/>
+					<input type="hidden" id="startTime" name="startTime"/>
+					<input type="hidden" name="endTime" id="endTime"/>
 				</form>
 				
 				
@@ -178,9 +193,18 @@ label {
 		</div>
 		<script type="text/javascript" src="../resources/js/summernote.js" ></script>
 		<!--  end of main -->
+		
+		<!-- <br><br><br> -->
+		<!-- 날짜선택 -->
+		<h2 class="step">Step2. 날짜선택</h2>
+		<div class="main">
+			<c:import url="../utils/dateTimePicker.jsp" />
+		</div>
+		<div class="btnField"><button id="LessonBtn" class="btn btn-primary">등록</button></div>
+		
 	</div>
 	<!-- end of container -->
-
+ 
 	<script type="text/javascript">
 	
 	
@@ -189,13 +213,62 @@ label {
 			change();
 			//다른 input들 검증
 			if($("#contents").summernote("isEmpty")){
-				alert("Empty");
+				alert("수업 설명을 입력해주세요.");
 			}else{
-				$("#frm").submit();
+				$("#form").submit();
 			}
 			
 		});
 		
+		function change() {
+			var txt = $(".datepicker-subheader").text().split(' ');
+			var time = $("#gettime").text().split(' '); // 10:30 am 
+			var time2 = time[0].split(":"); // 10 30
+			var endtime = $("#time").val()*1;
+			
+			var day=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+			var kday=["월요일","화요일","수요일","목요일","금요일","토요일","일요일"];
+			var month=["January","February","March","April","May","June","July","August","September",
+					"October","November","December"];
+			var kmonth=["01","02","03","04","05","06","07","08","09","10","11","12"];
+			var date=["01","02","03","04","05","06","07","08","09"];
+			
+			for(var i=0;i<12;i++){
+				if(txt[1]==month[i]){
+					txt[1]=kmonth[i];//영어를 숫자로 변환
+				}
+			}
+			
+			for(var i=0;i<7;i++){
+				if(txt[0]==day[i]){
+					txt[0]=kday[i]; //영어요일 한국어요일로 변환
+				}
+			}
+			
+			for(var i=0;i<9;i++){
+				if(txt[2]==i+1){
+					txt[2]=date[i]; 
+				}
+			}
+			
+			if(time[1]=="pm"){
+				time2[0] = time2[0]*1+12;
+			}
+			
+			time=time2[0]+":"+time2[1];
+			txt=txt[3]+"-"+txt[1]+"-"+txt[2];
+			
+			var minutes =time2[1]*1+(endtime%60);
+			if(minutes==0){
+				minutes="00";
+			}
+			endtime=(time2[0]*1+parseInt(endtime/60))+":"+minutes;
+			$("#class_date").val(txt);
+			$("#startTime").val(time);
+			$("#endTime").val(endtime);
+			
+			
+		}
 		var count=0;
 		$("#add").click(function() {
 			if(count<4){
@@ -205,8 +278,16 @@ label {
 				alert("첨부파일은 최대 5개까지 가능합니다.");
 			}
 		});
+		
+		$("#files").on("click", ".del", function() {
+			$(this).parent().parent().remove();
+			//$(this).remove();
+			count--;
+		});
 	</script>
 
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js'></script>
+	<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 
 </body>
 </html>
