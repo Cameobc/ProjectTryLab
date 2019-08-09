@@ -69,7 +69,6 @@
 			</div>
 					<ul class="menu_list">
 						<li class="menu"><a class="black">공지사항</a>
-						<li class="menu"><a href="${pageContext.request.contextPath }/class/classList" class="black">클래스</a>
 						<li class="menu"><a class="black">VOD 강의</a>
 						<li class="menu"><a href="${pageContext.request.contextPath }/lessons/lessonList" class="black">클래스</a>
 
