@@ -27,6 +27,9 @@
 td{
 	background-color: white;
 }
+button {
+	color :black !important;
+}
 
 body {
 	background-color: #ffeeeb;
