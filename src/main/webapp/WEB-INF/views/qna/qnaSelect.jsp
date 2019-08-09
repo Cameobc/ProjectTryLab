@@ -37,6 +37,12 @@
 			<a href="./qnaDelete?num=${dto.num}"><button type="button" class="btn btn-outline-danger">삭제</button></a> --%>
 		</div>
 		<div id="contents">${dto.contents}</div>
+		
+		<!-- 파일보여주기 -->
+		<div>	
+		
+		</div>
+		
 	<br><br>
 		<div id="line"></div>
 	<br>	
