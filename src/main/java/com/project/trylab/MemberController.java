@@ -44,13 +44,17 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="memberLogin", method = RequestMethod.POST)
-	public ModelAndView getSelect(MemberVO memberVO, HttpSession session) throws Exception {
+	public ModelAndView getSelect(MemberVO memberVO, ApprovalVO approvalVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		approvalVO = approvalService.getSelect(memberVO.getId());
 		memberVO = memberService.getSelect(memberVO);
 		String message = "Login Fail";
 		if(memberVO!=null) {
 			session.setAttribute("member", memberVO);
+			session.setAttribute("approval", approvalVO);
+			
 			message = "Login Success";
+			
 		}
 		mv.setViewName("common/messageMove");
 		mv.addObject("message", message);
@@ -75,6 +79,8 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = approvalService.tutorRequest(approvalVO, certificate, license, session);
+		
+		
 		String message= "승인 요청 실패";
 
 		if(result>0) {
@@ -85,7 +91,13 @@ public class MemberController {
 		mv.setViewName("common/messageMove");
 		
 		return mv;
+	}
+	
+	@RequestMapping(value="tutorUpdate", method = RequestMethod.GET)
+	public void tutorUpdate() throws Exception {
 		
 	}
+	
+	
 	
 }
