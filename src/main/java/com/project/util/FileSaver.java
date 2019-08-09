@@ -98,6 +98,7 @@ public class FileSaver {
 			// 저장될 이름
 			String fileSystemName= UUID.randomUUID().toString();
 			String originalName = multipartFile.getOriginalFilename();
+			if(originalName.length()>0)
 			originalName = originalName.substring(originalName.lastIndexOf("."));	// 확장자
 			
 			fileSystemName = fileSystemName + originalName;

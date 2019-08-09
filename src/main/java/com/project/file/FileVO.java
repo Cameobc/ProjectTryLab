@@ -6,7 +6,7 @@ public class FileVO {
 	private int num;
 	private String fname;
 	private String oname;
-	
+
 	public int getFnum() {
 		return fnum;
 	}
@@ -33,5 +33,5 @@ public class FileVO {
 	}
 	
 	
-	
+
 }

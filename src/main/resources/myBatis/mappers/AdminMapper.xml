@@ -48,9 +48,8 @@
  </resultMap>
   
   
-  <update id="gradeUpdate" parameterType="java.lang.String">
-  	update member set grade=#{grade} where id=#{id} 
-  
+  <update id="gradeUpdate" parameterType="String">
+  	update member set grade=1 where id=#{id} 
   </update>
   
   

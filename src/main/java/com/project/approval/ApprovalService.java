@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.certificate.CertificateDAO;
 import com.project.certificate.CertificateVO;
@@ -55,11 +56,9 @@ public class ApprovalService {
 		licenseVO.setFname(fname);
 		licenseVO.setOname(oname);
 
-
 		int result = approvalDAO.tutorRequest(approvalVO);
 		result = certificateDAO.setWrite(certificateVO);
 		result = licenseDAO.setWrite(licenseVO);
-		System.out.println("result=" + result);
 		
 		return result;
 
@@ -72,14 +71,15 @@ public class ApprovalService {
 		pageMaker.makePage(totalCount);
 		
 		return request;
-	
-		
-		
-		
 	}
 	
+	public ApprovalVO getSelect(String id) throws Exception {
+		return approvalDAO.getSelect(id);
+	}
 	
-	
+	public int regDelete(String id) throws Exception {
+		return approvalDAO.regDelete(id);
+	}
 	
 	
 	
