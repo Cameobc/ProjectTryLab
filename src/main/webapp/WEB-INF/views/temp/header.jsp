@@ -71,8 +71,6 @@
 						<li class="menu"><a class="black">공지사항</a>
 						<li class="menu"><a href="${pageContext.request.contextPath }/class/classList" class="black">클래스</a>
 						<li class="menu"><a class="black">VOD 강의</a>
-
-						<li class="menu"><a href="${pageContext.request.contextPath }/member/tutorRequest" class="black">튜터 등록</a>
 						<li class="menu"><a href="${pageContext.request.contextPath }/lessons/lessonList" class="black">클래스</a>
 
 						<c:if test="${empty approval.id }">

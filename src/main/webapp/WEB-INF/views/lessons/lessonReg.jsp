@@ -24,6 +24,9 @@
 	font-style: normal;
 }
 
+td{
+	background-color: white;
+}
 
 body {
 	background-color: #ffeeeb;
