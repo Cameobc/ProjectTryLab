@@ -127,6 +127,17 @@ body{
     color:white;
     font-family: 'Youth';
 }
+.btn_style2{
+	display: inline-block;
+    width: 45%;
+    height: 50px;
+    font-size: 16px;
+    background-color: white;
+    line-height: 50px;
+    color: #666;
+    font-family: 'Youth';
+    border: 1px solid #9999;
+}
 .menu_bar{
 	width: 100%;
 }
@@ -239,6 +250,11 @@ body{
 					<div class="box">
 						<span class="btn_talk btn_style">실시간 톡하기</span>
 						<span class="btn_pay btn_style">수업신청</span>
+					</div>
+					<!-- 튜터 회원만 보이게 -->
+					<div class="box">
+						<a href="./lessonUpdate?class_id=${lessons.class_id }" class="btn_talk btn_style2">수정하기</a>
+						<a href="./lessonDelete?class_id=${lessons.class_id }" class="btn_talk btn_style2">삭제하기</a>
 					</div>
 				</div>
 				<!-- end of info_summary -->

@@ -26,6 +26,25 @@ public class LessonController {
 	@Inject
 	private LessonService lessonService;
 
+	@RequestMapping(value="lessonDelete", method = RequestMethod.GET)
+	public ModelAndView lessonDelete(String class_id) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		int result = lessonService.setDelete(class_id);
+		
+		if(result>0) {
+			mv.addObject("message","해당 클래스를 삭제했습니다.");			
+		}else {
+			mv.addObject("message", "클래스 삭제에 실패했습니다.");
+		}
+		mv.addObject("path", "./lessonList");
+		mv.setViewName("common/messageMove");
+		return mv;
+	}
+	
+	
+	/////////////////////////////////////////////////////////////////////////
+	
 	@RequestMapping(value="lessonSelect", method = RequestMethod.GET)
 	public ModelAndView lessonSelect(String class_id) throws Exception{
 		

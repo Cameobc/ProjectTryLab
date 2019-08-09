@@ -14,6 +14,10 @@ public class LessonFileDAO {
 	private SqlSession sqlSession;
 	private static final String NAMESPACE="LessonFileMapper.";
 	
+	public int setDelete(String class_id) throws Exception {
+		return sqlSession.delete(NAMESPACE+"setDelete", class_id);
+	}
+	
 	public int setWrite(List<LessonFileVO> files) throws Exception{
 		int result=0;
 		

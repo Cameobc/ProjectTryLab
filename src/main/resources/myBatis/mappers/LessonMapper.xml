@@ -5,6 +5,14 @@
  
  <mapper namespace="LessonMapper">
  
+ 	<delete id="setDelete" parameterType="String">
+ 		delete classes where class_id= #{class_id}
+ 	</delete>
+ 	
+ 	<delete id="setDeleteTimetable" parameterType="String">
+ 		delete timetable where class_id= #{class_id}
+ 	</delete>
+ 	
  	<insert id="setTimetable" parameterType="LessonVO">
  		insert into timetable values(#{class_id},#{class_date},#{location},#{startTime},#{endTime})	
  	</insert>

@@ -14,6 +14,16 @@ public class LessonDAO {
 	private SqlSession session;
 	private static final String NAMESPACE="LessonMapper.";
 	
+	//수업정보 삭제
+	public int setDelete(String class_id) throws Exception {
+		return session.delete(NAMESPACE+"setDelete", class_id);
+	}
+	
+	//수업스케쥴 삭제
+	public int setDeleteTimetable(String class_id) throws Exception {
+		return session.delete(NAMESPACE+"setDeleteTimetable", class_id);
+	}
+	
 	//수업 상세정보
 	public LessonVO getSelect(String class_id) throws Exception {
 		return session.selectOne(NAMESPACE+"getSelect", class_id);

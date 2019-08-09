@@ -22,6 +22,27 @@ public class LessonService {
 	@Inject
 	private FileSaver fileSaver;
 	
+	//수업 삭제하기
+	public int setDelete(String class_id) throws Exception {
+		int result=0;
+		//1. 클래스 이미지 파일들 삭제
+			result = lessonFileDAO.setDelete(class_id);
+		//2. 클래스 스케쥴 삭제
+			if(result>0) {
+				result=lessonDAO.setDeleteTimetable(class_id);
+			}else {
+				System.out.println("클래스 이미지 삭제 실패");
+			}
+		//3. 클래스 정보 삭제
+			if(result>0) {
+				result=lessonDAO.setDelete(class_id);
+			}else {
+				System.out.println("클래스 스케줄 삭제 실패");
+				result=0;
+			}
+		return result;
+	}
+	
 	//수업상세보기
 	public LessonVO getSelect(String class_id) throws Exception{
 		return lessonDAO.getSelect(class_id);

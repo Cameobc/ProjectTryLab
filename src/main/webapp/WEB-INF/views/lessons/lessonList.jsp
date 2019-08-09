@@ -61,12 +61,27 @@ img{
 	background-color: white;
 	margin-bottom: 30px;
 }
+.inner{
+	clear:both;
+}
 .inner2{
 	padding:5px;
 	font-family: 'Youth'; 
 	color:black;
 }
-
+.btn_style{
+	display: inline-block;
+	float:right;
+	margin-right:260px;
+    width: 7%;
+    height: 50px;
+    font-size: 16px;
+    background-color: #f6755e;
+    line-height: 50px;
+    color:white;
+    font-family: 'Youth';
+    text-align: center;
+}
 </style>
 </head>
 <body id="top">
@@ -85,6 +100,7 @@ img{
 				<li class="cate"><a>재테크</a></li>
 			</ul>
 		</div>
+		<div class="btn_style"><a href="./lessonReg">클래스 등록</a></div>
 		<div class="inner">
 			<!-- Boxes -->
 			<div class="thumbnails">

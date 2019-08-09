@@ -14,5 +14,9 @@
  		)
  	
  	</insert>
+ 	
+ 	<delete id="setDelete" parameterType="String">
+ 		DELETE LESSONFILES WHERE CLASS_ID = #{class_id}
+ 	</delete>
  
  </mapper>
