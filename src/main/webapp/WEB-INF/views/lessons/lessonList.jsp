@@ -107,7 +107,11 @@ img{
 				<c:forEach items="${lessons}" var="les">
 					<div class="box">
 						<a href="./lessonSelect?class_id=${les.class_id }" class="image fit">
-							<img src="../resources/lessons/${les.file[0].fname }" alt="" /> 
+							<c:forEach items="${les.file }" var="file">
+							<c:if test="${file.thumbnail eq 1 }">
+							<img src="../resources/lessons/${file.fname }"/> 
+							</c:if>
+							</c:forEach>
 							<div class="inner2">
 								<div style="float:left; padding-top:5px"><img class="img-circle" src="../resources/images/Person-Icon.png" style="width:50px;height:50px;"></div>
 								<div style="font-size: 15px; font-weight: 400; padding-top:5px">${les.title }</div>

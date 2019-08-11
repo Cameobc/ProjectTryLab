@@ -4,7 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="LessonMapper">
- 
+ 	<update id="setUpdate" parameterType="LessonVO">
+ 		update classes set category_id=#{category_id}, title=#{title}, contents=#{contents}, price=#{price},time=#{time}
+ 		where class_id=#{class_id}
+ 	</update>
+ 	
+ 	<update id="setUpdateTimetable" parameterType="LessonVO">
+ 		update timetable set class_date=#{class_date}, location=#{location}, startTime=#{startTime}, endTime=#{endTime}
+ 		where class_id=#{class_id}
+ 	</update>
+ 	
  	<delete id="setDelete" parameterType="String">
  		delete classes where class_id= #{class_id}
  	</delete>
@@ -16,6 +25,7 @@
  	<insert id="setTimetable" parameterType="LessonVO">
  		insert into timetable values(#{class_id},#{class_date},#{location},#{startTime},#{endTime})	
  	</insert>
+ 	
  
  	<insert id="setWrite" parameterType="LessonVO">
  		insert into classes values(#{class_id},#{category_id},#{tid},#{title},#{contents},#{price},sysdate,0,#{time})

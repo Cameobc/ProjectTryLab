@@ -15,11 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.file.FileService;
 import com.project.file.FileVO;
+import com.project.lesson.LessonFileService;
 
 @Controller
 public class AjaxController {
 	@Inject
 	private FileService fileService;
+	@Inject
+	private LessonFileService lessonFileService;
 	
 	@RequestMapping(value = "/ajax/summerFileDelete", method = RequestMethod.POST)
 	public ModelAndView summerFileDelete(String fileName, HttpSession session)throws Exception{
@@ -61,5 +64,14 @@ public class AjaxController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/ajax/lessonFileDelete", method = RequestMethod.POST)
+	public ModelAndView lessonFileDelete(int fnum, String board, HttpSession session)throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		int result = lessonFileService.setDeleteByFnum(fnum);
+		mv.addObject("result", result);
+		mv.setViewName("common/message");
+		return mv;
+	}
 
 }

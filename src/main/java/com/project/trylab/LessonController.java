@@ -26,6 +26,40 @@ public class LessonController {
 	@Inject
 	private LessonService lessonService;
 
+	@RequestMapping(value="lessonUpdate", method = RequestMethod.GET)
+	public ModelAndView lessonUpdate(String class_id) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		List<CategoryVO> category = lessonService.getCategory();
+		LessonVO lesson = lessonService.getSelect(class_id);
+		
+		if(lesson == null) {
+			System.out.println("lessonVo is null");		
+		}else {
+			mv.addObject("category", category);
+			mv.addObject("lesson", lesson);
+		}
+	
+		mv.setViewName("lessons/lessonUpdate");
+		return mv;
+	}
+	
+	@RequestMapping(value="lessonUpdate", method = RequestMethod.POST)
+	public ModelAndView lessonUpdate(LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, HttpSession session) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		int result = lessonService.setUpdate(lessonVO, f1, thumbnail,session);
+		
+		if(result>0) {
+			mv.addObject("message", "수업정보를 수정했습니다.");
+		}else {
+			mv.addObject("message", "수업정보 수정에 실패했습니다.");
+		}
+		mv.addObject("path", "./lessonList");
+		mv.setViewName("common/messageMove");
+		return mv;
+	}
+	//////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="lessonDelete", method = RequestMethod.GET)
 	public ModelAndView lessonDelete(String class_id) throws Exception{
 		

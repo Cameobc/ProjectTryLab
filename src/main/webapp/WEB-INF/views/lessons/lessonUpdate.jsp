@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>수업등록</title>
+<title>수업수정</title>
 
 <link rel="stylesheet" href="../resources/css/style.css">
 <c:import url="../temp/boot.jsp" />
@@ -83,6 +83,7 @@ label {
 	text-align: center;
 	
 }
+
 .note-editable{
 	height:920px;
 }
@@ -112,6 +113,7 @@ label {
     color:white;
     font-family: 'Youth';
 }
+
 
 </style>
 <script language="javascript">
@@ -148,21 +150,27 @@ label {
 					<table id="frmTable" class="table" style="background-color: #ffffff; padding:5px;">
 					<tr>
 						<td class="tdWidth"><label>수업명</label></td>
-						<td colspan="7"><input type="text" name="title" class="form-control" placeholder="강의명을 입력하세요."/></td>
+						<td colspan="7"><input type="text" name="title" class="form-control" value="${lesson.title }"/></td>
 					</tr>
 					<tr>
 						<td class="tdWidth"><label>튜터ID</label></td>
-						<td><input type="text" name="tid" class="form-control"/></td>
+						<td><input type="text" name="tid" class="form-control" value="${lesson.tid }" readonly="readonly"/></td>
 						<td class="tdWidth"><label>가격</label></td>
-						<td><input type="text" name="price" class="form-control"/></td>
+						<td><input type="text" name="price" class="form-control" value="${lesson.price }"/></td>
 						<td class="tdWidth"><label>수업 시간(분)</label></td>
-						<td><input type="text" name="time" id="time" class="form-control" /></td>
-						<!-- <td><input type="text" name="endTime" id="endTime" class="form-control" /></td> -->
+						<td><input type="text" name="time" id="time" class="form-control" value="${lesson.time }"/></td>
 						<td class="tdWidth"><label>Category</label></td>
 						<td>
 							<select name="category_id" class="form-control" >
 							<c:forEach items="${category }" var="c">
-								<option value="${c.category_id }">${c.category }</option>
+								<c:choose>
+								<c:when test="${c.category_id eq lesson.category_id}">
+									<option value="${c.category_id }" selected="selected">${c.category }</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${c.category_id }">${c.category }</option>							
+								</c:otherwise>
+								</c:choose>
 							</c:forEach>
 							</select>
 						</td>
@@ -170,7 +178,7 @@ label {
 					<tr>
 						<td class="tdWidth"><label>수업 장소</label></td> 
 						<td colspan="7">
-							<input type="text" id="location2" name="location2" onclick="goPopup();" class="form-control"/>
+							<input type="text" id="location2" name="location2" onclick="goPopup();" class="form-control" value="${lesson.location }"/>
 							<input type="hidden" id="location" name="location" class="form-control"/>
 						</td>
 						
@@ -181,23 +189,39 @@ label {
 					</tr>		
 					<tr>
 						<td class="tdWidth"><label>썸네일</label></td>
-						<td colspan="7"><div class="input-group col-lg-9"><input type="file" name="thumbnail" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-remove del"></i></span></div></td>
+						<td colspan="7">
+							<div id="thumbField">
+							<div class="input-group col-lg-9">
+								<c:forEach items="${lesson.file }" var="f">
+								<c:if test="${f.thumbnail eq 1 }">
+								<input type="text" name="thumbnail1" class="form-control" title="${f.fnum }" readonly="readonly" value="${f.oname }">
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-remove del"></i>
+								</span>
+								</c:if>
+								</c:forEach>
+							</div>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<td class="tdWidth"><label>사진</label></td>
 						<td colspan="7">
 							<div id="fileField">
-								<div class="input-group col-lg-9" id="fField">
-									<input type="file" name="f1" class="form-control">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-remove del" ></i></span>
-									<span class="input-group-addon" style="background-color: #f0ad4e;  height:30px;"><i class="glyphicon glyphicon-plus add" style="color:white;"></i></span>
-								</div>		
+							<c:forEach items="${lesson.file }" var="f">
+							<c:if test="${f.thumbnail eq 0 }">
+							<div class="input-group col-lg-9 fField">
+								<input type="text" name="f11" class="form-control" readonly="readonly" title="${f.fnum }" value="${f.oname }">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-remove del" ></i></span>
+								<span class="input-group-addon" style="background-color: #f0ad4e;  height:30px;"><i class="glyphicon glyphicon-plus add" style="color:white;"></i></span>
+							</div>	
+							</c:if>
+							</c:forEach>
 							</div>
 						</td>
 					</tr>	
 					</table>
 					
-					<!-- <div class="btnField"><button class="btn btn-primary">등록</button></div> -->
 					<input type="hidden" id="class_date" name="class_date"/>
 					<input type="hidden" id="startTime" name="startTime"/>
 					<input type="hidden" name="endTime" id="endTime"/>
@@ -216,14 +240,14 @@ label {
 		<div class="main">
 			<c:import url="../utils/dateTimePicker.jsp" />
 		</div>
-		<div class="btnField"><button id="LessonBtn" class="btn_style">등록</button></div>
+		<div class="btnField"><button id="LessonBtn" class="btn_style">수정완료</button></div>
 		
 	</div>
 	<!-- end of container -->
  
 	<script type="text/javascript">
-	
-	
+		$("#contents").summernote('code','${lesson.contents}');
+		
 		$("#LessonBtn").click(function() {
 			
 			change();
@@ -286,14 +310,26 @@ label {
 			
 		}
 		var count=0;
+		var fnum=0;
+	
+		$("#thumbField").on("click",".del",function(){
+			fnum = $(this).parent().prev().attr("title")*1;
+			console.log("thumbnail:"+fnum);
+			deleteFiles(fnum);
+			$(this).parent().parent().remove();
+			$("#thumbField").append('<div class="input-group col-lg-9">'
+					+'<input type="file" name="thumbnail" class="form-control">'
+					+'<span class="input-group-addon"><i class="glyphicon glyphicon-remove del" ></i></span>'
+				+'</div>');
+		});
+		
 		$("#fileField").on("click",".add",function() {
-			
 			if(count<4){
-				$("#fileField").append('<div class="input-group col-lg-9" id="fField">'
+				$("#fileField").append('<div class="input-group col-lg-9 fField">'
 						+'<input type="file" name="f1" class="form-control">'
-						+'<span class="input-group-addon"><i class="glyphicon glyphicon-remove del" ></i></span>'
-						+'<span class="input-group-addon" style="background-color: #f0ad4e;  height:30px;"><i class="glyphicon glyphicon-plus add" style="color:white;"></i></span>'
-					+'</div>');
+						+'<span class="input-group-addon"><i class="glyphicon glyphicon-remove ddel" ></i></span>'
+					+'<span class="input-group-addon" style="background-color: #f0ad4e;  height:30px;"><i class="glyphicon glyphicon-plus add" style="color:white;"></i></span></div>');
+			 	
 				count++;
 			}else if(count==4){
 				alert("첨부파일은 최대 5개까지 가능합니다.");
@@ -301,10 +337,40 @@ label {
 		});
 		
 		$("#fileField").on("click", ".del", function() {
+			
+			fnum = $(this).parent().prev().attr("title")*1;
+			console.log("fnum:"+fnum);
+			deleteFiles(fnum);
+			
 			$(this).parent().parent().remove();
-			//$(this).remove();
+			$("#fileField").append('<div class="input-group col-lg-9 fField">'
+					+'<input type="file" name="f1" class="form-control">'
+					+'<span class="input-group-addon"><i class="glyphicon glyphicon-remove ddel" ></i></span>'
+				+'<span class="input-group-addon" style="background-color: #f0ad4e;  height:30px;"><i class="glyphicon glyphicon-plus add" style="color:white;"></i></span></div>');
+		 	});
+		
+		$("#fileField").on("click", ".ddel", function() {
+			$(this).parent().parent().remove();
 			count--;
 		});
+		
+		function deleteFiles(fnum) {
+			$.ajax({
+				url:"../ajax/lessonFileDelete",
+				method:"post",
+				data:{
+					fnum:fnum
+				},
+				success:function(res){
+					res=res.trim();
+					if(res=='1'){
+						console.log("첨부파일 삭제 성공");
+					}else{
+						console.log("첨부파일 삭제 실패");
+					}
+				}
+			});
+		}
 	</script>
 
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js'></script>
