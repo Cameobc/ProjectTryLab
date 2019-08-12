@@ -126,10 +126,15 @@
 	
 	<!-- replyUpdate -->
 	<update id="setReplyUpdate" parameterType="QnaVO">
-		update qna set step=step+1
+<!-- 		update qna set step=step+1
 		where ref=(<include refid="subRef" />)
-		and step>(<include refid="subStep" />)
+		and step>(<include refid="subStep" />) -->
+		update qna set step = step + 1
+		where ref = (select ref from qna where num=#{num})
+		and step > (select step from qna where num=#{num})
 	</update>
+
+
 
 
 </mapper>

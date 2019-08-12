@@ -53,8 +53,12 @@
 	  		<div id="agree">필수적 개인정보 수집 및 이용에 대한 동의 <span>(필수)</span></div>
 	  	</div>
 	  	
-	  	<div id="c2"><input type="checkbox" name="chk"> 동의함</div>
+	  	<div id="c2">
+	  		<input type="checkbox" id="a1" name="chk"> 동의함
+	  		<label for="a1"></label>
+	  	</div>
 		<br><br><br>	
+		
 		<div id="agree_text">
 			<textarea rows="10" cols="111" style="padding-left: 10px; width: 780px;">
 

@@ -19,11 +19,34 @@
 		<br>
 		확인하실 수 있습니다.</div>
 		<br><br>
-		<div id="btn" OnClick="location.href='./qnaWrite';">1:1문의 하기</div>
-		
-		<!-- <div id="line"></div> -->
+
+		<div class="search">
+			<form action="./qnaList" class="form-inline">
+				<div class="form-group col-sm-4">
+					<select class="form-control" name="kind" id="kind">
+						<option class="k" value="1">제목</option>
+						<option class="k" value="2">글쓴이</option>
+						<option class="k" value="3">내용</option>
+					</select>
+				</div>
+
+			    <div class="form-group col-sm-8">
+			        <div class="input-group">
+			            <input type="text" class="form-control" name="keyword" id="keyword" value="${pager.search}" placeholder="Search">
+			            <span class="input-group-btn">
+			                <button type="button" class="btn btn-danger btn-flat" id="searchBtn">
+			                    <i class="fa fa-search"></i> 검색
+			                </button>
+			            </span>
+			        </div>
+			    </div>
+			    
+			</form>
+		</div>	<!-- search end -->
+
 	
-	<div class="">
+	
+	<div>
 	  <table class="table table-hover">
 	    <thead>
 	      <tr class="title" style="border-top: 1px solid #9c836a;">
@@ -38,22 +61,30 @@
 	  	<c:forEach items="${list}" var="dto">
 		    <tbody>
 		      <tr>
-		        <td style="padding-top: 20px">${dto.num}</td>
+		        <td style="padding-top: 20px; width:120px;">${dto.num}</td>
 		        <td style="padding-top: 20px; padding-left:50px; cursor: pointer;" onclick="location.href='./qnaSelect?num=${dto.num}'">
 		        	<c:forEach begin="1" end="${dto.depth}">[RE] </c:forEach>${dto.title}
 		        </td>
-		        <%-- <td style="padding-top: 20px; padding-left: 50px; cursor: pointer;">
-		        	<c:forEach begin="1" end="${dto.depth}">[RE] </c:forEach>
-		        	<a href="./qnaSelect?num=${dto.num}">${dto.title}</a>
-		        </td> --%>
-		        <td style="padding-top: 20px; text-align: center; color: #999;">${dto.writer}</td>
-		        <td style="padding-top: 20px; text-align: center; color: #999;">${dto.reg_date}</td>
-		        <td style="padding-top: 20px">${dto.hit}</td>
+		        
+<%-- 				<td>
+					<c:forEach begin="1" end="${dto.depth}">[RE] </c:forEach>
+					<a href="./qnaSelect?num=${dto.num}">${dto.title}</a>
+				</td> --%>		        
+		        
+		        
+		        
+		        <td style="padding-top: 20px; width:120px; text-align: center; color: #999;">${dto.writer}</td>
+		        <td style="padding-top: 20px; width:120px; text-align: center; color: #999;">${dto.reg_date}</td>
+		        <td style="padding-top: 20px; width:120px;">${dto.hit}</td>
 		      </tr>
 		    </tbody>
 	  	</c:forEach> 	    
-	   </table>		
+	   </table>
+	   
+	   	<div id="btn" OnClick="location.href='./qnaWrite';">1:1문의 하기</div>
+	   	
 	</div>
+	</div> <!-- container end -->
 	
 	<div>
 		<ul class="pager">
@@ -72,10 +103,27 @@
 	</div>
 	
 		
+<script type="text/javascript">
+ 	var kind = '${pager.kind}';
+	$(".k").each(function() {
+		if($(this).val() == kind) {
+			$(this).prop("selected", true);
+		}
+	}); 
+
+	$(document).on('click', '#searchBtn', function(e){
+		e.preventDefault();
+		var url = "./qnaList";
+		url = url + "?kind=" + $('#kind').val();
+		url = url + "&search=" + $('#keyword').val();
+		location.href = url;
+		console.log(url);
+	});
+
+	
+</script>	
 	
 	
-	
-	</div> <!-- container end -->
 <c:import url="../temp/footer.jsp"/>	
 </body>
 </html>
