@@ -73,6 +73,7 @@ img{
 	display: inline-block;
 	float:right;
 	margin-right:260px;
+	margin-bottom:20px;
     width: 7%;
     height: 50px;
     font-size: 16px;
@@ -81,6 +82,9 @@ img{
     color:white;
     font-family: 'Youth';
     text-align: center;
+}
+.footer_text{
+	color:white;
 }
 </style>
 </head>
@@ -100,7 +104,11 @@ img{
 				<li class="cate"><a>재테크</a></li>
 			</ul>
 		</div>
-		<div class="btn_style"><a href="./lessonReg">클래스 등록</a></div>
+		
+		<c:if test="${sessionScope.member.grade eq 1 }">
+			<div class="btn_style"><a href="./lessonReg">클래스 등록</a></div>
+		</c:if>
+		
 		<div class="inner">
 			<!-- Boxes -->
 			<div class="thumbnails">

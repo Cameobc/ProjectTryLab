@@ -80,7 +80,7 @@ public class LessonController {
 	/////////////////////////////////////////////////////////////////////////
 	
 	@RequestMapping(value="lessonSelect", method = RequestMethod.GET)
-	public ModelAndView lessonSelect(String class_id) throws Exception{
+	public ModelAndView lessonSelect(String class_id, HttpSession session) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
 		LessonVO lessons = lessonService.getSelect(class_id);
@@ -92,7 +92,7 @@ public class LessonController {
 	
 	///////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="lessonList", method=RequestMethod.GET)
-	public ModelAndView lessonList() throws Exception {
+	public ModelAndView lessonList(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		List<LessonVO> lessons = lessonService.getList();
 		

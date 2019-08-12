@@ -252,10 +252,12 @@ body{
 						<span class="btn_pay btn_style">수업신청</span>
 					</div>
 					<!-- 튜터 회원만 보이게 -->
+					<c:if test="${sessionScope.member.grade eq 1 && sessionScope.member.id eq lessons.tid  }">
 					<div class="box">
 						<a href="./lessonUpdate?class_id=${lessons.class_id }" class="btn_talk btn_style2">수정하기</a>
 						<a href="./lessonDelete?class_id=${lessons.class_id }" class="btn_talk btn_style2">삭제하기</a>
 					</div>
+					</c:if>
 				</div>
 				<!-- end of info_summary -->
 			</div>
