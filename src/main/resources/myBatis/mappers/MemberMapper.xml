@@ -6,6 +6,11 @@
   
  <mapper namespace="MemberMapper">
 
+<!-- 이메일 확인 -->
+<update id="updateGrade" parameterType="MemberVO">
+	UPDATE MEMBER SET GRADE=2 
+	WHERE ID=#{id} AND MAIL_KEY=#{mail_key}
+</update>
 
 <select id="getCount" resultType="java.lang.Integer" parameterType="PageMaker">
 	select count(id) from member
