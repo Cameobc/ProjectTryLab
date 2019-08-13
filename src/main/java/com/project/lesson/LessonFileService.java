@@ -26,5 +26,10 @@ public class LessonFileService {
 		
 		return fname;
 	}
+	public int setDeleteByFnum(int fnum) throws Exception{
+
+		return lessonFileDAO.setDeleteByFnum(fnum);
+	}
+	
 	
 }

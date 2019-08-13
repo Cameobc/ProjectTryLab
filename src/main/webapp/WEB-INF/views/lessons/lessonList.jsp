@@ -61,12 +61,31 @@ img{
 	background-color: white;
 	margin-bottom: 30px;
 }
+.inner{
+	clear:both;
+}
 .inner2{
 	padding:5px;
 	font-family: 'Youth'; 
 	color:black;
 }
-
+.btn_style{
+	display: inline-block;
+	float:right;
+	margin-right:260px;
+	margin-bottom:20px;
+    width: 7%;
+    height: 50px;
+    font-size: 16px;
+    background-color: #f6755e;
+    line-height: 50px;
+    color:white;
+    font-family: 'Youth';
+    text-align: center;
+}
+.footer_text{
+	color:white;
+}
 </style>
 </head>
 <body id="top">
@@ -85,13 +104,22 @@ img{
 				<li class="cate"><a>재테크</a></li>
 			</ul>
 		</div>
+		
+		<c:if test="${sessionScope.member.grade eq 1 }">
+			<div class="btn_style"><a href="./lessonReg">클래스 등록</a></div>
+		</c:if>
+		
 		<div class="inner">
 			<!-- Boxes -->
 			<div class="thumbnails">
 				<c:forEach items="${lessons}" var="les">
 					<div class="box">
 						<a href="./lessonSelect?class_id=${les.class_id }" class="image fit">
-							<img src="../resources/lessons/${les.file[0].fname }" alt="" /> 
+							<c:forEach items="${les.file }" var="file">
+							<c:if test="${file.thumbnail eq 1 }">
+							<img src="../resources/lessons/${file.fname }"/> 
+							</c:if>
+							</c:forEach>
 							<div class="inner2">
 								<div style="float:left; padding-top:5px"><img class="img-circle" src="../resources/images/Person-Icon.png" style="width:50px;height:50px;"></div>
 								<div style="font-size: 15px; font-weight: 400; padding-top:5px">${les.title }</div>

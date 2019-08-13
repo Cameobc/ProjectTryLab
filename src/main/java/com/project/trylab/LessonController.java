@@ -26,8 +26,61 @@ public class LessonController {
 	@Inject
 	private LessonService lessonService;
 
+	@RequestMapping(value="lessonUpdate", method = RequestMethod.GET)
+	public ModelAndView lessonUpdate(String class_id) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		List<CategoryVO> category = lessonService.getCategory();
+		LessonVO lesson = lessonService.getSelect(class_id);
+		
+		if(lesson == null) {
+			System.out.println("lessonVo is null");		
+		}else {
+			mv.addObject("category", category);
+			mv.addObject("lesson", lesson);
+		}
+	
+		mv.setViewName("lessons/lessonUpdate");
+		return mv;
+	}
+	
+	@RequestMapping(value="lessonUpdate", method = RequestMethod.POST)
+	public ModelAndView lessonUpdate(LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, HttpSession session) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		int result = lessonService.setUpdate(lessonVO, f1, thumbnail,session);
+		
+		if(result>0) {
+			mv.addObject("message", "수업정보를 수정했습니다.");
+		}else {
+			mv.addObject("message", "수업정보 수정에 실패했습니다.");
+		}
+		mv.addObject("path", "./lessonList");
+		mv.setViewName("common/messageMove");
+		return mv;
+	}
+	//////////////////////////////////////////////////////////////////////
+	@RequestMapping(value="lessonDelete", method = RequestMethod.GET)
+	public ModelAndView lessonDelete(String class_id) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		int result = lessonService.setDelete(class_id);
+		
+		if(result>0) {
+			mv.addObject("message","해당 클래스를 삭제했습니다.");			
+		}else {
+			mv.addObject("message", "클래스 삭제에 실패했습니다.");
+		}
+		mv.addObject("path", "./lessonList");
+		mv.setViewName("common/messageMove");
+		return mv;
+	}
+	
+	
+	/////////////////////////////////////////////////////////////////////////
+	
 	@RequestMapping(value="lessonSelect", method = RequestMethod.GET)
-	public ModelAndView lessonSelect(String class_id) throws Exception{
+	public ModelAndView lessonSelect(String class_id, HttpSession session) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
 		LessonVO lessons = lessonService.getSelect(class_id);
@@ -39,7 +92,7 @@ public class LessonController {
 	
 	///////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="lessonList", method=RequestMethod.GET)
-	public ModelAndView lessonList() throws Exception {
+	public ModelAndView lessonList(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		List<LessonVO> lessons = lessonService.getList();
 		

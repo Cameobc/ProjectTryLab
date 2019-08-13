@@ -21,7 +21,7 @@
 	<typeAlias type="com.project.lesson.LessonVO" alias="LessonVO"/>
 	<typeAlias type="com.project.lesson.CategoryVO" alias="CategoryVO"/>
 	<typeAlias type="java.util.List" alias="List"/>
-	<typeAlias type="java.lang.Integer" alias="Integer"/>
+	<typeAlias type="java.util.HashMap" alias="HashMap"/>
 	<typeAlias type="com.project.lesson.LessonFileVO" alias="LessonFileVO"/>
 	
 	<!-- 성현 -->
