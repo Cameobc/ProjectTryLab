@@ -61,7 +61,7 @@ public class MemberController {
 		MemberVO memberVO2 = memberService.getSelect(memberVO);
 		String message = "Login Fail";
 		if(memberVO2!= null&&passwordEncoder.matches(memberVO.getPw(), memberVO2.getPw())) {
-			session.setAttribute("member", memberVO);
+			session.setAttribute("member", memberVO2);
 			session.setAttribute("approval", approvalVO);
 			
 			message = "Login Success";
