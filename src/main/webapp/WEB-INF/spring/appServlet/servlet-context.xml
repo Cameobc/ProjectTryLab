@@ -61,5 +61,6 @@
 	<context:component-scan base-package="com.project.purchase" />
 	<!-- xml 파일 읽어들이기 -->
 	<beans:import resource="classpath:/spring/*"/>
+	<beans:import resource="spring-security.xml"/>
 	
 </beans:beans>

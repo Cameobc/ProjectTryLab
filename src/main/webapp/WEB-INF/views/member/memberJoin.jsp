@@ -154,11 +154,17 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 	
 	.input_rex{
 		margin-left:38%;
-		font-size: 1em;
+		font-size: 0.9em;
 		text-align: left;
 		font-weight: lighter;
 	}
 	
+	.mask-result{
+		text-align: center;
+		font-family: BMJUA;
+		font-size: 0.7em;
+		margin-bottom: 15px;		
+	}
 </style>
 </head>
 <body>
@@ -170,6 +176,7 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 				<div class="member_thumbnail">
 					<img id="thumbnail" src="../resources/images/profile.png" width="100" height="100">
 					<span class="mask"></span>
+					<div class="mask-result">사진을 넣어주세요.</div>
 					<input type="file" id="photo" name="photo" accept="image/*">
 				</div>		  		
 				<div class="member-form">
@@ -381,7 +388,7 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 	$('.btn').click(function() {
 		var check = true;
 		$('.member-input').each(function() {
-			if($(this).val('')){
+			if($(this).val()==''){
 				check=false;
 			}
 		});
@@ -393,10 +400,17 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 				check2 = true;
 			}
 		});
+
+		var check3 = true;
+		if($('#photo').val()==''){
+			check3 = false;
+		}
 		
-		if(check&&check2){
+		if(check&&check2&&check3){
 			$('#frm').submit();
 		}else{
+			console.log(check);
+			console.log(check2);
 			alert('폼을 모두 채워주세요.');
 		}
 	});
