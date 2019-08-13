@@ -33,6 +33,23 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value = "joinConfirm")
+	public ModelAndView joinConrifm(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println(memberVO.getId()); 
+		System.out.println(memberVO.getMail_key());
+		int result = memberService.updateGrade(memberVO);
+		String message = "확인 불가";
+		if(result>0) {
+			message = "메일 인증 완료";
+		}
+		mv.addObject("message", message);
+		mv.addObject("path", "../");
+		mv.setViewName("common/messageMove");
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="memberJoin", method = RequestMethod.POST)
 	public ModelAndView setWrite(MemberVO memberVO, MultipartFile photo, HttpSession session )throws Exception {
 		ModelAndView mv = new ModelAndView();

@@ -9,7 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.project.mail.MailKey;
+import com.project.mail.MailForm;
+import com.project.mail.MailService;
+import com.project.mail.MailSet;
 import com.project.memberProfile.MemberFileDAO;
 import com.project.memberProfile.MemberFileVO;
 import com.project.util.FileSaver;
@@ -24,10 +26,17 @@ public class MemberService {
 	@Inject
 	private MemberFileDAO memberFileDAO;
 	@Inject
-	private MailKey mailKey;
+	private MailService mailService;
+	@Inject
+	private MailSet mailSet;
 	
-	//MAIL발송
 	
+	//메일 인증 후 업데이트
+	public int updateGrade(MemberVO memberVO) throws Exception{
+		return memberDAO.updateGrade(memberVO);
+	}
+	
+	//회원가입
 	public int setWrite(MemberVO memberVO, MultipartFile photo, HttpSession session) throws Exception {
 		
 		String realPath = session.getServletContext().getRealPath("/resources/member");
@@ -45,11 +54,16 @@ public class MemberService {
 		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
 		
 		//메일 키 발급
-		String key = mailKey.createKey();
+		String key = mailService.createKey();
 		memberVO.setMail_key(key);
 		
+		//가입성공
 		int result = memberDAO.setWrite(memberVO);
 		result = memberFileDAO.setWrite(memberFileVO);
+
+		//MAIL발송
+		MailForm mailForm = mailSet.joinTrylab(memberVO);
+		mailService.mailSend(memberVO, mailForm);
 		
 		return result;
 	}

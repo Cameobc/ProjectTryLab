@@ -16,9 +16,11 @@ public class MemberDAO {
 	public SqlSession sqlSession;
 	private final static String NAMESPACE = "MemberMapper.";
 	
+	
 	public int setWrite(MemberVO memberVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setWrite", memberVO);
 	}
+	
 	public MemberVO getSelect(MemberVO memberVO) throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE+"getSelect", memberVO);
@@ -31,5 +33,7 @@ public class MemberDAO {
 		return sqlSession.selectOne(NAMESPACE+"checkMember", map);
 	}
 	
-	
+	public int updateGrade(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"updateGrade", memberVO);
+	}
 }
