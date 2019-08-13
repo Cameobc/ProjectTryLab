@@ -10,11 +10,8 @@
 		<config>src/main/resources/spring/context-file.xml</config>
 	</configs>
 	<autoconfigs>
-<<<<<<< Updated upstream
-=======
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
->>>>>>> Stashed changes
 	</autoconfigs>
 	<configSets>
 	</configSets>
