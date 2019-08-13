@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="LessonFileMapper">
+ 	<!-- <select id="pickThumbnail" parameterType="HashMap" resultType="LessonFileVO">
+ 		SELECT * FROM LESSONFILES WHERE CLASS_ID=#{class_id} and STATUS=#{status}
+ 	</select> -->
+ 	
  	<insert id="setWrite" parameterType="LessonFileVO">
  		INSERT INTO LESSONFILES VALUES(
  				lesson_file_seq.nextval,
@@ -14,5 +18,14 @@
  		)
  	
  	</insert>
+ 	
+ 	<delete id="setDelete" parameterType="String">
+ 		DELETE LESSONFILES WHERE CLASS_ID = #{class_id}
+ 	</delete>
+ 	
+ 	<delete id="setDeleteByFnum" parameterType="Integer">
+ 		DELETE LESSONFILES WHERE FNUM = #{fnum}
+ 	</delete>
+ 
  
  </mapper>

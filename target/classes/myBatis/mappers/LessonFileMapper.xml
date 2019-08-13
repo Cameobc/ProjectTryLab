@@ -27,4 +27,5 @@
  		DELETE LESSONFILES WHERE FNUM = #{fnum}
  	</delete>
  
+ 
  </mapper>
