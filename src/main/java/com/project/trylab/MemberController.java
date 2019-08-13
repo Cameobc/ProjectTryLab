@@ -57,7 +57,6 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 
 		approvalVO = approvalService.getSelect(memberVO.getId());
-		memberVO = memberService.getSelect(memberVO);
 
 		MemberVO memberVO2 = memberService.getSelect(memberVO);
 		String message = "Login Fail";
