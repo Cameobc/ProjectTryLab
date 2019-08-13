@@ -76,7 +76,7 @@ public class AjaxController {
 	
 
 	@ResponseBody
-	@RequestMapping(value = "checkMember")
+	@RequestMapping(value = "/ajax/checkMember")
 	public int checkMember(@RequestBody Map<String, Object> params) throws Exception{
 		int result=memberService.checkMember(params);
 		return result;
