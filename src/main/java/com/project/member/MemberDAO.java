@@ -1,5 +1,7 @@
 package com.project.member;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,4 +26,10 @@ public class MemberDAO {
 	public int getCount(PageMaker pageMaker) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getCount", pageMaker);
 	}
+	
+	public int checkMember(Map<String, Object> map) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"checkMember", map);
+	}
+	
+	
 }

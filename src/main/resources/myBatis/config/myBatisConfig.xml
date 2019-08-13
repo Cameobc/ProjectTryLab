@@ -36,6 +36,7 @@
 	<!-- 승한 -->
 
 
+
 	<!-- 공통 -->
 	<typeAlias type="java.lang.Integer" alias="Integer"/>
 	<typeAlias type="java.lang.String" alias="String"/>

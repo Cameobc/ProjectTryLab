@@ -1,25 +1,30 @@
 package com.project.trylab;
 
-
 import java.io.File;
 import java.nio.file.FileVisitOption;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.file.FileService;
 import com.project.file.FileVO;
+import com.project.member.MemberService;
 
 @Controller
 public class AjaxController {
 	@Inject
 	private FileService fileService;
+	@Inject
+	private MemberService memberService;
 	
 	@RequestMapping(value = "/ajax/summerFileDelete", method = RequestMethod.POST)
 	public ModelAndView summerFileDelete(String fileName, HttpSession session)throws Exception{
@@ -60,6 +65,13 @@ public class AjaxController {
 		mv.setViewName("common/message");
 		return mv;
 	}
+
 	
+	@ResponseBody
+	@RequestMapping(value = "checkMember")
+	public int checkMember(@RequestBody Map<String, Object> params) throws Exception{
+		int result=memberService.checkMember(params);
+		return result;
+	}
 
 }

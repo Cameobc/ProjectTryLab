@@ -27,9 +27,25 @@
 
 <!-- 회원 가입 -->
 <insert id="setWrite" parameterType="MemberVO">
-	 insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{gender}, 2)
+	 insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{gender}, 3)
 </insert>
  
+ <!-- 중복확인 -->
+ <select id="checkMember" parameterType="java.util.Map" resultType="Integer">
+ 	SELECT COUNT(*) FROM MEMBER WHERE
+ 	<choose>
+ 		<when test="name=='id'">
+ 		ID=#{id}
+ 		</when>
+		<when test="name=='phone'">
+		PHONE=#{id}
+		</when>
+		<otherwise>
+		EMAIL=#{id}
+		</otherwise>
+ 	</choose>
+ </select>
+
  <!-- 탈퇴 -->
  <delete id="setDelete" parameterType="java.util.List">
  	delete member where id = #{id}
@@ -56,7 +72,8 @@
  <select id="getSelect" resultMap="member" parameterType="MemberVO" resultType="MemberVO">
  	select M.*, F.*
  	from member M Full Join MemberFile F on (M.id=F.id)
- 	where M.id=#{id} and M.pw=#{pw}
+ 	where M.id=#{id}
+
  </select>
 
  

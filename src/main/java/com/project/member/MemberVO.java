@@ -12,9 +12,17 @@ public class MemberVO {
 	private String email;
 	private String gender;
 	private int grade;
+	private String mail_key;
 	private MemberFileVO memberFileVO;
 	
 	
+	
+	public String getMail_key() {
+		return mail_key;
+	}
+	public void setMail_key(String mail_key) {
+		this.mail_key = mail_key;
+	}
 	public String getPw2() {
 		return pw2;
 	}

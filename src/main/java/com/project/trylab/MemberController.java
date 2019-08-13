@@ -3,6 +3,7 @@ package com.project.trylab;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,14 @@ public class MemberController {
 	private MemberService memberService;
 	@Inject
 	private ApprovalService approvalService;
+	@Inject
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	
+	@RequestMapping(value = "memberOrder")
+	public void memberOrder() throws Exception{
+	}
+	
 	
 	@RequestMapping(value="memberJoin", method = RequestMethod.POST)
 	public ModelAndView setWrite(MemberVO memberVO, MultipartFile photo, HttpSession session )throws Exception {
@@ -46,10 +55,13 @@ public class MemberController {
 	@RequestMapping(value="memberLogin", method = RequestMethod.POST)
 	public ModelAndView getSelect(MemberVO memberVO, ApprovalVO approvalVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+
 		approvalVO = approvalService.getSelect(memberVO.getId());
 		memberVO = memberService.getSelect(memberVO);
+
+		MemberVO memberVO2 = memberService.getSelect(memberVO);
 		String message = "Login Fail";
-		if(memberVO!=null) {
+		if(memberVO2!= null&&passwordEncoder.matches(memberVO.getPw(), memberVO2.getPw())) {
 			session.setAttribute("member", memberVO);
 			session.setAttribute("approval", approvalVO);
 			

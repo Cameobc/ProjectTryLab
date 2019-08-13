@@ -1,8 +1,11 @@
 package com.project.member;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,15 +26,16 @@ public class MemberService {
 	public int setWrite(MemberVO memberVO, MultipartFile photo, HttpSession session) throws Exception {
 		
 		String realPath = session.getServletContext().getRealPath("/resources/member");
-		System.out.println(realPath);
+		//System.out.println(realPath);
 		
 		String fname = fileSaver.saveFile(realPath, photo);
 		String oname = photo.getOriginalFilename();
-		System.out.println(fname);
 		MemberFileVO memberFileVO = new MemberFileVO();
 		memberFileVO.setId(memberVO.getId());
 		memberFileVO.setFname(fname);
 		memberFileVO.setOname(oname);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
 		
 		int result = memberDAO.setWrite(memberVO);
 		result = memberFileDAO.setWrite(memberFileVO);
@@ -42,5 +46,10 @@ public class MemberService {
 	public MemberVO getSelect(MemberVO memberVO) throws Exception {
 		return memberVO=memberDAO.getSelect(memberVO);
 		
+	}
+	
+	//중복확인
+	public int checkMember(Map<String, Object> map) throws Exception{
+		return memberDAO.checkMember(map);
 	}
 }

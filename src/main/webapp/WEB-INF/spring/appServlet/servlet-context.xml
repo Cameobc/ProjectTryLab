@@ -3,10 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
-
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+<util:properties id="purchase" location="classpath:properties/*.properties"></util:properties>
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
@@ -29,8 +31,15 @@
 	
 		<!-- properties 파일 설정 -->
 	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
-		<beans:property name="locations" value="classpath:properties/*.properties" />
+		<beans:property name="locations">
+			<beans:list>
+				<beans:value>classpath:properties/DataSource.properties</beans:value>
+				<beans:value>classpath:properties/message.properties</beans:value>
+				<beans:value>classpath:properties/purchase.properties</beans:value>
+			 </beans:list>
+		</beans:property>
 	</beans:bean>	
+	
 	
 	<!-- 하림 -->
 	<context:component-scan base-package="com.project.lesson" />
@@ -53,7 +62,9 @@
 	<context:component-scan base-package="com.project.approval"/>
 	<context:component-scan base-package="com.project.license" />
 	<context:component-scan base-package="com.project.certificate" />
+	<context:component-scan base-package="com.project.purchase" />
 	<!-- xml 파일 읽어들이기 -->
 	<beans:import resource="classpath:/spring/*"/>
+	<beans:import resource="spring-security.xml"/>
 	
 </beans:beans>
