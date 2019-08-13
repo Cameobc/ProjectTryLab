@@ -36,6 +36,7 @@
 				<beans:value>classpath:properties/DataSource.properties</beans:value>
 				<beans:value>classpath:properties/message.properties</beans:value>
 				<beans:value>classpath:properties/purchase.properties</beans:value>
+				<beans:value>classpath:properties/mail.properties</beans:value>
 			 </beans:list>
 		</beans:property>
 	</beans:bean>	
