@@ -28,9 +28,8 @@ public class AjaxController {
 	@Inject
 	private FileService fileService;
 	@Inject
-
 	private MemberService memberService;
-
+	@Inject
 	private LessonFileService lessonFileService;
 
 	
@@ -82,6 +81,8 @@ public class AjaxController {
 		int result=memberService.checkMember(params);
 		return result;
 
+	}
+	
 	@RequestMapping(value = "/ajax/lessonFileDelete", method = RequestMethod.POST)
 	public ModelAndView lessonFileDelete(int fnum, String board, HttpSession session)throws Exception{
 		
