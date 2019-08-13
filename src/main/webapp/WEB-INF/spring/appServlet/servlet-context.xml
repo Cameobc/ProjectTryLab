@@ -55,6 +55,9 @@
 	
 	<!-- 승한 -->
 	
+	<!-- 민지 -->
+	<context:component-scan base-package="com.project.purchase" />
+
 	<!-- 유라 -->
 	<context:component-scan base-package="com.project.trylab" />
 	<context:component-scan base-package="com.project.member" />
@@ -64,7 +67,6 @@
 	<context:component-scan base-package="com.project.approval"/>
 	<context:component-scan base-package="com.project.license" />
 	<context:component-scan base-package="com.project.certificate" />
-	<context:component-scan base-package="com.project.purchase" />
 	<!-- xml 파일 읽어들이기 -->
 	<beans:import resource="classpath:/spring/*"/>
 	<beans:import resource="spring-security.xml"/>

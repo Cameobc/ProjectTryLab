@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.mail.MailKey;
 import com.project.memberProfile.MemberFileDAO;
 import com.project.memberProfile.MemberFileVO;
 import com.project.util.FileSaver;
@@ -22,6 +23,10 @@ public class MemberService {
 	private FileSaver fileSaver;
 	@Inject
 	private MemberFileDAO memberFileDAO;
+	@Inject
+	private MailKey mailKey;
+	
+	//MAIL발송
 	
 	public int setWrite(MemberVO memberVO, MultipartFile photo, HttpSession session) throws Exception {
 		
@@ -34,8 +39,14 @@ public class MemberService {
 		memberFileVO.setId(memberVO.getId());
 		memberFileVO.setFname(fname);
 		memberFileVO.setOname(oname);
+		
+		//비밀번호 암호화
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
+		
+		//메일 키 발급
+		String key = mailKey.createKey();
+		memberVO.setMail_key(key);
 		
 		int result = memberDAO.setWrite(memberVO);
 		result = memberFileDAO.setWrite(memberFileVO);

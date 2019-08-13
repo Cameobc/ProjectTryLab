@@ -65,11 +65,13 @@
 			<version>${security.version}</version> 
 		</dependency>
 		<!-- Mail -->
+		<!-- JavaMailSenderImpl을 위해 필요 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<!-- MimeMessage를 사용하기 위해 필요 -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
