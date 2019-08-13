@@ -112,6 +112,11 @@ label {
     color:white;
     font-family: 'Youth';
 }
+.fieldd{
+	background-color: yellow;
+	width:50px;
+	height:30px;
+}
 
 </style>
 <script language="javascript">
@@ -209,20 +214,29 @@ label {
 		</div>
 		<script type="text/javascript" src="../resources/js/summernote.js" ></script>
 		<!--  end of main -->
-		
+	
 		<!-- <br><br><br> -->
 		<!-- 날짜선택 -->
 		<h2 class="step">Step2. 날짜선택</h2>
 		<div class="main">
 			<c:import url="../utils/dateTimePicker.jsp" />
 		</div>
+		<!-- <div class="fieldd">
+			<div class="cancel-button" id="cancelbutton">CANCEL</div>
+			<div class="save-button" id="savebutton">SAVE</div>
+		</div>  -->
 		<div class="btnField"><button id="LessonBtn" class="btn_style">등록</button></div>
 		
 	</div>
 	<!-- end of container -->
  
 	<script type="text/javascript">
-	
+ 	/* $("#cancelbutton").click(function() {
+		alert("click cancel");
+	}); */
+	/* $("#savebutton").click(function() {
+		alert("click cancel");
+	});  */
 	
 		$("#LessonBtn").click(function() {
 			
@@ -305,6 +319,8 @@ label {
 			//$(this).remove();
 			count--;
 		});
+		
+		
 	</script>
 
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js'></script>

@@ -9,7 +9,7 @@
  
   <style type="text/css">
   	.app-container {
-  		width:900px;
+  		width:700px;
 		position:static;
 	}
 	.datepicker.am{
@@ -22,7 +22,10 @@
 		padding: 40px 20px 0px;
 	}
 	.timepicker-container-outer{
-		padding: 70px 5px 0px 40px;
+		padding: 70px 50px 0px 0px;
+	}
+	.buttons-container{
+		position: absolute;
 	}
   </style>
   
@@ -121,10 +124,10 @@
 				</div>
 			</div>
 			
-		<!-- 	<div class="buttons-container">
-				<div class="cancel-button">CANCEL</div>
-				<div class="save-button" id="save-button">SAVE</div>
-			</div> -->
+		 	<div class="buttons-container">
+				<div class="cancel-button" id="savebutton" ng-click="mySave()">확인 </div>
+				<div class="save-button" id="addbutton" ng-click="myAdd()">스케줄 추가</div>
+			</div>  
 			
 		</div>
 	</div>
