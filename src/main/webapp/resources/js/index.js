@@ -13,6 +13,8 @@ app.controller('dateTimeCtrl', function ($scope) {
 		
 		console.log(newdate);
 	};
+	
+
 });
 
 // Date Picker
@@ -196,7 +198,15 @@ app.directive('datePicker', function ($timeout, $window) {
                 getDaysInMonth();
                 getSelected();
             };
-
+            
+        	scope.mySave=function(){
+        		alert("save");
+        	}
+        	
+        	scope.myAdd=function(){
+        		alert("add");
+        	}
+        	
             scope.moveBack = function () {
                 scope.currentViewDate.setMonth(scope.currentViewDate.getMonth() - 1);
                 if (scope.currentViewDate.getMonth() == -1) {

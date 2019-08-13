@@ -91,6 +91,24 @@ a{
 .font2{
 	font-size: 20px;
 }
+.member_thumbnail{
+	    position: relative;
+	    width: 100px;
+	    height: 100px;
+	}
+	
+.member_thumbnail .mask{
+		position: absolute;
+	    z-index: 10;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    background: url(../resources/images/profilesub.png) 0 0;
+	    background-repeat: no-repeat;
+	    cursor:pointer;
+	}
+	
 </style>
 </head>
 <body id="top">
@@ -100,8 +118,11 @@ a{
 		<div class="cont">
 			<div class="info_top">
 				<div class="info_left">
-					<img src="../resources/images/Person-Icon.png" style="width:120px; height:120px;">
-					<div style="width:120px;text-align: center"><span style="font-size:20px; font-weight: bold">${sessionScope.member.id}</span> 님</div>
+					<div class="member_thumbnail">
+						<img src="../resources/member/${sessionScope.member.memberFileVO.fname }" style="width:100px; height:100px; ">
+						<span class="mask"></span>
+						<div style="width:120px;text-align: center"><span style="font-size:20px; font-weight: bold">${sessionScope.member.id}</span> 님</div>
+					</div>
 				</div>
 				<div class="info_right">
 					<div class="parts">
@@ -167,6 +188,7 @@ a{
 		getList(id);
 	}); 
 		
+ 	
  	
 	</script>
 
