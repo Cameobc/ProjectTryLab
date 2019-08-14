@@ -241,8 +241,8 @@ body{
 					
 					<div class="box">
 						<select class="browser-default custom-select">
-							<c:forEach items="${lessons.timetable}" var="date">
-								<option value="${date.class_date }">${date.class_date }</option>
+							<c:forEach items="${lessons.class_date }" var="date">
+								<option value="${date }">${date }</option>
 							</c:forEach>
 						</select>
 					</div>

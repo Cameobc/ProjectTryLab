@@ -23,6 +23,7 @@
 	<typeAlias type="java.util.List" alias="List"/>
 	<typeAlias type="java.util.HashMap" alias="HashMap"/>
 	<typeAlias type="com.project.lesson.LessonFileVO" alias="LessonFileVO"/>
+	<typeAlias type="com.project.lesson.TimeTableVO" alias="TimeTableVO"/>
 	
 	<!-- 성현 -->
 	<typeAlias type="java.lang.Integer" alias="Integer"/>

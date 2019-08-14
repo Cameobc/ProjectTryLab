@@ -13,6 +13,7 @@
 <c:import url="../temp/boot.jsp" />
 <c:import url="../temp/header.jsp" />
 <c:import url="../temp/summernote.jsp" />
+<c:import url="../temp/font.jsp"/>
 
 <style type="text/css">
 @font-face {
@@ -42,6 +43,7 @@ body {
 	width: 100%;
 	padding-top: 20px;
 	padding-bottom: 50px;
+	font-family: 'Youth';
 }
 .lcontainer {
 	width: 50%;
@@ -96,11 +98,13 @@ label {
 	font-weight: 500;
 }
 .btnField{
+	clear:both;
 	text-align: center;
 	vertical-align: middle;
 	font-family: BMHANNAPro;
 	font-weight: 500;
 	padding-bottom: 100px;
+	padding-top: 50px;
 }
 .btn_style{
 	display: inline-block;
@@ -109,15 +113,40 @@ label {
     font-size: 16px;
     background-color: #f6755e;
     line-height: 50px;
-    color:white;
     font-family: 'Youth';
+    color:white;
 }
 .fieldd{
 	background-color: yellow;
 	width:50px;
 	height:30px;
 }
-
+.addTimetable{
+	float:right;
+	background-color: white;
+	width:400px;
+	height:450px;
+	border-radius: 4px;
+	font-size: 14px;
+}
+#timeField{
+	padding:15px;
+	height:335px;
+	font-family: 'Youth';
+	color: #333;
+	font-size:16px;
+}
+.fontstyle{
+	color: #f6755e;
+	text-align: center;
+}
+.table{
+	margin: 0px;
+}
+.trstyle{
+	height:20px;
+	text-align: center;
+}
 </style>
 <script language="javascript">
 	// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
@@ -157,7 +186,7 @@ label {
 					</tr>
 					<tr>
 						<td class="tdWidth"><label>튜터ID</label></td>
-						<td><input type="text" name="tid" class="form-control"/></td>
+						<td><input type="text" name="tid" class="form-control" value="${sessionScope.member.id }" readonly="readonly"/></td>
 						<td class="tdWidth"><label>가격</label></td>
 						<td><input type="text" name="price" class="form-control"/></td>
 						<td class="tdWidth"><label>수업 시간(분)</label></td>
@@ -174,11 +203,12 @@ label {
 					</tr>
 					<tr>
 						<td class="tdWidth"><label>수업 장소</label></td> 
-						<td colspan="7">
+						<td colspan="5">
 							<input type="text" id="location2" name="location2" onclick="goPopup();" class="form-control"/>
 							<input type="hidden" id="location" name="location" class="form-control"/>
 						</td>
-						
+						<td class="tdWidth"><label>정원</label></td>
+						<td><input type="text" id="limit" name="limit" class="form-control"></td>
 					</tr>
 					<tr>
 						<td class="tdWidth"><label>설명</label></td>
@@ -202,10 +232,9 @@ label {
 					</tr>	
 					</table>
 					
-					<!-- <div class="btnField"><button class="btn btn-primary">등록</button></div> -->
-					<input type="hidden" id="class_date" name="class_date"/>
-					<input type="hidden" id="startTime" name="startTime"/>
-					<input type="hidden" name="endTime" id="endTime"/>
+					<div id="hiddenField">
+					
+					</div>
 				</form>
 				
 				
@@ -220,27 +249,37 @@ label {
 		<h2 class="step">Step2. 날짜선택</h2>
 		<div class="main">
 			<c:import url="../utils/dateTimePicker.jsp" />
+			<div class="addTimetable">
+				<div class="datepicker-header" style="background-color: #f6755e;border-radius: 4px;">
+					<div class="datepicker-title">수업 스케줄</div>
+					<div class="datepicker-subheader">최대 7개까지 등록 가능</div>
+				</div>
+				<div id="timeField">
+					<table class="table" id="timetb">
+						<tr class="fontstyle">
+							<td>수업일</td>
+							<td>시작시간</td>
+							<td>종료시간</td>
+						</tr>
+					</table>
+				</div>
+				<div class="save-button" id="addbutton" style="float: right; ">스케줄 추가</div>
+				
+			</div>
 		</div>
-		<!-- <div class="fieldd">
-			<div class="cancel-button" id="cancelbutton">CANCEL</div>
-			<div class="save-button" id="savebutton">SAVE</div>
-		</div>  -->
-		<div class="btnField"><button id="LessonBtn" class="btn_style">등록</button></div>
+	
+		<div class="btnField"><input type="button" id="LessonBtn" class="btn_style" value="등록"/></div>
 		
 	</div>
 	<!-- end of container -->
  
 	<script type="text/javascript">
- 	/* $("#cancelbutton").click(function() {
-		alert("click cancel");
-	}); */
-	/* $("#savebutton").click(function() {
-		alert("click cancel");
-	});  */
+		var idx=0;
+		$("#addbutton").click(function() {
+			change();	
+		});  
 	
 		$("#LessonBtn").click(function() {
-			
-			change();
 			//다른 input들 검증
 			if($("#contents").summernote("isEmpty")){
 				alert("수업 설명을 입력해주세요.");
@@ -251,10 +290,11 @@ label {
 		});
 		
 		function change() {
-			var txt = $(".datepicker-subheader").text().split(' ');
+			var txt = $(".s2").text().split(' ');
 			var time = $("#gettime").text().split(' '); // 10:30 am 
 			var time2 = time[0].split(":"); // 10 30
 			var endtime = $("#time").val()*1;
+			
 			
 			var day=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 			var kday=["월요일","화요일","수요일","목요일","금요일","토요일","일요일"];
@@ -293,9 +333,25 @@ label {
 				minutes="00";
 			}
 			endtime=(time2[0]*1+parseInt(endtime/60))+":"+minutes;
-			$("#class_date").val(txt);
+			/* $("#class_date").val(txt);
 			$("#startTime").val(time);
-			$("#endTime").val(endtime);
+			$("#endTime").val(endtime); */
+			
+			if(idx<7){
+				$("#timetb").append('<tr class="trstyle">'+
+						'<td>'+txt+'</td>'+
+						'<td>'+time+'</td>'+
+						'<td>'+endtime+'</td></tr>');
+				$("#hiddenField").append(
+					'<input type="hidden" class="class_date" name="class_date" value='+txt+'>'+
+					'<input type="hidden" class="startTime" name="startTime" value='+time+'>'+
+					'<input type="hidden" name="endTime" class="endTime" value='+endtime+'>'
+				);
+				idx++;
+			}else{
+				alert("스케줄은 7개까지만 등록 가능합니다.");
+			}
+			
 			
 			
 		}

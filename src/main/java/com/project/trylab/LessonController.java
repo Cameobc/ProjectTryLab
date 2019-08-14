@@ -1,5 +1,6 @@
 package com.project.trylab;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.lesson.CategoryVO;
 import com.project.lesson.LessonService;
 import com.project.lesson.LessonVO;
+import com.project.lesson.TimeTableVO;
 
 import oracle.net.aso.l;
 
@@ -115,9 +118,14 @@ public class LessonController {
 	}
 
 	@RequestMapping(value = "lessonReg", method = RequestMethod.POST)
-	public ModelAndView classReg(LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, HttpSession session) throws Exception {
+	public ModelAndView classReg(@RequestParam(value="class_date",required=true) List<String> class_date,
+			@RequestParam(value="startTime",required=true) List<String> startTime, 
+			@RequestParam(value="endTime",required=true) List<String> endTime, 
+			LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, HttpSession session) throws Exception {
 		
-		int result = lessonService.setWrite(lessonVO, f1, thumbnail, session);
+		
+		
+		int result = lessonService.setWrite(lessonVO, f1, thumbnail, class_date, startTime, endTime, session);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("path","./lessonList");
 		if(result>0) {

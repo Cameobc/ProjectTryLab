@@ -14,10 +14,9 @@ public class LessonVO {
 	private Date reg_date;
 	private int hit;
 	private String location;
-	private String class_date;
-	private String startTime;
-	private String endTime;
 	private int time;
+	private int limit;
+	private List<TimeTableVO> timetable;
 	private List<LessonFileVO> file;
 	
 	public String getClass_id() {
@@ -70,33 +69,13 @@ public class LessonVO {
 		this.hit = hit;
 	}
 	
-	
-	
 	public String getLocation() {
 		return location;
 	}
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-	public String getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-	public String getClass_date() {
-		return class_date;
-	}
-	public void setClass_date(String class_date) {
-		this.class_date = class_date;
-	}
-	
+
 	public int getTime() {
 		return time;
 	}
@@ -109,12 +88,17 @@ public class LessonVO {
 	public void setFile(List<LessonFileVO> file) {
 		this.file = file;
 	}
-	
-	
-	
-	
-	
-
-	
+	public List<TimeTableVO> getTimetable() {
+		return timetable;
+	}
+	public void setTimetable(List<TimeTableVO> timetable) {
+		this.timetable = timetable;
+	}
+	public int getLimit() {
+		return limit;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
 	
 }
