@@ -240,11 +240,14 @@ body{
 					</div>
 					
 					<div class="box">
-						<select class="browser-default custom-select">
-							<c:forEach items="${lessons.timetable}" var="date">
-								<option value="${date.class_date }">${date.class_date }</option>
+						<select class="browser-default custom-select" id="selectbox">
+							<c:forEach items="${dates}" var="date">
+								<option value="${date }">${date }</option>
 							</c:forEach>
 						</select>
+					</div>
+					<div id="newbox">
+						
 					</div>
 					
 					<div class="box">
@@ -286,7 +289,24 @@ body{
 
 
 	</div>
-
+	<script type="text/javascript">
+		$("#selectbox").change(function() {
+			var date = $(this).val();
+			alert(date);
+			 $.ajax({
+				url:"../ajax/selectDateToGetTime",
+				method:"get",
+				data:{
+					class_id:"${lessons.class_id}",
+					class_date:date
+				},
+				success:function(res) {
+					res=res.trim();
+					$("#newbox").html(res);
+				}
+			}); 
+		});
+	</script>
 	<script>
 		$(document).ready(
 				function() {

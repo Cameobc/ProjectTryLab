@@ -24,8 +24,6 @@ public class TutorController {
 	
 	@RequestMapping (value = "tutorMypage", method = RequestMethod.GET)
 	public void tutorMypage(HttpSession session) {
-	
-		
 
 	}
 	
@@ -34,9 +32,7 @@ public class TutorController {
 		ModelAndView mv = new ModelAndView();
 		//MemberVO m = (MemberVO)session.getAttribute("member");
 		
-		System.out.println(tid);
 		List<LessonVO> lessons = tutorService.getListByTid(tid);
-		System.out.println(lessons.size());
 		mv.addObject("lessons", lessons);
 		mv.setViewName("/tutor/tutorList");
 

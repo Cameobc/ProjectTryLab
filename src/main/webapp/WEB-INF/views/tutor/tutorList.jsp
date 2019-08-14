@@ -14,6 +14,7 @@
 			<td>NO</td>
 			<td>클래스 이름</td>
 			<td>등록일</td>
+			<td>정원</td>
 		</tr>
 		<c:forEach items="${lessons}" var="les" varStatus="i">
 			
@@ -25,6 +26,7 @@
 					</a>
 				</td>
 				<td>${les.reg_date}</td>
+				<td>${les.limit}</td>
 			</tr>
 			
 		</c:forEach>

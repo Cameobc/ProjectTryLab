@@ -1,5 +1,6 @@
 package com.project.lesson;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +15,10 @@ public class LessonDAO {
 	private SqlSession session;
 	private static final String NAMESPACE = "LessonMapper.";
 
+	//date에 따른 시간정보
+	public List<TimeTableVO> getSelectTime(TimeTableVO tVO){
+		return session.selectList(NAMESPACE + "getSelectTime", tVO);
+	}
 	// 수업정보 업데이트
 	public int setUpdate(LessonVO lessonVO) throws Exception {
 		return session.update(NAMESPACE + "setUpdate", lessonVO);
@@ -39,6 +44,10 @@ public class LessonDAO {
 		return session.selectOne(NAMESPACE + "getSelect", class_id);
 	}
 
+	// 수업 상세정보
+	public List<String> getSelectDate(String class_id) throws Exception {
+		return session.selectList(NAMESPACE + "getSelectDate", class_id);
+	}
 	// 수업리스트
 	public List<LessonVO> getList() throws Exception {
 		return session.selectList(NAMESPACE + "getList");

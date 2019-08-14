@@ -2,6 +2,7 @@ package com.project.lesson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -113,6 +114,11 @@ public class LessonService {
 		result = lessonDAO.setUpdateHit(class_id);
 		return lessonDAO.getSelect(class_id);
 	}
+	
+	public List<String> getSelectDate(String class_id) throws Exception {
+	
+		return lessonDAO.getSelectDate(class_id);
+	}
 
 	// 수업리스트
 	public List<LessonVO> getList() throws Exception {
@@ -196,5 +202,10 @@ public class LessonService {
 	public List<CategoryVO> getCategory() throws Exception {
 
 		return lessonDAO.getCategory();
+	}
+	
+	//date에 따른 시간정보 
+	public List<TimeTableVO> getSelectTime(TimeTableVO tVO) throws Exception{
+		return lessonDAO.getSelectTime(tVO);
 	}
 }

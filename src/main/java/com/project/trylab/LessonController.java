@@ -87,8 +87,9 @@ public class LessonController {
 		
 		ModelAndView mv = new ModelAndView();
 		LessonVO lessons = lessonService.getSelect(class_id);
-		
+		List<String> dates = lessonService.getSelectDate(class_id);
 		mv.addObject("lessons",lessons);
+		mv.addObject("dates", dates);
 		mv.setViewName("lessons/lessonSelect");
 		return mv;
 	}

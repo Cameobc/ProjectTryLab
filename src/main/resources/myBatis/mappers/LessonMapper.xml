@@ -15,7 +15,7 @@
  	</update>
  	
  	<update id="setUpdateTimetable" parameterType="LessonVO">
- 		update timetable set class_date=#{class_date}, startTime=#{startTime}, endTime=#{endTime}, curPerson=#{curPerson}
+ 		update timetable set class_date=#{class_date}, startTime=#{startTime}, endTime=#{endTime}, curPerson=#{curPerson},
  		where class_id=#{class_id}
  	</update>
  	
@@ -28,7 +28,7 @@
  	</delete>
  	
  	<insert id="setTimetable" parameterType="TimeTableVO">
- 		insert into timetable values(#{class_id},#{class_date},#{startTime},#{endTime},0)	
+ 		insert into timetable values(#{class_id},#{class_date},#{startTime},#{endTime},0,timetable_seq.nextval)	
  	</insert>
  	
  
@@ -36,6 +36,10 @@
  		insert into classes values(#{class_id},#{category_id},#{tid},#{title},#{contents},#{price},sysdate,0,#{time},#{location},#{limit})
  	</insert>
  
+ 	<select id="getSelectDate" parameterType="String" resultType="String">
+ 		select distinct class_date from timetable where class_id=#{class_id}
+ 	</select>
+ 	
  	<select id="getSelect" parameterType="String" resultMap="LessonResult">
  		select * from classes C inner join lessonfiles L
  		on (C.class_id = L.class_id)
@@ -46,6 +50,10 @@
  	
  	<select id="getCategory" resultType="CategoryVO">
  		select * from classCategory
+ 	</select>
+ 	
+ 	<select id="getSelectTime" parameterType="TimeTableVO" resultMap="TimeTableResult">
+ 		select startTime, endTime, idx from timetable where class_id=#{class_id} and class_date=#{class_date}
  	</select>
  	
  	<select id="getList" resultMap="LessonResult">
@@ -99,6 +107,7 @@
 		<result property="startTime" column="startTime"/>
 		<result property="endTime" column="endTime"/>
 		<result property="curPerson" column="curPerson"/>
+		<result property="idx" column="idx"/>
  	</resultMap>
  	
  </mapper>
