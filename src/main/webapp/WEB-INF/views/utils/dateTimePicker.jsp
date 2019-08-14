@@ -11,6 +11,9 @@
   	.app-container {
   		width:700px;
 		position:static;
+		margin:0px;
+		float:left;
+		font-family: 'Youth';
 	}
 	.datepicker.am{
 		height: 450px;
@@ -53,7 +56,7 @@
 			}">
 			<div class="datepicker-header">
 				<div class="datepicker-title" ng-if="datepicker_title">수업일을 지정해주세요</div>
-				<div class="datepicker-subheader">{{ selectedDay }} {{ monthNames[localdate.getMonth()] }} {{ localdate.getDate() }} {{ localdate.getFullYear() }}</div>
+				<div class="datepicker-subheader s2">{{ selectedDay }} {{ monthNames[localdate.getMonth()] }} {{ localdate.getDate() }} {{ localdate.getFullYear() }}</div>
 			</div>
 			<div class="datepicker-calendar">
 				<div class="calendar-header">
@@ -124,10 +127,9 @@
 				</div>
 			</div>
 			
-		 	<div class="buttons-container">
-				<div class="cancel-button" id="savebutton" ng-click="mySave()">확인 </div>
+		 	<!-- <div class="buttons-container">
 				<div class="save-button" id="addbutton" ng-click="myAdd()">스케줄 추가</div>
-			</div>  
+			</div>   -->
 			
 		</div>
 	</div>

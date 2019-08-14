@@ -4,13 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="LessonMapper">
+ 	<update id="setUpdateHit" parameterType="String">
+ 		update classes set hit=hit+1
+ 		where class_id=#{class_id}
+ 	</update>
+ 	
  	<update id="setUpdate" parameterType="LessonVO">
- 		update classes set category_id=#{category_id}, title=#{title}, contents=#{contents}, price=#{price},time=#{time}
+ 		update classes set category_id=#{category_id}, title=#{title}, contents=#{contents}, price=#{price},time=#{time}, location=#{location},#{limit}
  		where class_id=#{class_id}
  	</update>
  	
  	<update id="setUpdateTimetable" parameterType="LessonVO">
- 		update timetable set class_date=#{class_date}, location=#{location}, startTime=#{startTime}, endTime=#{endTime}
+ 		update timetable set class_date=#{class_date}, startTime=#{startTime}, endTime=#{endTime}, curPerson=#{curPerson}
  		where class_id=#{class_id}
  	</update>
  	
@@ -22,13 +27,13 @@
  		delete timetable where class_id= #{class_id}
  	</delete>
  	
- 	<insert id="setTimetable" parameterType="LessonVO">
- 		insert into timetable values(#{class_id},#{class_date},#{location},#{startTime},#{endTime})	
+ 	<insert id="setTimetable" parameterType="TimeTableVO">
+ 		insert into timetable values(#{class_id},#{class_date},#{startTime},#{endTime},0)	
  	</insert>
  	
  
  	<insert id="setWrite" parameterType="LessonVO">
- 		insert into classes values(#{class_id},#{category_id},#{tid},#{title},#{contents},#{price},sysdate,0,#{time})
+ 		insert into classes values(#{class_id},#{category_id},#{tid},#{title},#{contents},#{price},sysdate,0,#{time},#{location},#{limit})
  	</insert>
  
  	<select id="getSelect" parameterType="String" resultMap="LessonResult">
@@ -67,10 +72,14 @@
  		<result property="reg_date" column="reg_date"/>
  		<result property="hit" column="hit"/>
  		<result property="location" column="location"/>
- 		<result property="class_date" column="class_date"/>
+ 	<!-- 	<result property="class_date" column="class_date"/>
  		<result property="startTime" column="startTime"/>
- 		<result property="endTime" column="endTime"/>
+ 		<result property="endTime" column="endTime"/> -->
  		<result property="time" column="time"/>
+ 		<result property="limit" column="limit"/>
+ 		<collection property="timetable" javaType="List" ofType="TimeTableVO" resultMap="TimeTableResult">
+ 		
+ 		</collection>
  		<collection property="file" javaType="List" ofType="LessonFileVO" resultMap="LessonFileResult">
  		
  		</collection>
@@ -84,5 +93,12 @@
 		<result property="thumbnail" column="thumbnail"/>
  	</resultMap>
  	
+ 	<resultMap type="TimeTableVO" id="TimeTableResult">
+ 		<result property="class_id" column="class_id"/>
+		<result property="class_date" column="class_date"/>
+		<result property="startTime" column="startTime"/>
+		<result property="endTime" column="endTime"/>
+		<result property="curPerson" column="curPerson"/>
+ 	</resultMap>
  	
  </mapper>

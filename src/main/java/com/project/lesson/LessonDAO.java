@@ -50,8 +50,13 @@ public class LessonDAO {
 	}
 
 	// 시간표 등록
-	public int setTimetable(LessonVO lessonVO) throws Exception {
-		return session.insert(NAMESPACE + "setTimetable", lessonVO);
+	public int setTimetable(List<TimeTableVO> timeTB) throws Exception {
+		int result=0;
+		for(TimeTableVO t : timeTB) {
+			result=session.insert(NAMESPACE+"setTimetable", t);
+		}
+		
+		return result;
 	}
 
 	// 카테고리 목록 리스트 불러오기
@@ -70,6 +75,11 @@ public class LessonDAO {
 	// 수업 상세정보
 	public LessonVO getSelectByTid(String tid) throws Exception {
 		return session.selectOne(NAMESPACE + "getSelectByTid", tid);
+	}
+	
+	//조회수 증가
+	public int setUpdateHit(String class_id) throws Exception{
+		return session.update(NAMESPACE + "setUpdateHit", class_id);
 	}
 
 }

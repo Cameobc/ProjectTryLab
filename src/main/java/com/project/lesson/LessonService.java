@@ -107,6 +107,10 @@ public class LessonService {
 
 	// 수업상세보기
 	public LessonVO getSelect(String class_id) throws Exception {
+		int result=0;
+		
+		//조회수+1
+		result = lessonDAO.setUpdateHit(class_id);
 		return lessonDAO.getSelect(class_id);
 	}
 
@@ -116,8 +120,9 @@ public class LessonService {
 	}
 
 	// 수업등록
-	public int setWrite(LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, HttpSession session)
-			throws Exception {
+	public int setWrite(LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, 
+			List<String> class_date, List<String> startTime, List<String> endTime, HttpSession session) throws Exception {
+		
 		String realPath = "";
 		String fname = "";
 		LessonFileVO lessonFileVO = null;
@@ -154,7 +159,6 @@ public class LessonService {
 
 		// 4.파일들 저장
 		if (result > 0) {
-
 			for (MultipartFile f : f1) {
 				fname = fileSaver.saveFile3(realPath, f);
 				lessonFileVO = new LessonFileVO();
@@ -170,7 +174,19 @@ public class LessonService {
 
 		// 5.timetable에 스케쥴 등록
 		if (result > 0) {
-			result = lessonDAO.setTimetable(lessonVO);
+			List<TimeTableVO> timeTB = new ArrayList<TimeTableVO>(){};
+					
+			for(int i=0;i<class_date.size();i++) {
+				TimeTableVO tv = new TimeTableVO();
+				tv.setClass_id(class_id);
+				tv.setClass_date(class_date.get(i));
+				tv.setStartTime(startTime.get(i));
+				tv.setEndTime(endTime.get(i));
+				timeTB.add(tv);
+			}
+			
+			//lessonVO.setTimetable(t);
+			result = lessonDAO.setTimetable(timeTB);
 		}
 
 		return result;
