@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -136,6 +137,13 @@ public class LessonController {
         return "lessons/jusoPopup";
 
     }
+	
+	@RequestMapping(value="lessonSearch", method = RequestMethod.GET)
+	@ResponseBody
+	public List<LessonVO> getSearchList(String[] location) throws Exception {
+		System.out.println(location[1]);
+		return lessonService.getSearchList(location);
+	}
 	
 	
 	

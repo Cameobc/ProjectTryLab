@@ -56,14 +56,15 @@
  		order by reg_date desc
  	</select>
  	
- 	<select id="getSearchList" resultMap="LessonResult">
+ 	<select id="getSearchList" resultMap="LessonResult" parameterType="List">
  	 	select * from classes C inner join lessonfiles L
  		on (C.class_id = L.class_id)
- 		where location=#{location}
+ 		where 1=1 and
+ 		<foreach collection="array" item="item" separator="or">
+ 			location like '%'||#{item}||'%'		
+ 		</foreach>
  		order by reg_date desc
  		
- 	
- 	
  	</select>
  	
  	

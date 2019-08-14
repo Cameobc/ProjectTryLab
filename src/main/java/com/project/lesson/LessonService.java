@@ -181,4 +181,22 @@ public class LessonService {
 
 		return lessonDAO.getCategory();
 	}
+	
+	public List<LessonVO> getSearchList(String[] location) throws Exception {
+		return lessonDAO.getSearchList(location);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

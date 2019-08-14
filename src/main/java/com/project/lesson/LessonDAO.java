@@ -71,5 +71,18 @@ public class LessonDAO {
 	public LessonVO getSelectByTid(String tid) throws Exception {
 		return session.selectOne(NAMESPACE + "getSelectByTid", tid);
 	}
+	
+	//지역 검색
+	public List<LessonVO> getSearchList(String[] location) throws Exception {
+		return session.selectList(NAMESPACE+"getSearchList", location);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

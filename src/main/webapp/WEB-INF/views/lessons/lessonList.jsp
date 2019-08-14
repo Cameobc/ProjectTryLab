@@ -91,10 +91,10 @@ img{
 }
 
 .list_wrap {
-	width:100%; height: 500px; margin-left: 0px;
+	width:100%; height: 200px; margin-left: 0px;
 }
 .loc_wrap {
-	height: 400px; margin : 0 30% 0 40%;
+	height: 200px; margin : 0 30% 0 40%;
 	float: right;
 }
 
@@ -104,7 +104,11 @@ img{
 	color : black; padding: 0px;
 	
 }
-
+.selected {
+	background-color: #f6755e;
+	color : white;
+	border: 1px solid white;
+}
 
 </style>
 </head>
@@ -139,7 +143,8 @@ img{
 				<input type="button" class="loc col-sm-4" value="강남구">
 				<input type="button" class="loc col-sm-4" value="송파구">
 				<input type="button" class="loc col-sm-4" value="강동구">
-			
+				<button id="loc_search">검색</button>			
+
 			</div>
 		
 		
@@ -201,14 +206,33 @@ img{
 	<c:import url="../temp/footer.jsp" />
 	
 <script type="text/javascript">
+
+
 	$('.loc').click(function() {
-		$(this).css('background-color', '#f6755e');
-		$(this).css('color', 'white');
-		$(this).css('border', '1px solid white');
+		$(this).toggleClass("selected");
+	});
+	
+	
+	$("#loc_search").click(function() {
+		var locations=[];
+		$('.selected').each(function() {
+			var location=$(this).val();
+			locations.push(location);
+		});
+		
+
+	jQuery.ajaxSettings.traditional=true;
+	
+	$.ajax({
+		url:"./lessonSearch",
+		type:"GET",
+		data:{location:locations},
+		success:function(data) {
+			alert(data);
+		}
 	});
 
-
-
+});
 
 
 
