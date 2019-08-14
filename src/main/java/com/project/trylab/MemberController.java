@@ -32,6 +32,11 @@ public class MemberController {
 	public void memberOrder() throws Exception{
 	}
 	
+	@RequestMapping(value = "memberAgree")
+	public void memberAgree() throws Exception{
+		
+	}
+	
 	
 	@RequestMapping(value = "joinConfirm")
 	public ModelAndView joinConrifm(MemberVO memberVO) throws Exception{

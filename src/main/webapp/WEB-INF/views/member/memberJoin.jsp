@@ -169,7 +169,6 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 </head>
 <body>
 	<div class="container">
-		<h1>Member Join Form</h1>
 		
 		<div class="join_all">
 			<form:form commandName="memberVO" id="frm" enctype="multipart/form-data">
