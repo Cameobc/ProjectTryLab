@@ -1,6 +1,8 @@
 package com.project.trylab;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +30,16 @@ public class MemberController {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	
+	@RequestMapping(value = "findPw")
+	public void findPw() throws Exception{
+		
+	}
+	
+	@RequestMapping(value = "findId")
+	public void findId() throws Exception{
+		
+	}
+	
 	@RequestMapping(value = "memberOrder")
 	public void memberOrder() throws Exception{
 	}
@@ -36,7 +48,6 @@ public class MemberController {
 	public void memberAgree() throws Exception{
 		
 	}
-	
 	
 	@RequestMapping(value = "joinConfirm")
 	public ModelAndView joinConrifm(MemberVO memberVO) throws Exception{
@@ -75,20 +86,35 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="memberLogin", method = RequestMethod.POST)
-	public ModelAndView getSelect(MemberVO memberVO, ApprovalVO approvalVO, HttpSession session) throws Exception {
+	public ModelAndView getSelect(MemberVO memberVO, ApprovalVO approvalVO, HttpSession session, String remember, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		approvalVO = approvalService.getSelect(memberVO.getId());
-
+		
 		MemberVO memberVO2 = memberService.getSelect(memberVO);
 		String message = "Login Fail";
 		if(memberVO2!= null&&passwordEncoder.matches(memberVO.getPw(), memberVO2.getPw())) {
+			
 			session.setAttribute("member", memberVO2);
 			session.setAttribute("approval", approvalVO);
-			
 			message = "Login Success";
 			
 		}
+		String check = "0";
+		System.out.println(remember);
+		if(remember!=null) {
+			check= "1";
+			Cookie cookie = new Cookie("id", memberVO.getId());
+			Cookie cookie2 = new Cookie("remember", check);
+			response.addCookie(cookie);
+			response.addCookie(cookie2);
+		}else {
+			Cookie cookie = new Cookie("id", "");
+			Cookie cookie2 = new Cookie("remember", check);
+			response.addCookie(cookie);
+			response.addCookie(cookie2);
+		}
+		
 		mv.setViewName("common/messageMove");
 		mv.addObject("message", message);
 		mv.addObject("path","../");
