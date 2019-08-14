@@ -56,6 +56,16 @@
  		order by reg_date desc
  	</select>
  	
+ 	<select id="getSearchList" resultMap="LessonResult">
+ 	 	select * from classes C inner join lessonfiles L
+ 		on (C.class_id = L.class_id)
+ 		where location=#{location}
+ 		order by reg_date desc
+ 		
+ 	
+ 	
+ 	</select>
+ 	
  	
  	<resultMap type="LessonVO" id="LessonResult">
  		<id property="class_id" column="class_id"/>

@@ -13,6 +13,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="../resources/assets/css/main.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <c:import url="../temp/header.jsp" />
 <c:import url="../temp/font.jsp"/>
 <style type="text/css">
@@ -86,12 +89,69 @@ img{
 .footer_text{
 	color:white;
 }
+
+.list_wrap {
+	width:100%; height: 500px; margin-left: 0px;
+}
+.loc_wrap {
+	height: 400px; margin : 0 30% 0 40%;
+	float: right;
+}
+
+.loc {
+	width : 80px; height : 40px !important;
+	background-color: white; border: 1px solid #f6755e;
+	color : black; padding: 0px;
+	
+}
+
+
 </style>
 </head>
 <body id="top">
 
 	<!-- Main -->
 	<div id="main">
+		<div class="list_wrap">
+			<div class="loc_wrap">
+				<input type="button" class="loc col-sm-4" value="종로구">
+				<input type="button" class="loc col-sm-4" value="중구">
+				<input type="button" class="loc col-sm-4" value="용산구">
+				<input type="button" class="loc col-sm-4" value="성동구">
+				<input type="button" class="loc col-sm-4" value="광진구">
+				<input type="button" class="loc col-sm-4" value="동대문구">
+				<input type="button" class="loc col-sm-4" value="중랑구">
+				<input type="button" class="loc col-sm-4" value="성북구">
+				<input type="button" class="loc col-sm-4" value="강북구">
+				<input type="button" class="loc col-sm-4" value="도봉구">
+				<input type="button" class="loc col-sm-4" value="노원구">
+				<input type="button" class="loc col-sm-4" value="은평구">
+				<input type="button" class="loc col-sm-4" value="서대문구">
+				<input type="button" class="loc col-sm-4" value="마포구">
+				<input type="button" class="loc col-sm-4" value="양천구">
+				<input type="button" class="loc col-sm-4" value="강서구">
+				<input type="button" class="loc col-sm-4" value="구로구">
+				<input type="button" class="loc col-sm-4" value="금천구">
+				<input type="button" class="loc col-sm-4" value="영등포구">
+				<input type="button" class="loc col-sm-4" value="동작구">
+				<input type="button" class="loc col-sm-4" value="관악구">
+				<input type="button" class="loc col-sm-4" value="서초구">
+				<input type="button" class="loc col-sm-4" value="강남구">
+				<input type="button" class="loc col-sm-4" value="송파구">
+				<input type="button" class="loc col-sm-4" value="강동구">
+			
+			</div>
+		
+		
+		
+		
+		
+		</div>
+	
+	
+	
+	
+	
 		<div class="category_wrap">
 			<ul class="category">
 				<li class="cate"><a>디자인</a></li>
@@ -139,6 +199,34 @@ img{
 	</div>
 
 	<c:import url="../temp/footer.jsp" />
+	
+<script type="text/javascript">
+	$('.loc').click(function() {
+		$(this).css('background-color', '#f6755e');
+		$(this).css('color', 'white');
+		$(this).css('border', '1px solid white');
+	});
 
+
+
+
+
+
+
+
+</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>

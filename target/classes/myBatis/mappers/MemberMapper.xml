@@ -32,7 +32,7 @@
 
 <!-- 회원 가입 -->
 <insert id="setWrite" parameterType="MemberVO">
-	 insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{gender}, 3, #{mail_key})
+	 insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{gender}, 0, #{mail_key})
 </insert>
  
  <!-- 중복확인 -->
@@ -64,6 +64,7 @@
 		<result property="phone" column="phone" />
 		<result property="gender" column="gender" />
 		<result property="grade" column="grade"/>
+		<result property="mail_key" column="mail_key"/>
  		<association property="memberFileVO" resultMap="fileResult" javaType="MemberFileVO" />
  	 
  </resultMap>
