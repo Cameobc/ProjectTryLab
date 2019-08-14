@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Login</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -164,7 +164,7 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 		  	<input type="button" value="Login" id="login">
 		  </div>
 		  <div class="member-check">
-		  	<input type="checkbox" id="remember" name="remember"> <label for="remember">로그인 상태 유지</label>
+		  	<input type="checkbox" id="remember" name="remember"> <label for="remember">아이디 기억하기</label>
 		  </div>
 		  <div class="member-etc">
 		  	<a href="./findId"><span>아이디 찾기&nbsp;</span></a> | <a href="./findPw"><span>&nbsp;비밀번호 찾기</span></a>

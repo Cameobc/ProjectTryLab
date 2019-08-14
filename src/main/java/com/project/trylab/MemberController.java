@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -67,8 +68,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="memberJoin", method = RequestMethod.POST)
-	public ModelAndView setWrite(MemberVO memberVO, MultipartFile photo, HttpSession session )throws Exception {
+	public ModelAndView setWrite(@Valid MemberVO memberVO, BindingResult bindingResult, MultipartFile photo, HttpSession session )throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("member/memberJoin");
+			return mv;
+		}
+		
 		int result = memberService.setWrite(memberVO, photo, session);
 		String message="Join Fail";
 		if(result>0) {

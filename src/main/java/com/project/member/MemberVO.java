@@ -1,14 +1,29 @@
 package com.project.member;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import com.project.memberProfile.MemberFileVO;
 
 public class MemberVO {
 
+	@NotEmpty
+	@Size(min = 6, max = 20)
+	@Pattern(regexp = "^[a-z0-9][a-z0-9_]{5,20}$")
 	private String id;
 	private String pw;
+	@NotEmpty
+	@Size(min = 8, max = 20)
+	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\\W])[a-zA-Z0-9\\W]{8,20}$")
 	private String pw2;
+	@NotEmpty
 	private String name;
+	@NotEmpty
+	@Pattern(regexp = "^01(?:1|0|[6-9])[0-9]{6,8}$")
 	private String phone;
+	@NotEmpty
+	@Pattern(regexp = "^[a-zA-Z0-9_]+@[a-z]+\\.[a-z]{2,4}$")
 	private String email;
 	private String gender;
 	private int grade;

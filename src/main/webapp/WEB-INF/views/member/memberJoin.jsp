@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Join</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <c:import url="../temp/header.jsp" />
 <style type="text/css">
@@ -182,34 +182,35 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 			    	<span class="member-label">ID </span>
 					<form:input path="id" cssClass="member-input" id="id"/>
 					<div class="input_rex id_text"></div>
-					<form:errors path="id"></form:errors>
+					<form:errors id="input_rex input_error" path="id"></form:errors>
 				</div>
 				<div class="member-form">
 			    	<span class="member-label">PASSWORD</span>
 			    	<form:password path="pw" cssClass="member-input" id="pw"/><br>
-			    	<div class="input_rex pw_text">영어 대소문자, 숫자, 특수문자 포함 8~16글자</div>
+			    	<div class="input_rex pw_text">영어 대소문자, 숫자, 특수문자 포함 8~20글자</div>
 			  	</div> 
 				<div class="member-form">
 			    	<span class="member-label">PASSWORD CONFIRM</span>
 			    	<form:password path="pw2" cssClass="member-input" id="pw2"/>
-			    	<form:errors path="pw2"></form:errors>
+			    	<form:errors id="input_rex input_error" path="pw2"></form:errors>
 			  	</div> 
 				<div class="member-form">
 				    <span class="member-label">NAME</span>
 				    <form:input path="name" cssClass="member-input" id="name"/>
 				    <div class="input_rex name_text"></div>
-				    <form:errors path="name"></form:errors>
+				    <form:errors id="input_rex" path="name"></form:errors>
 				</div>		
 				<div class="member-form">
 			    	<span class="member-label">PHONE</span>
 			    	<form:input path="phone" cssClass="member-input" id="phone"/>
 			    	<div class="input_rex phone_text">01012345678 형식을 지켜주세요</div>
+			    	<form:errors id="input_rex input_error" path="phone"></form:errors>
 			  	</div> 
 				<div class="member-form">
 				    <span class="member-label">EMAIL</span>
 				    <form:input path="email" cssClass="member-input" id="email"/><br>
 				    <div class="input_rex email_text"></div>
-				    <form:errors path="email"></form:errors>
+				    <form:errors id="input_rex input_error" path="email"></form:errors>
 				</div>
 				<div class="member-form">
 			    	<span class="member-label2">GENDER</span>
@@ -224,7 +225,8 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 		</div>	
 	</div>
 <script type="text/javascript">
-	//동그란 형식으로 파일 바꾸는 것
+
+ 	//동그란 형식으로 파일 바꾸는 것
 	$('.mask').click(function() {
 		$('#photo').click();
 	});
