@@ -17,6 +17,19 @@ public class MemberDAO {
 	private final static String NAMESPACE = "MemberMapper.";
 	
 	
+	
+	public int findPw(MemberVO memberVO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"findPw", memberVO);
+	}
+	
+	public int setUpdatePw(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpdatePw", memberVO);
+	}
+	
+	public String getId(MemberVO memberVO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getId", memberVO);
+	}
+	
 	public int setWrite(MemberVO memberVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setWrite", memberVO);
 	}
