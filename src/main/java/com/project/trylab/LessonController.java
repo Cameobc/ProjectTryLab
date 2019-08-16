@@ -29,6 +29,24 @@ public class LessonController {
 	@Inject
 	private LessonService lessonService;
 
+	@RequestMapping(value = "lessonDeleteTime", method = RequestMethod.GET)
+	public ModelAndView lessonDeleteTime(String class_id,int idx) throws Exception{
+		int result = 0;
+		ModelAndView mv = new ModelAndView();
+		TimeTableVO tVO = new TimeTableVO();
+		tVO.setClass_id(class_id);
+		tVO.setIdx(idx);
+		
+		result = lessonService.setDeleteTime(tVO);
+		
+	
+		mv.addObject("result", result);
+		mv.setViewName("common/message");
+		
+		return mv;
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="lessonUpdate", method = RequestMethod.GET)
 	public ModelAndView lessonUpdate(String class_id) throws Exception{
 		
@@ -48,10 +66,13 @@ public class LessonController {
 	}
 	
 	@RequestMapping(value="lessonUpdate", method = RequestMethod.POST)
-	public ModelAndView lessonUpdate(LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, HttpSession session) throws Exception{
+	public ModelAndView lessonUpdate(@RequestParam(value="class_date",required=true) List<String> class_date,
+			@RequestParam(value="startTime",required=true) List<String> startTime, 
+			@RequestParam(value="endTime",required=true) List<String> endTime, 
+			LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, HttpSession session) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
-		int result = lessonService.setUpdate(lessonVO, f1, thumbnail,session);
+		int result = lessonService.setUpdate(lessonVO, f1, thumbnail,class_date, startTime, endTime,session);
 		
 		if(result>0) {
 			mv.addObject("message", "수업정보를 수정했습니다.");

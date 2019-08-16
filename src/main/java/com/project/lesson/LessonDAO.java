@@ -15,6 +15,10 @@ public class LessonDAO {
 	private SqlSession session;
 	private static final String NAMESPACE = "LessonMapper.";
 
+	//시간삭제idx
+	public int setDeleteTime(TimeTableVO tVO) {
+		return session.delete(NAMESPACE+"setDeleteTime", tVO);
+	}
 	//date에 따른 시간정보
 	public List<TimeTableVO> getSelectTime(TimeTableVO tVO){
 		return session.selectList(NAMESPACE + "getSelectTime", tVO);
@@ -25,10 +29,18 @@ public class LessonDAO {
 	}
 
 	// 수업정보 업데이트
-	public int setUpdateTimetable(LessonVO lessonVO) throws Exception {
-		return session.update(NAMESPACE + "setUpdateTimetable", lessonVO);
+	public int setUpdateTimetable(TimeTableVO tVO) throws Exception {
+		return session.update(NAMESPACE + "setUpdateTimetable", tVO);
 	}
-
+	//x
+	public int setUpdateTime(List<TimeTableVO> timeTB) throws Exception {
+		int result=0;
+		for(TimeTableVO tVO:timeTB) {
+			result=session.update(NAMESPACE + "setUpdateTime", tVO);
+		}
+		return result;
+	}
+	
 	// 수업정보 삭제
 	public int setDelete(String class_id) throws Exception {
 		return session.delete(NAMESPACE + "setDelete", class_id);
@@ -48,6 +60,12 @@ public class LessonDAO {
 	public List<String> getSelectDate(String class_id) throws Exception {
 		return session.selectList(NAMESPACE + "getSelectDate", class_id);
 	}
+	
+	public TimeTableVO getSelectByIdx(TimeTableVO tVO) throws Exception{
+		
+		return session.selectOne(NAMESPACE+"getSelectByIdx", tVO);
+	}
+	
 	// 수업리스트
 	public List<LessonVO> getList() throws Exception {
 		return session.selectList(NAMESPACE + "getList");

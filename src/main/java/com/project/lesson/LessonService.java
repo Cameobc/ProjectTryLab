@@ -22,9 +22,14 @@ public class LessonService {
 	private LessonFileDAO lessonFileDAO;
 	@Inject
 	private FileSaver fileSaver;
+	
+	//시간삭제idx
+	public int setDeleteTime(TimeTableVO tVO) throws Exception {
+		return lessonDAO.setDeleteTime(tVO);
+	}
 
 	// 수업 수정하기
-	public int setUpdate(LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, HttpSession session)
+	public int setUpdate(LessonVO lessonVO, List<MultipartFile> f1, MultipartFile thumbnail, List<String> class_date, List<String> startTime, List<String> endTime, HttpSession session)
 			throws Exception {
 		int result = 0;
 		String realPath = "";
@@ -37,7 +42,18 @@ public class LessonService {
 
 		// 2. 클래스 스케줄 업데이트
 		if (result > 0) {
-			result = lessonDAO.setUpdateTimetable(lessonVO);
+			List<TimeTableVO> timeTB = new ArrayList<TimeTableVO>(){};
+			
+			for(int i=0;i<class_date.size();i++) {
+				TimeTableVO tv = new TimeTableVO();
+				tv.setClass_id(lessonVO.getClass_id());
+				tv.setClass_date(class_date.get(i));
+				tv.setStartTime(startTime.get(i));
+				tv.setEndTime(endTime.get(i));
+				tv.setCurPerson(0);
+				timeTB.add(tv);
+			}
+			result = lessonDAO.setTimetable(timeTB);
 		} else {
 			System.out.println("클래스 스케줄 업데이트 실패");
 		}
@@ -82,6 +98,8 @@ public class LessonService {
 			System.out.println("이미지 업데이트 실패");
 			result=0;
 		}
+		
+		
 		return result;
 	}
 
@@ -113,6 +131,12 @@ public class LessonService {
 		//조회수+1
 		result = lessonDAO.setUpdateHit(class_id);
 		return lessonDAO.getSelect(class_id);
+	}
+	
+	public TimeTableVO getSelectByIdx(TimeTableVO tVO) throws Exception {
+		int result=0;
+		 
+		return lessonDAO.getSelectByIdx(tVO);
 	}
 	
 	public List<String> getSelectDate(String class_id) throws Exception {

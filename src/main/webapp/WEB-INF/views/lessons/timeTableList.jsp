@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<div class="box">
-	<select class="browser-default custom-select">
+	<select class="browser-default custom-select" id="timetableSelect">
+		<option></option>
 		<c:forEach items="${times}" var="t">
 			<option value="${t.idx }">${t.startTime } ~ ${t.endTime }</option>
 		</c:forEach>
