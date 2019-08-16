@@ -33,6 +33,26 @@ public class MemberController {
 	
 	
 	
+	//회원정보 수정하기
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
+	public ModelAndView memberUpdate(@Valid MemberVO memberVO, BindingResult bindingResult, MultipartFile photo, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO vo=(MemberVO)session.getAttribute("member");
+		String id = vo.getId();
+		vo=memberService.selectOne(id);
+		return mv;
+	}
+	
+	//회원 정보 수정  폼으로 가기
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
+	public ModelAndView memberUpdate(MemberVO memberVO, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO vo=(MemberVO)session.getAttribute("member");
+		String id = vo.getId();
+		vo=memberService.selectOne(id);
+		return mv;
+	}
+	
 	//문의 내역
 	@RequestMapping(value = "memberQna")
 	public ModelAndView memberQna() throws Exception{

@@ -51,7 +51,7 @@
 	float: right;
 }
 
- a{
+.check{
 	color:black;
 	text-decoration: none;
 }
@@ -62,16 +62,16 @@
 <div class="member_header">
 		<table class="m_heaer">
 			<tr>
-				<td><a class="check1" href="./memberMypage">My page</a></td>
+				<td><a class="check1 check" href="./memberMypage">My page</a></td>
 			</tr>
 			<tr>
-				<td><a class="check2" href="./memberSchedule">스케줄 확인</a></td>
+				<td><a class="check2 check" href="./memberSchedule">스케줄 확인</a></td>
 			</tr>
 			<tr>
-				<td><a class="check3" href="./memberPayment">결제 내역</a></td>
+				<td><a class="check3 check" href="./memberPayment">결제 내역</a></td>
 			</tr>
 			<tr>
-				<td><a class="check4" href="./memberQna">문의 내역</a></td>
+				<td><a class="check4 check" href="./memberQna">문의 내역</a></td>
 			</tr>
 		</table>
 	</div>

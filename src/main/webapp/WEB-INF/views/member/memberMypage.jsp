@@ -75,16 +75,26 @@
 	background-repeat: no-repeat;
 }
 
+.btn_div{
+	text-align: center;
+}
 
+.btn_update{
+	font-family: Youth;
+	background-color: #548AF0;
+}
 
+.btn_pw{
+	font-family: Youth;
+}
 </style>
 </head>
 <body>
 <div class="container">
 	<div class="member_navi">
-	<div class="welcome">
-		<span>${member.id}님의 마이 페이지</span>
-	</div>
+		<div class="welcome">
+			<span>${member.id}님의 마이 페이지</span>
+		</div>
 		<div class="member_thumbnail">
 			<img id="thumbnail" src="../resources/member/${member.memberFileVO.fname}" width="100" height="100">
 			<span class="mask"></span>
@@ -116,6 +126,10 @@
 					</td>
 				</tr>
 			</table>
+		</div>
+		<div class="btn_div">
+			<a href="memberUpdate"><button class="btn_update">회원 정보 수정</button></a>
+			<a href="memberPwUpdate"><button class="btn_pw">비밀번호 변경</button></a>
 		</div>
 	</div>
 <c:import url="../temp/mheader.jsp" />	
