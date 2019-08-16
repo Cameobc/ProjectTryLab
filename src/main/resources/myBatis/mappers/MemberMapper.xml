@@ -6,6 +6,30 @@
   
  <mapper namespace="MemberMapper">
 
+<!-- 마이페이지 정보 조회 -->
+<select id="selectOne" parameterType="String" resultMap="member">
+	SELECT M.*, F.* FROM MEMBER M 
+	JOIN MEMBERFILE F ON (M.ID=F.ID)
+	WHERE M.ID=#{id}
+</select>
+<!-- 비밀번호 발급 위해 아이디&이메일 조회 -->
+<select id="findPw" parameterType="MemberVO" resultType="Integer">
+	SELECT COUNT(*) FROM MEMBER
+	WHERE ID=#{id} AND EMAIL=#{email}
+</select>
+
+<!-- 비밀번호 업데이트 -->
+<update id="setUpdatePw" parameterType="MemberVO">
+	UPDATE MEMBER SET PW=#{pw}
+	WHERE ID=#{id}
+</update>
+
+<!-- 아이디 찾기 -->
+<select id="getId" parameterType="MemberVO" resultType="String">
+	SELECT ID FROM MEMBER 
+	WHERE EMAIL=#{email}
+</select>
+
 <!-- 이메일 확인 -->
 <update id="updateGrade" parameterType="MemberVO">
 	UPDATE MEMBER SET GRADE=2 
@@ -74,6 +98,7 @@
  	<result property="oname" column="oname" />
  </resultMap>
  
+ <!-- 로그인 -->
  <select id="getSelect" resultMap="member" parameterType="MemberVO" resultType="MemberVO">
  	select M.*, F.*
  	from member M Full Join MemberFile F on (M.id=F.id)

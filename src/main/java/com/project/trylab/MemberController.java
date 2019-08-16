@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,7 +32,76 @@ public class MemberController {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	
-	@RequestMapping(value = "findPw")
+	
+	//회원정보 수정하기
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
+	public ModelAndView memberUpdate(@Valid MemberVO memberVO, BindingResult bindingResult, MultipartFile photo, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		return mv;
+	}
+	
+	//회원 정보 수정  폼으로 가기
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
+	public ModelAndView memberUpdate(MemberVO memberVO, HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO vo=(MemberVO)session.getAttribute("member");
+		String id = vo.getId();
+		vo=memberService.selectOne(id);
+		return mv;
+	}
+	
+	//문의 내역
+	@RequestMapping(value = "memberQna")
+	public ModelAndView memberQna() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("headset", "4");
+		return mv;
+	}
+	
+	//결제 내역
+	@RequestMapping(value = "memberPayment")
+	public ModelAndView memberPayment() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("headset", "3");
+		return mv;
+	}
+	
+	//스케줄관리
+	@RequestMapping(value = "memberSchedule")
+	public ModelAndView memberSchedule() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("headset", "2");
+		return mv;
+	}
+	
+	//회원정보 조회
+	@RequestMapping(value = "memberMypage", method = RequestMethod.GET)
+	public ModelAndView memberMypage(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO vo=(MemberVO)session.getAttribute("member");
+		String id = vo.getId();
+		vo=memberService.selectOne(id);
+		mv.addObject("headset", "1");
+		mv.addObject("member", vo);
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "findPw", method = RequestMethod.POST)
+	public ModelAndView findPw(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		String message="아이디나 이메일을 다시 한 번 확인해주세요.";
+		int result = memberService.setFindPw(memberVO);
+		if(result>0) {
+			message = "이메일을 확인해주세요.";
+		}
+		mv.addObject("message", message);
+		mv.addObject("path", "../");
+		mv.setViewName("common/messageMove");
+		return mv;
+	}
+	
+	@RequestMapping(value = "findPw", method = RequestMethod.GET)
 	public void findPw() throws Exception{
 		
 	}
@@ -53,8 +123,6 @@ public class MemberController {
 	@RequestMapping(value = "joinConfirm")
 	public ModelAndView joinConrifm(MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println(memberVO.getId()); 
-		System.out.println(memberVO.getMail_key());
 		int result = memberService.updateGrade(memberVO);
 		String message = "확인 불가";
 		if(result>0) {
@@ -82,7 +150,7 @@ public class MemberController {
 			message ="Join Success";	
 		}
 		mv.addObject("message", message);
-		mv.addObject("path", "../");
+		mv.addObject("path", "./memberLogin");
 		mv.setViewName("common/messageMove");
 		
 		return mv;
@@ -108,7 +176,8 @@ public class MemberController {
 			
 		}
 		String check = "0";
-		System.out.println(remember);
+		
+		//쿠키생성
 		if(remember!=null) {
 			check= "1";
 			Cookie cookie = new Cookie("id", memberVO.getId());

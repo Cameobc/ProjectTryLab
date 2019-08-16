@@ -43,11 +43,10 @@
 				<ul class="top_list">
 					<c:if test="${empty member }">
 					<li class="top_menu"><a href="${pageContext.request.contextPath}/member/memberLogin">로그인  </a></li>
+					<li class="top_menu"><a href="${pageContext.request.contextPath}/member/memberAgree">회원가입 </a></li>
 					</c:if>
 					<c:if test="${not empty member }">
 					<li class="top_menu"><a href="${pageContext.request.contextPath }/member/memberLogout">로그아웃</a></li>
-					</c:if>
-					
 					<c:choose>
 						<c:when test="${member.grade eq 0 }">
 							<li class="top_menu"><a href="${ pageContext.request.contextPath}/admin/adminMain">관리자 페이지</a></li>
@@ -56,10 +55,11 @@
 							<li class="top_menu"><a href="${ pageContext.request.contextPath}/tutor/tutorMypage">마이페이지</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="top_menu"><a>마이페이지</a></li>	
+							<li class="top_menu"><a href="${pageContext.request.contextPath}/member/memberMypage">마이페이지</a></li>	
 						</c:otherwise>
 					</c:choose>
-					<li class="top_menu"><a href="${pageContext.request.contextPath}/member/memberAgree">회원가입 </a></li>
+					</c:if>
+					
 					<li class="top_menu"><a>고객센터 </a></li>
 				</ul>
 			</div>

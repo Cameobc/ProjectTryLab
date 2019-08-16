@@ -31,6 +31,41 @@ public class MemberService {
 	private MailSet mailSet;
 	
 	
+	
+	//회원정보 조회
+	public MemberVO selectOne(String id) throws Exception{
+		
+		
+		return memberDAO.selectOne(id);
+	}
+	
+	
+	//비밀번호 찾기
+	public int setFindPw(MemberVO memberVO) throws Exception{
+		int result = memberDAO.findPw(memberVO);
+		
+		if(result>0) {
+			//임시 비밀번호 발급 후 암호화
+			String pw = mailService.createTempPassword();
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			memberVO.setPw(passwordEncoder.encode(pw));
+			result = memberDAO.setUpdatePw(memberVO);
+
+			if(result>0) {
+				MailForm mailForm = mailSet.sendPw(memberVO, pw);
+				mailService.mailSend(memberVO, mailForm);
+			}
+			
+		}
+		
+		return result;
+	}
+	
+	//아이디 찾기
+	public String getId(MemberVO memberVO) throws Exception{
+		return memberDAO.getId(memberVO);
+	}
+	
 	//메일 인증 후 업데이트
 	public int updateGrade(MemberVO memberVO) throws Exception{
 		return memberDAO.updateGrade(memberVO);
@@ -68,6 +103,8 @@ public class MemberService {
 		return result;
 	}
 	
+	
+	//로그인
 	public MemberVO getSelect(MemberVO memberVO) throws Exception {
 		return memberVO=memberDAO.getSelect(memberVO);
 		

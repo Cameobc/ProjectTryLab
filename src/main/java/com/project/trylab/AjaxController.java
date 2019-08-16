@@ -19,7 +19,7 @@ import com.project.file.FileService;
 import com.project.file.FileVO;
 
 import com.project.member.MemberService;
-
+import com.project.member.MemberVO;
 import com.project.lesson.LessonFileService;
 
 
@@ -73,8 +73,6 @@ public class AjaxController {
 		return mv;
 	}
 
-	
-
 	@ResponseBody
 	@RequestMapping(value = "/ajax/checkMember")
 	public int checkMember(@RequestBody Map<String, Object> params) throws Exception{
@@ -82,6 +80,14 @@ public class AjaxController {
 		return result;
 
 	}
+	
+	@RequestMapping(value = "/ajax/findId", method = RequestMethod.POST)
+	@ResponseBody
+	public String findId(MemberVO memberVO) throws Exception{
+		String id = memberService.getId(memberVO);
+		return id;
+	}
+	
 	
 	@RequestMapping(value = "/ajax/lessonFileDelete", method = RequestMethod.POST)
 	public ModelAndView lessonFileDelete(int fnum, String board, HttpSession session)throws Exception{
