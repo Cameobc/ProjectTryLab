@@ -118,33 +118,38 @@ img{
 	<div id="main">
 		<div class="list_wrap">
 			<div class="loc_wrap">
-				<input type="button" class="loc col-sm-4" value="종로구">
-				<input type="button" class="loc col-sm-4" value="중구">
-				<input type="button" class="loc col-sm-4" value="용산구">
-				<input type="button" class="loc col-sm-4" value="성동구">
-				<input type="button" class="loc col-sm-4" value="광진구">
-				<input type="button" class="loc col-sm-4" value="동대문구">
-				<input type="button" class="loc col-sm-4" value="중랑구">
-				<input type="button" class="loc col-sm-4" value="성북구">
-				<input type="button" class="loc col-sm-4" value="강북구">
-				<input type="button" class="loc col-sm-4" value="도봉구">
-				<input type="button" class="loc col-sm-4" value="노원구">
-				<input type="button" class="loc col-sm-4" value="은평구">
-				<input type="button" class="loc col-sm-4" value="서대문구">
-				<input type="button" class="loc col-sm-4" value="마포구">
-				<input type="button" class="loc col-sm-4" value="양천구">
-				<input type="button" class="loc col-sm-4" value="강서구">
-				<input type="button" class="loc col-sm-4" value="구로구">
-				<input type="button" class="loc col-sm-4" value="금천구">
-				<input type="button" class="loc col-sm-4" value="영등포구">
-				<input type="button" class="loc col-sm-4" value="동작구">
-				<input type="button" class="loc col-sm-4" value="관악구">
-				<input type="button" class="loc col-sm-4" value="서초구">
-				<input type="button" class="loc col-sm-4" value="강남구">
-				<input type="button" class="loc col-sm-4" value="송파구">
-				<input type="button" class="loc col-sm-4" value="강동구">
+			<form class="form-inline" action="./lessonSearch">
+			<div class="form-group">
+				<input type="button" class="loc col-sm-4" name="location" value="종로구">
+				<input type="button" class="loc col-sm-4" name="location" value="중구">
+				<input type="button" class="loc col-sm-4" name="location" value="용산구">
+				<input type="button" class="loc col-sm-4" name="location" value="성동구">
+				<input type="button" class="loc col-sm-4" name="location" value="광진구">
+				<input type="button" class="loc col-sm-4" name="location" value="동대문구">
+				<input type="button" class="loc col-sm-4" name="location" value="중랑구">
+				<input type="button" class="loc col-sm-4" name="location" value="성북구">
+				<input type="button" class="loc col-sm-4" name="location" value="강북구">
+				<input type="button" class="loc col-sm-4" name="location" value="도봉구">
+				<input type="button" class="loc col-sm-4" name="location" value="노원구">
+				<input type="button" class="loc col-sm-4" name="location" value="은평구">
+				<input type="button" class="loc col-sm-4" name="location" value="서대문구">
+				<input type="button" class="loc col-sm-4" name="location" value="마포구">
+				<input type="button" class="loc col-sm-4" name="location" value="양천구">
+				<input type="button" class="loc col-sm-4" name="location" value="강서구">
+				<input type="button" class="loc col-sm-4" name="location" value="구로구">
+				<input type="button" class="loc col-sm-4" name="location" value="금천구">
+				<input type="button" class="loc col-sm-4" name="location" value="영등포구">
+				<input type="button" class="loc col-sm-4" name="location" value="동작구">
+				<input type="button" class="loc col-sm-4" name="location" value="관악구">
+				<input type="button" class="loc col-sm-4" name="location" value="서초구">
+				<input type="button" class="loc col-sm-4" name="location" value="강남구">
+				<input type="button" class="loc col-sm-4" name="location" value="송파구">
+				<input type="button" class="loc col-sm-4" name="location" value="강동구">
+			</div>
+			
 				<button id="loc_search">검색</button>			
-
+			
+			</form>
 			</div>
 		
 		
@@ -211,29 +216,33 @@ img{
 	$('.loc').click(function() {
 		$(this).toggleClass("selected");
 	});
-	
-	
+
 	$("#loc_search").click(function() {
 		var locations=[];
 		$('.selected').each(function() {
 			var location=$(this).val();
 			locations.push(location);
 		});
-		
+	
 
 	jQuery.ajaxSettings.traditional=true;
-	
+	var url : "./lessonResult"
 	$.ajax({
-		url:"./lessonSearch",
+		url: url+
+		for(var i=0; i<locations.length; i++) {
+			"?location=" + locations[i]
+		}
+			+ ";"
+		
 		type:"GET",
 		data:{location:locations},
 		success:function(data) {
 			alert(locations[0]);
+			location.href=url;
 		}
 	});
 
 });
-
 
 
 

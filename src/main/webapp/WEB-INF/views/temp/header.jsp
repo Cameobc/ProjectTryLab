@@ -23,7 +23,7 @@
 	<div class="header_wrap">
 		<div class="header_gray">
 			<div class="gray_wrap">
-			<form class="form-inline" action="./class/classList" style="width: 1000px; height:48px; margin: 0px; display: inline-block;">
+			<form class="form-inline" action="${pageContext.request.contextPath}/lessons/lessonList" style="width: 1000px; height:48px; margin: 0px; display: inline-block;">
 				<div class="form-group search_wrap">
 					<select class="form-control" id="option" name = "kind">
 						<option class="k" value="0">전체</option>
@@ -97,7 +97,12 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+ 
 
+
+
+</script>
 
 
 

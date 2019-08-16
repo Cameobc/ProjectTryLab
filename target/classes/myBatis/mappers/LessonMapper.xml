@@ -43,9 +43,23 @@
  		select * from classCategory
  	</select>
  	
- 	<select id="getList" resultMap="LessonResult">
- 		select * from classes C inner join lessonfiles L
- 		on (C.class_id = L.class_id)
+ 	<select id="getList" resultMap="LessonResult" parameterType="PageMaker">
+	select * from classes C, lessonfiles L, timetable T, classcategory O
+    where C.class_id = L.class_id
+    and L.class_id=T.class_id
+ 		<choose>
+			<when test="kind==1">
+				and O.category_id
+			</when>
+			<when test="kind==2">
+				and C.title
+			</when>
+			<otherwise>
+				and C.title
+			</otherwise>
+			</choose>
+		like '%' ||#{search}|| '%'
+ 		
  		order by reg_date desc
  	</select>
  	

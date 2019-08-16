@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.project.util.PageMaker;
+
 @Repository
 public class LessonDAO {
 
@@ -40,8 +42,8 @@ public class LessonDAO {
 	}
 
 	// 수업리스트
-	public List<LessonVO> getList() throws Exception {
-		return session.selectList(NAMESPACE + "getList");
+	public List<LessonVO> getList(PageMaker pageMaker) throws Exception {
+		return session.selectList(NAMESPACE + "getList", pageMaker);
 	}
 	
 	// 클래스 등록
