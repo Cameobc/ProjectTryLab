@@ -33,6 +33,42 @@ public class MemberController {
 	
 	
 	
+	//문의 내역
+	@RequestMapping(value = "memberQna")
+	public ModelAndView memberQna() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("headset", "4");
+		return mv;
+	}
+	
+	//결제 내역
+	@RequestMapping(value = "memberPayment")
+	public ModelAndView memberPayment() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("headset", "3");
+		return mv;
+	}
+	
+	//스케줄관리
+	@RequestMapping(value = "memberSchedule")
+	public ModelAndView memberSchedule() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("headset", "2");
+		return mv;
+	}
+	
+	//회원정보 조회
+	@RequestMapping(value = "memberMypage", method = RequestMethod.GET)
+	public ModelAndView memberMypage(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO vo=(MemberVO)session.getAttribute("member");
+		String id = vo.getId();
+		vo=memberService.selectOne(id);
+		mv.addObject("headset", "1");
+		mv.addObject("member", vo);
+		return mv;
+	}
+	
 	
 	@RequestMapping(value = "findPw", method = RequestMethod.POST)
 	public ModelAndView findPw(MemberVO memberVO) throws Exception{
@@ -97,7 +133,7 @@ public class MemberController {
 			message ="Join Success";	
 		}
 		mv.addObject("message", message);
-		mv.addObject("path", "../");
+		mv.addObject("path", "./memberLogin");
 		mv.setViewName("common/messageMove");
 		
 		return mv;
@@ -123,7 +159,8 @@ public class MemberController {
 			
 		}
 		String check = "0";
-		System.out.println(remember);
+		
+		//쿠키생성
 		if(remember!=null) {
 			check= "1";
 			Cookie cookie = new Cookie("id", memberVO.getId());

@@ -6,6 +6,12 @@
   
  <mapper namespace="MemberMapper">
 
+<!-- 마이페이지 정보 조회 -->
+<select id="selectOne" parameterType="String" resultMap="member">
+	SELECT M.*, F.* FROM MEMBER M 
+	JOIN MEMBERFILE F ON (M.ID=F.ID)
+	WHERE M.ID=#{id}
+</select>
 <!-- 비밀번호 발급 위해 아이디&이메일 조회 -->
 <select id="findPw" parameterType="MemberVO" resultType="Integer">
 	SELECT COUNT(*) FROM MEMBER

@@ -55,7 +55,7 @@
 							<li class="top_menu"><a href="${ pageContext.request.contextPath}/tutor/tutorMypage">마이페이지</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="top_menu"><a>마이페이지</a></li>	
+							<li class="top_menu"><a href="${pageContext.request.contextPath}/member/memberMypage">마이페이지</a></li>	
 						</c:otherwise>
 					</c:choose>
 					</c:if>

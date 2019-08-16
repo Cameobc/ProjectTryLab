@@ -32,6 +32,14 @@ public class MemberService {
 	
 	
 	
+	//회원정보 조회
+	public MemberVO selectOne(String id) throws Exception{
+		
+		
+		return memberDAO.selectOne(id);
+	}
+	
+	
 	//비밀번호 찾기
 	public int setFindPw(MemberVO memberVO) throws Exception{
 		int result = memberDAO.findPw(memberVO);
@@ -95,6 +103,8 @@ public class MemberService {
 		return result;
 	}
 	
+	
+	//로그인
 	public MemberVO getSelect(MemberVO memberVO) throws Exception {
 		return memberVO=memberDAO.getSelect(memberVO);
 		
