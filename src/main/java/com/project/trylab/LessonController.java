@@ -8,6 +8,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -141,7 +142,7 @@ public class LessonController {
 	@RequestMapping(value="lessonSearch", method = RequestMethod.GET)
 	@ResponseBody
 	public List<LessonVO> getSearchList(String[] location) throws Exception {
-		System.out.println(location[1]);
+		System.out.println(location[0]);
 		return lessonService.getSearchList(location);
 	}
 	

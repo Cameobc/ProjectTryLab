@@ -229,6 +229,7 @@ img{
 		data:{location:locations},
 		success:function(data) {
 			alert(locations[0]);
+			location.href="./lessonSearch"
 		}
 	});
 

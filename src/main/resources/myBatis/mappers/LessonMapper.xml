@@ -23,12 +23,12 @@
  	</delete>
  	
  	<insert id="setTimetable" parameterType="LessonVO">
- 		insert into timetable values(#{class_id},#{class_date},#{location},#{startTime},#{endTime})	
+ 		insert into timetable values(#{class_id},#{class_date},#{startTime},#{endTime},0)	
  	</insert>
  	
  
  	<insert id="setWrite" parameterType="LessonVO">
- 		insert into classes values(#{class_id},#{category_id},#{tid},#{title},#{contents},#{price},sysdate,0,#{time})
+ 		insert into classes values(#{class_id},#{category_id},#{tid},#{title},#{contents},#{price},sysdate,0,#{time},#{location},0)
  	</insert>
  
  	<select id="getSelect" parameterType="String" resultMap="LessonResult">
@@ -56,14 +56,16 @@
  		order by reg_date desc
  	</select>
  	
- 	<select id="getSearchList" resultMap="LessonResult" parameterType="List">
- 	 	select * from classes C inner join lessonfiles L
- 		on (C.class_id = L.class_id)
- 		where 1=1 and
+ 	<select id="getSearchList" resultMap="LessonResult" parameterType="java.util.Map">
+ 	 	select *
+        from classes C, lessonfiles L, timetable T
+ 		where (C.class_id = L.class_id)
+        and C.class_id = T.class_id
+ 		and
  		<foreach collection="array" item="item" separator="or">
- 			location like '%'||#{item}||'%'		
+ 			C.location like '%'||#{item}||'%'
  		</foreach>
- 		order by reg_date desc
+ 		order by C.reg_date desc
  		
  	</select>
  	
