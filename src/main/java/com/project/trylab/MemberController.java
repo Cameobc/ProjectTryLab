@@ -37,9 +37,6 @@ public class MemberController {
 	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
 	public ModelAndView memberUpdate(@Valid MemberVO memberVO, BindingResult bindingResult, MultipartFile photo, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberVO vo=(MemberVO)session.getAttribute("member");
-		String id = vo.getId();
-		vo=memberService.selectOne(id);
 		return mv;
 	}
 	
