@@ -57,7 +57,9 @@ public class LessonDAO {
 	public LessonVO getSelect(String class_id) throws Exception {
 		return session.selectOne(NAMESPACE + "getSelect", class_id);
 	}
-
+	public List<LessonVO> tutorCalendar(String class_id) throws Exception {
+		return session.selectList(NAMESPACE + "getSelect", class_id);
+	}
 	// 수업 상세정보
 	public List<String> getSelectDate(String class_id) throws Exception {
 		return session.selectList(NAMESPACE + "getSelectDate", class_id);

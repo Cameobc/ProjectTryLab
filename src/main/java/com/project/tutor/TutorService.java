@@ -26,6 +26,9 @@ public class TutorService {
 	@Inject
 	private FileSaver fileSaver;
 
+	public List<LessonVO> tutorCalendar(String class_id) throws Exception{
+		return lessonDAO.tutorCalendar(class_id);
+	}
 	//
 	public List<LessonVO> getSalesByTid(String tid) throws Exception{
 		return lessonDAO.getSalesByTid(tid);

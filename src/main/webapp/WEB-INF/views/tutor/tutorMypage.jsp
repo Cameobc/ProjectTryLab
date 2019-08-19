@@ -166,6 +166,10 @@ a{
 	var id='${sessionScope.member.id}';
 	var lessonLength = 0;
 	
+	getList(id);
+	getSales(id);
+	getList(id);
+	
 	function getList(tid) {
 		
 		$.ajax({
@@ -205,9 +209,6 @@ a{
 		return Number(data_value).toLocaleString('en');
 	}
 
-	getSales(id);
-	getList(id);
-	
  	$("#list").click(function() {
 		getList(id);
 	}); 

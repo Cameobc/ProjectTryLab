@@ -28,7 +28,7 @@
 				<tr>
 					<%-- <td>${les.class_id }</td> --%>
 					<td>${l.title }</td>
-					<td>${time.class_date } ${time.startTime } ~ ${time.endTime }</td>
+					<td>${time.class_date } [${time.startTime } ~ ${time.endTime }]</td>
 					<td><span>${time.curPerson}</span> / <span>${l.limit}</span></td>
 					<td><fmt:formatNumber value="${l.price*time.curPerson}" type="number"/>원</td>
 					<td><fmt:formatNumber value="${l.price * time.curPerson*0.2}" type="number"/>원</td>

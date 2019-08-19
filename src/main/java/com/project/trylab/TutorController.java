@@ -28,8 +28,13 @@ public class TutorController {
 	}
 	
 	@RequestMapping (value = "tutorCalendar", method = RequestMethod.GET)
-	public void tutorCalendar(HttpSession session) {
-
+	public ModelAndView tutorCalendar(String class_id, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<LessonVO> list = tutorService.tutorCalendar(class_id);
+		
+		mv.addObject("list", list);
+		mv.setViewName("tutor/tutorCalendar");
+		return mv;
 	}
 	
 	@RequestMapping(value="getSalesList", method=RequestMethod.GET)
