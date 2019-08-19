@@ -27,6 +27,21 @@ public class TutorController {
 
 	}
 	
+	@RequestMapping (value = "tutorCalendar", method = RequestMethod.GET)
+	public void tutorCalendar(HttpSession session) {
+
+	}
+	
+	@RequestMapping(value="getSalesList", method=RequestMethod.GET)
+	public ModelAndView getSales(String tid) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<LessonVO> list = tutorService.getSalesByTid(tid);
+		
+		mv.addObject("list", list);
+		mv.setViewName("tutor/tutorSales");
+		return mv;
+	}
+	
 	@RequestMapping (value = "tutorMyLesson", method = RequestMethod.GET)
 	public ModelAndView tutorMyLesson(String tid, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();

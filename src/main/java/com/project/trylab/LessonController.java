@@ -29,6 +29,8 @@ public class LessonController {
 	@Inject
 	private LessonService lessonService;
 
+	
+	///////////////////////////////////////////////////
 	@RequestMapping(value = "lessonDeleteTime", method = RequestMethod.GET)
 	public ModelAndView lessonDeleteTime(String class_id,int idx) throws Exception{
 		int result = 0;

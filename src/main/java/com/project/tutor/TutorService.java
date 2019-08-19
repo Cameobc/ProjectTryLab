@@ -26,6 +26,10 @@ public class TutorService {
 	@Inject
 	private FileSaver fileSaver;
 
+	//
+	public List<LessonVO> getSalesByTid(String tid) throws Exception{
+		return lessonDAO.getSalesByTid(tid);
+	}
 	
 	// 수업상세보기
 	public LessonVO getSelect(String class_id) throws Exception {

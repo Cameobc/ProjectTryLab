@@ -15,6 +15,8 @@ public class LessonDAO {
 	private SqlSession session;
 	private static final String NAMESPACE = "LessonMapper.";
 
+	
+	
 	//시간삭제idx
 	public int setDeleteTime(TimeTableVO tVO) {
 		return session.delete(NAMESPACE+"setDeleteTime", tVO);
@@ -99,6 +101,9 @@ public class LessonDAO {
 		return session.selectList(NAMESPACE + "getListByTid",tid);
 	}
 	
+	public List<LessonVO> getSalesByTid(String tid) throws Exception {
+		return session.selectList(NAMESPACE + "getSalesByTid",tid);
+	}
 	// 수업 상세정보
 	public LessonVO getSelectByTid(String tid) throws Exception {
 		return session.selectOne(NAMESPACE + "getSelectByTid", tid);

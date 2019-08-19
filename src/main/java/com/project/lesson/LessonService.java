@@ -23,6 +23,8 @@ public class LessonService {
 	@Inject
 	private FileSaver fileSaver;
 	
+	
+	
 	//시간삭제idx
 	public int setDeleteTime(TimeTableVO tVO) throws Exception {
 		return lessonDAO.setDeleteTime(tVO);
