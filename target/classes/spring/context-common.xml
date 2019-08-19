@@ -14,6 +14,6 @@
 	
 	</bean>
 	
-	
+	<bean class="com.project.qna.QnaVOValidate" id="qnaVOValidate"></bean>
 	
 </beans>

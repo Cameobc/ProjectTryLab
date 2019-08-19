@@ -25,7 +25,7 @@
 				<div class="form-group col-sm-4">
 					<select class="form-control" name="kind" id="kind">
 						<option class="k" value="1">제목</option>
-						<option class="k" value="2">글쓴이</option>
+						<option class="k" value="2">작성자</option>
 						<option class="k" value="3">내용</option>
 					</select>
 				</div>
@@ -52,7 +52,7 @@
 	      <tr class="title" style="border-top: 1px solid #9c836a;">
 	        <th style="padding-top: 15px; padding-bottom: 15px;">No</th>
 	        <th style="padding-top: 15px; padding-bottom: 15px;">제목</th>
-	        <th style="padding-top: 15px; padding-bottom: 15px;">글쓴이</th>
+	        <th style="padding-top: 15px; padding-bottom: 15px;">작성자</th>
 	        <th style="padding-top: 15px; padding-bottom: 15px;">작성시간</th>
 	        <th style="padding-top: 15px; padding-bottom: 15px;">조회수</th>
 	      </tr>
@@ -63,10 +63,10 @@
 		      <tr>
 		        <td style="padding-top: 20px; width:120px;">${dto.num}</td>
 		        <td style="padding-top: 20px; padding-left:50px; cursor: pointer;" onclick="location.href='./qnaSelect?num=${dto.num}'">
-		        	<c:forEach begin="1" end="${dto.depth}">[RE] </c:forEach>${dto.title}
+		        	<c:forEach begin="1" end="${dto.depth}">&nbsp;&nbsp;&nbsp;[RE] </c:forEach>${dto.title}
 		        </td>
 		        
-<%-- 				<td>
+<%-- 			<td>
 					<c:forEach begin="1" end="${dto.depth}">[RE] </c:forEach>
 					<a href="./qnaSelect?num=${dto.num}">${dto.title}</a>
 				</td> --%>		        
@@ -104,12 +104,16 @@
 	
 		
 <script type="text/javascript">
- 	var kind = '${pager.kind}';
-	$(".k").each(function() {
-		if($(this).val() == kind) {
-			$(this).prop("selected", true);
-		}
-	}); 
+	
+	//검색창에 기록남기
+	$(function() { 
+		var kind = '${pager.kind}';
+		$(".k").each(function() {
+			if($(this).val() == kind) {
+				$(this).prop("selected", true);
+			}
+		});
+	});
 
 	$(document).on('click', '#searchBtn', function(e){
 		e.preventDefault();

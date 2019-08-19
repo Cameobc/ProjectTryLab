@@ -29,18 +29,17 @@
 	</div>
 	<br>
 		<div class="buttons">
-			<a href="./qnaUpdate?num=${dto.num}" class="btn btn-outline-dark">수정</a>
-			<a href="./qnaDelete?num=${dto.num}" class="btn btn-outline-danger">삭제</a>
-		
-		
-			<%-- <a href="./qnaUpdate?num=${dto.num}"><button type="button" class="btn btn-outline-dark">수정</button></a>
-			<a href="./qnaDelete?num=${dto.num}"><button type="button" class="btn btn-outline-danger">삭제</button></a> --%>
+			<a href="./qnaUpdate?num=${dto.num}" id="btnUpdate" class="btn btn-outline-dark">수정</a>
+			<a href="./qnaDelete?num=${dto.num}" id="btnDelete"class="btn btn-outline-danger">삭제</a>
 		</div>
-		<div id="contents">${dto.contents}</div>
 		
-		<!-- 파일보여주기 -->
+		<div id="contents" style="max-width: 90%;">${dto.contents}</div>
+		
+		<!-- 파일 -->
 		<div>	
-		
+			<c:forEach items="${dto.files}" var="file">
+				<img src="../resources/qna/${file.fname}" style="max-width: 90%; height: auto;">
+			</c:forEach>
 		</div>
 		
 	<br><br>
@@ -51,28 +50,21 @@
 		</div>
 		<div id="btn" OnClick="location.href='./qnaList';">목록</div>
 
-
-<!-- 
-		<h1>제목 : ${dto.title}</h1>
-		<h1>작성자 : ${dto.writer}</h1>
-		<h1>내용 : ${dto.contents}</h1>
-		
-		<c:forEach items="${dto.files}" var="file">
-			<input type="button" title="${file.fname}" value="${file.oname}">
-		</c:forEach>
- -->	
-	
 	</div> <!-- container end -->
 
 <script type="text/javascript">
-	/* function deleteCheck() {
-		var msg = confirm("정말 삭제하시겠습니까?");
-		if(msg == true) {
-			alert("삭제되었습니다.");
-		}else {
-			return false;
-		}
-	} */
+	$(document).ready(function() {
+		$("#btnDelete").click(function() {
+			if(confirm("삭제하시겠습니까?")) {
+				document.form.action = "./qnaDelete";
+				document.form.submit();
+			}else {
+				return false;
+			}
+		});
+	});
+	
+
 
 </script>
 <c:import url="../temp/footer.jsp"/>

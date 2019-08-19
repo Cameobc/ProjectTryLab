@@ -14,6 +14,11 @@ public class NoticeService {
 
 	@Inject
 	private NoticeDAO noticeDAO;
+	
+	//hit
+	public void updateHit(int num) throws Exception {
+		noticeDAO.updateHit(num);
+	}
 
 	
 	//write

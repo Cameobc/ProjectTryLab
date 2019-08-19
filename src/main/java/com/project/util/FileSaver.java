@@ -15,7 +15,7 @@ public class FileSaver {
 	//
 	//1. Spring에서 제공하는 FileCopyUtils 클래스의 copy 메서드 사용
 	// 저장경로, MultipartFile
-	public String saveFile(String realPath, MultipartFile multipartFile) throws Exception {
+	public String saveFile(String realPath, MultipartFile f1) throws Exception {
 		File file = new File(realPath);
 		if(!file.exists()) {
 			file.mkdirs();
@@ -25,20 +25,20 @@ public class FileSaver {
 		// 	 UUID 클래스 사용 (Universal Unique ID)
 		// 저장될 이름
 		String fileSystemName= UUID.randomUUID().toString();
-		String originalName = multipartFile.getOriginalFilename();
+		String originalName = f1.getOriginalFilename();
 		originalName = originalName.substring(originalName.lastIndexOf("."));	// 확장자
 		
 		fileSystemName = fileSystemName + originalName;
 		
 		//b. 저장
 		file = new File(realPath, fileSystemName);
-		FileCopyUtils.copy(multipartFile.getBytes(), file);
+		FileCopyUtils.copy(f1.getBytes(), file);
 		
 		return fileSystemName;
 		
 	}
 	
-	public String saveFile_test(String realPath, MultipartFile multipartFile, MultipartFile multipartFile2) throws Exception {
+	public String saveFile_test(String realPath, MultipartFile f1, MultipartFile multipartFile2) throws Exception {
 		File file = new File(realPath);
 		if(!file.exists()) {
 			file.mkdirs();
@@ -48,21 +48,21 @@ public class FileSaver {
 		// 	 UUID 클래스 사용 (Universal Unique ID)
 		// 저장될 이름
 		String fileSystemName= UUID.randomUUID().toString();
-		String originalName = multipartFile.getOriginalFilename();
+		String originalName = f1.getOriginalFilename();
 		originalName = originalName.substring(originalName.lastIndexOf("."));	// 확장자
 		
 		fileSystemName = fileSystemName + originalName;
 		
 		//b. 저장
 		file = new File(realPath, fileSystemName);
-		FileCopyUtils.copy(multipartFile.getBytes(), file);
+		FileCopyUtils.copy(f1.getBytes(), file);
 		
 		return fileSystemName;
 		
 	}
 	
 	//2. OutputStream 연결
-	public String saveFile2(String realPath, MultipartFile multipartFile) throws Exception {
+	public String saveFile2(String realPath, MultipartFile f1) throws Exception {
 		
 		File file = new File(realPath);
 		if(!file.exists()) {
@@ -73,7 +73,7 @@ public class FileSaver {
 		// 	 UUID 클래스 사용 (Universal Unique ID)
 		// 저장될 이름
 		String fileSystemName= UUID.randomUUID().toString();
-		String originalName = multipartFile.getOriginalFilename();
+		String originalName = f1.getOriginalFilename();
 		originalName = originalName.substring(originalName.lastIndexOf("."));	// 확장자
 		
 		fileSystemName = fileSystemName + originalName;
@@ -81,13 +81,13 @@ public class FileSaver {
 		//저장
 		file = new File(realPath, fileSystemName);
 		FileOutputStream fs = new FileOutputStream(file);
-		fs.write(multipartFile.getBytes());
+		fs.write(f1.getBytes());
 
 		return fileSystemName;
 	}
 	
 	//3. MultipartFile 클래스의  transferTo 메서드 사용
-	 public String saveFile3(String realPath, MultipartFile multipartFile) throws Exception {
+	 public String saveFile3(String realPath, MultipartFile f1) throws Exception {
 			File file = new File(realPath);
 			if(!file.exists()) {
 				file.mkdirs();
@@ -97,7 +97,7 @@ public class FileSaver {
 			// 	 UUID 클래스 사용 (Universal Unique ID)
 			// 저장될 이름
 			String fileSystemName= UUID.randomUUID().toString();
-			String originalName = multipartFile.getOriginalFilename();
+			String originalName = f1.getOriginalFilename();
 			if(originalName.length()>0)
 			originalName = originalName.substring(originalName.lastIndexOf("."));	// 확장자
 			
@@ -105,7 +105,7 @@ public class FileSaver {
 		 
 			// 저장
 			file = new File(realPath, fileSystemName);
-			multipartFile.transferTo(file);
+			f1.transferTo(file);
 			
 			return fileSystemName;
 			

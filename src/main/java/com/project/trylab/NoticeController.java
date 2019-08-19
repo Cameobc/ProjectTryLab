@@ -84,6 +84,7 @@ public class NoticeController {
 	@RequestMapping(value = "noticeSelect", method = RequestMethod.GET)
 	public String getSelect(int num, Model model) throws Exception {
 		NoticeVO noticeVO = noticeService.getSelect(num);
+		noticeService.updateHit(num);
 		String view = "common/messageMove";
 		if(noticeVO != null) {
 			view = "notice/noticeSelect";

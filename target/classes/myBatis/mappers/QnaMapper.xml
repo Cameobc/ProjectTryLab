@@ -17,12 +17,13 @@
 		<selectKey keyProperty="num" resultType="Integer" order="BEFORE">
 			select qna_seq.nextval from dual
 		</selectKey>
-		insert into qna values(#{num}, #{title}, #{writer}, #{contents}, #{email, jdbcType=VARCHAR}, sysdate, 0, ${num}, 0, 0)
+		insert into qna 
+		values(#{num}, #{title}, #{writer}, #{contents}, #{email, jdbcType=VARCHAR}, sysdate, 0, ${num}, 0, 0)
 	</insert>
 	
 	<!-- update -->
 	<update id="setUpdate" parameterType="QnaVO">
-		update qna set title=#{title}, contents=#{contents} where num=#{num}
+		update qna set title=#{title}, writer=#{writer}, contents=#{contents} where num=#{num}
 	</update>
 	
 	<!-- delete -->
@@ -68,41 +69,42 @@
 	<select id="getList" parameterType="PageMaker" resultType="QnaVO" >
 		select * from
 		(select rownum R, Q.* from
-		(select * from qna where
+		(select * from qna
+		where
 		<choose>
-			<when test="kind == 1">
+			<when test="kind = 1">
 				title
 			</when>
-			<when test="kind == 2">
+			<when test="kind = 2">
 				writer
 			</when>
 			<otherwise>
 				contents
 			</otherwise>
 		</choose>
-		like '%'||#{search}||'%' order by num desc, step asc) Q)
+		like '%'||#{search}||'%'
+		order by ref desc, step asc) Q)
 		where R between #{startRow} and #{lastRow}
 	</select>
 
 	<!-- totalCount -->
 	<select id="getTotalCount" parameterType="PageMaker" resultType="Integer">
-		select count(num) from qna where
+		select count(num) from qna
 		<choose>
-			<when test="kind == 1">
-				title
+			<when test="kind = 1">
+				where title
 			</when>
-			<when test="kind == 2">
-				writer
+			<when test="kind = 2">
+				where writer
 			</when>
 			<otherwise>
-				contents
+				where contents
 			</otherwise>
 		</choose>
 		like '%' || #{search} || '%'
 	</select>
 
-	<!-- 댓글작업 -->	
-	<!-- CDATA 쿼리문 -->
+	<!-- 답글 -->	
 	<sql id="subRef">
 	<![CDATA[
 		select ref from qna where num=#{num}
@@ -123,18 +125,13 @@
 			(select depth from qna where num=#{num})+1
 		)
 	</insert>
-	
+
 	<!-- replyUpdate -->
 	<update id="setReplyUpdate" parameterType="QnaVO">
-<!-- 		update qna set step=step+1
+		update qna set step=step+1
 		where ref=(<include refid="subRef" />)
-		and step>(<include refid="subStep" />) -->
-		update qna set step = step + 1
-		where ref = (select ref from qna where num=#{num})
-		and step > (select step from qna where num=#{num})
+		and step>(<include refid="subStep" />)
 	</update>
-
-
 
 
 </mapper>
