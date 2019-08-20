@@ -34,6 +34,14 @@ public class MemberService {
 	private MailSet mailSet;
 	
 	
+	//비밀번호 변경
+	public int setPwUpdate(MemberVO memberVO) throws Exception{
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		memberVO.setPw(passwordEncoder.encode(memberVO.getPw()));
+		
+		return memberDAO.setUpdatePw(memberVO);
+	}
+	
 	//문의 내역 확인
 	public List<QnaVO> getQnaList(PageMaker pageMaker, HttpSession session) throws Exception{
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");

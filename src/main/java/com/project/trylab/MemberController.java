@@ -36,6 +36,41 @@ public class MemberController {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	
+	//현재 비밀번호 일치하는지 확인
+	@RequestMapping(value = "checkPW", method = RequestMethod.POST)
+	@ResponseBody
+	public int checkPW(String pw, HttpSession session) throws Exception{
+		int result =0;
+		MemberVO vo = (MemberVO)session.getAttribute("member");
+		if(passwordEncoder.matches(pw, vo.getPw())) {
+			result = 1;
+		}
+		return result;
+	}
+	
+	//pw업데이트
+	@RequestMapping(value = "memberPwUpdate", method = RequestMethod.POST)
+	public ModelAndView memberPwUpdate(HttpSession session, MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		MemberVO vo = (MemberVO)session.getAttribute("member");
+		memberVO.setId(vo.getId());
+		String path = "./memberMypage";
+		String message = "Update Fail";
+
+		int result=memberService.setPwUpdate(memberVO);
+		
+		if(result>0) {
+			message = "변경된 비밀번호로 로그인 해 주세요.";
+			path = "../";
+			session.invalidate();
+		}
+		mv.addObject("message", message);
+		mv.addObject("path", path);
+		mv.setViewName("common/messageMove");
+		return mv;
+	}
+	
 	//pw업데이트
 	@RequestMapping(value = "memberPwUpdate", method = RequestMethod.GET)
 	public void memberPwUpdate() throws Exception{

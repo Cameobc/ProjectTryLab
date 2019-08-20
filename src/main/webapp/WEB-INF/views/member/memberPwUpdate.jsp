@@ -135,6 +135,12 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 	    font-family: BMJUA;
 	}
 	
+	.input_rex{
+		margin-left:47%;
+		font-size: 0.9em;
+		text-align: left;
+		font-weight: lighter;
+	}
 </style>	
 </head>
 <body>
@@ -143,14 +149,16 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 		  <div class="member-form">
 		  	<span class="member-label">현재 비밀번호</span>
 		    <input type="password" class="member-input" id="curpw" name="curpw">
+		    <div class="input_rex curpw_text"></div>
 		  </div>
 		  <div class="member-form">
 		  	<span class="member-label">변경 할 비밀번호</span>
 		    <input type="password" class="member-input" id="pw" name="pw">
+		    <div class="input_rex pw_text">영어 대소문자, 숫자, 특수문자 포함 8~20글자</div>
 		  </div>
 		  	 <div class="member-form">
 		  	 <span class="member-label">비밀번호 재확인</span>
-		    <input type="password" class="member-input" id="pw" name="pw">
+		    <input type="password" class="member-input" id="pw2" name="pw2">
 		  </div>
 		  <div class="member-form">
 		  	<input type="button" value="UPDATE" id="update">
@@ -158,6 +166,77 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 		  </div>
 		</form>
 	</div>
+<script type="text/javascript">
+	$('#curpw').change(function() {
+		var pw = $(this).val();
+		$.ajax({
+			url:"./checkPW",
+			type:"POST",
+			data:{pw:pw},
+			success:function(data){
+				if(data=='1'){
+					$('.curpw_text').html('비밀번호 확인');
+					$('.curpw_text').css('color', '#f6755e');
+				}else{
+					$('#curpw').val('');
+					$('.curpw_text').html('비밀번호 불일치');
+					$('.curpw_text').css('color', 'red');
+				}
+			}
+		});
+	});
+	
+	//pw 유효성검사+ pw&pw2 일치 여부 검사	
+	$('#pw2').change(function() {
+		var pw=$('#pw').val();
+		var pw2=$('#pw2').val();
+		var pwRex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\W])[a-zA-Z0-9\W]{8,20}$/;
+		if(pw==pw2){
+			if(!pwRex.test($('#pw2').val())){
+				$('#pw').val('');
+				$('#pw2').val('');
+				$('.pw_text').html('영어 대소문자, 숫자, 특수문자 포함 8~16글자');
+				$('.pw_text').css('color', '#f6755e');
+			}else{
+				$('.pw_text').html('사용할 수 있는 비밀번호 입니다.');
+				$('.pw_text').css('color', '#f6755e');
+			}
+		}else{
+			$('#pw').val('');
+			$('#pw2').val('');
+			$('.pw_text').html('비밀번호가 일치하지 않습니다.');
+			$('.pw_text').css('color', '#f6755e');
+		}
+		
+	});
+	$('#pw').change(function() {
+		var pw=$('#pw').val();
+		var pw2=$('#pw2').val();
+		if(pw2.length>0 && pw!=pw2){
+			$('#pw').val('');
+			$('#pw2').val('');
+			$('.pw_text').html('비밀번호가 일치하지 않습니다.');
+			$('.pw_text').css('color', '#f6755e');
+		}
+	});	
+	
+	$('#cancle').click(function() {
+		location.href="./memberMypage";
+	});
+	
+	$('#update').click(function() {
+		var check = true;
+		$('.member-input').each(function() {
+			if($(this).val()==''){
+				check = false;
+			}
+		});
+		
+		if(check){
+			$('#frm').submit();
+		}
+	});
+</script>
 <c:import url="../temp/footer.jsp" />	
 </body>
 </html>
