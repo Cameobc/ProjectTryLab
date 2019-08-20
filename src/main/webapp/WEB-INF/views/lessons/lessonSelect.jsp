@@ -227,7 +227,7 @@ body{
 				<!-- end of info_img -->
 
 				<div class="info_summary">
-					<div class="tutor">
+					<div class="tutor" title="${lessons.class_id }">
 						[${lessons.tid } 선생님] <!-- 나중에 session.name -->
 					</div>
 					<div class="title">
@@ -236,15 +236,20 @@ body{
 					<div class="info_line">
 						<img src="../resources/images/ic_location.png"/> ${lessons.location }&nbsp;
 						<img src="../resources/images/ic_time.png"/> <span class="point">${lessons.time }</span>/분&nbsp;
+						<img src="../resources/images/ic_limit.png"/> 최대 <span class="point">${lessons.limit }</span>명&nbsp;
 						<img src="../resources/images/ic_price.png"/> <span class="point">${lessons.price }원</span>/1회&nbsp;
 					</div>
 					
 					<div class="box">
-						<select class="browser-default custom-select">
-							<c:forEach items="${lessons.timetable}" var="date">
-								<option value="${date.class_date }">${date.class_date }</option>
+						<select class="browser-default custom-select" id="selectbox">
+							<option></option>
+							<c:forEach items="${dates}" var="date">
+								<option value="${date }">${date }</option>
 							</c:forEach>
 						</select>
+					</div>
+					<div id="newbox">
+						
 					</div>
 					
 					<div class="box">
@@ -254,8 +259,8 @@ body{
 					<!-- 튜터 회원만 보이게 -->
 					<c:if test="${sessionScope.member.grade eq 1 && sessionScope.member.id eq lessons.tid  }">
 					<div class="box">
-						<a href="./lessonUpdate?class_id=${lessons.class_id }" class="btn_talk btn_style2">수정하기</a>
-						<a href="./lessonDelete?class_id=${lessons.class_id }" class="btn_talk btn_style2">삭제하기</a>
+						<button class="btn_talk btn_style2" id="updateBtn">수정하기</button>
+						<button class="btn_talk btn_style2" id="deleteBtn">삭제하기</button>
 					</div>
 					</c:if>
 				</div>
@@ -286,7 +291,33 @@ body{
 
 
 	</div>
-
+	<script type="text/javascript">
+		var class_id = $(".tutor").attr("title");
+		
+		$("#selectbox").change(function() {
+			var date = $(this).val();
+			 $.ajax({
+				url:"../ajax/selectDateToGetTime",
+				method:"get",
+				data:{
+					class_id:"${lessons.class_id}",
+					class_date:date
+				},
+				success:function(res) {
+					res=res.trim();
+					$("#newbox").html(res);
+				}
+			}); 
+		});
+		
+		$("#updateBtn").click(function() {
+			location.href="./lessonUpdate?class_id="+class_id;
+		});
+		$("#deleteBtn").click(function() {
+			location.href="./lessonDelete?class_id="+class_id;
+		});
+		
+	</script>
 	<script>
 		$(document).ready(
 				function() {

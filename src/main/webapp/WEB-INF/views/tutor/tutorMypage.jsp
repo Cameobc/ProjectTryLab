@@ -15,6 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="../resources/assets/css/main.css" />
 <c:import url="../temp/header.jsp" />
+<c:import url="../temp/boot.jsp"/>
 <c:import url="../temp/font.jsp"/>
 <style type="text/css">
 p{
@@ -135,7 +136,7 @@ a{
 					</div>
 					<div class="parts">
 						<p class="font1">이번달 수입</p>
-						<p class="font2">0000원</p>
+						<p class="font2"><span id="ttotal"></span>원</p>
 					</div>
 				</div>
 			</div>
@@ -165,6 +166,10 @@ a{
 	var id='${sessionScope.member.id}';
 	var lessonLength = 0;
 	
+	getList(id);
+	getSales(id);
+	getList(id);
+	
 	function getList(tid) {
 		
 		$.ajax({
@@ -181,13 +186,36 @@ a{
 			
 		}); 
 	}
-	
-	getList(id);
-	
+	function getSales(tid) {
+		
+		$.ajax({
+			url:"./getSalesList",
+			method:"get",
+			data:{
+				tid:tid
+			},
+			success:function(res){
+				res=res.trim();
+				$(".info_contents").html(res);
+				var total=$("#total").val();
+				total=Math.round(total);
+				total=AddComma(total);
+				$("#ttotal").html(total);
+			}
+			
+		}); 
+	}
+	function AddComma(data_value) {
+		return Number(data_value).toLocaleString('en');
+	}
+
  	$("#list").click(function() {
 		getList(id);
 	}); 
 		
+ 	$("#sales").click(function() {
+		getSales(id);
+	});
  	
  	
 	</script>

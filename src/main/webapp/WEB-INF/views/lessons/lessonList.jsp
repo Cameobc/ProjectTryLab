@@ -41,6 +41,7 @@ ul {
 	background: #e6e6e6;
 	float: left;
 	vertical-align: middle;
+	font-family: 'Youth';
 }
 
 .cate>a {
@@ -130,14 +131,8 @@ img{
 						</a>
 					</div>
 				</c:forEach>
-
-
-
 			</div>
-
-
-
-		</div>
+		</div><!-- end of inner -->
 	</div>
 
 	<c:import url="../temp/footer.jsp" />

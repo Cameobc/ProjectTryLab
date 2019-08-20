@@ -149,6 +149,10 @@ label {
 	height:20px;
 	text-align: center;
 }
+.xstyle{
+	border: none;
+	background-color: white;
+}
 
 </style>
 <script language="javascript">
@@ -263,7 +267,6 @@ label {
 					</div>
 				</form>
 				
-				
 			</div>
 			<!-- end of lcontainer -->
 		</div>
@@ -286,7 +289,16 @@ label {
 							<td>수업일</td>
 							<td>시작시간</td>
 							<td>종료시간</td>
+							<td></td>
 						</tr>
+						<c:forEach items="${lesson.timetable }" var="time">
+						<tr class="trstyle">
+								<td>${time.class_date }</td>
+								<td>${time.startTime }</td>
+								<td>${time.endTime }</td>
+								<td><span class="input-group-addon xstyle"><i class="glyphicon glyphicon-remove xdel" title="${time.idx }"></i></span></td>
+						</tr>
+						</c:forEach>
 					</table>
 				</div>
 				<div class="save-button" id="addbutton" style="float: right; ">스케줄 추가</div>
@@ -420,6 +432,32 @@ label {
 		$("#fileField").on("click", ".ddel", function() {
 			$(this).parent().parent().remove();
 			count--;
+		});
+		
+		/* $("#timetb").on("click",".xdel", function() {
+			 $(this).parent().parent().remove; 
+			alert("click");
+		}); */
+		$(".xdel").click(function() {
+			var idx=$(this).attr("title");
+			$(this).parent().parent().parent().remove();
+			
+			$.ajax({
+				url:"./lessonDeleteTime",
+				method:"get",
+				data:{
+					class_id:"${lesson.class_id}",
+					idx:idx
+				},
+				success:function(res){
+					res=res.trim();
+					if(res!='1'){
+						alert("fail");
+					}
+				}
+			});
+			
+			
 		});
 		
 		function deleteFiles(fnum) {

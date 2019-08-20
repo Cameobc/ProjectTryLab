@@ -10,14 +10,23 @@
  	</update>
  	
  	<update id="setUpdate" parameterType="LessonVO">
- 		update classes set category_id=#{category_id}, title=#{title}, contents=#{contents}, price=#{price},time=#{time}, location=#{location},#{limit}
+ 		update classes set category_id=#{category_id}, title=#{title}, contents=#{contents}, price=#{price},time=#{time}, location=#{location}, limit=#{limit}
  		where class_id=#{class_id}
  	</update>
  	
- 	<update id="setUpdateTimetable" parameterType="LessonVO">
- 		update timetable set class_date=#{class_date}, startTime=#{startTime}, endTime=#{endTime}, curPerson=#{curPerson}
+ 	<update id="setUpdateTimetable" parameterType="TimeTableVO">
+ 		update timetable set class_date=#{class_date}, startTime=#{startTime}, endTime=#{endTime}, curPerson=0,
  		where class_id=#{class_id}
  	</update>
+ 	
+ 	<update id="setUpdateTime" parameterType="TimeTableVO">
+ 		update timetable set class_date=#{class_date}, startTime=#{startTime}, endTime=#{endTime}, curPerson=#{curPerson},
+ 		where class_id=#{class_id} and idx=#{idx}
+ 	</update>
+ 	
+ 	<delete id="setDeleteTime" parameterType="TimeTableVO" >
+ 		delete timetable where class_id= #{class_id} and idx=#{idx}
+ 	</delete>
  	
  	<delete id="setDelete" parameterType="String">
  		delete classes where class_id= #{class_id}
@@ -28,7 +37,7 @@
  	</delete>
  	
  	<insert id="setTimetable" parameterType="TimeTableVO">
- 		insert into timetable values(#{class_id},#{class_date},#{startTime},#{endTime},0)	
+ 		insert into timetable values(#{class_id},#{class_date},#{startTime},#{endTime},0,timetable_seq.nextval)	
  	</insert>
  	
  
@@ -36,6 +45,15 @@
  		insert into classes values(#{class_id},#{category_id},#{tid},#{title},#{contents},#{price},sysdate,0,#{time},#{location},#{limit})
  	</insert>
  
+ 	<select id="getSelectByIdx" parameterType="TimeTableVO" resultType="TimeTableVO">
+ 		select * from timetable where class_id=#{class_id} and idx=#{idx}
+ 	</select>
+ 	
+ 	
+ 	<select id="getSelectDate" parameterType="String" resultType="String">
+ 		select distinct class_date from timetable where class_id=#{class_id}
+ 	</select>
+ 	
  	<select id="getSelect" parameterType="String" resultMap="LessonResult">
  		select * from classes C inner join lessonfiles L
  		on (C.class_id = L.class_id)
@@ -46,6 +64,10 @@
  	
  	<select id="getCategory" resultType="CategoryVO">
  		select * from classCategory
+ 	</select>
+ 	
+ 	<select id="getSelectTime" parameterType="TimeTableVO" resultMap="TimeTableResult">
+ 		select startTime, endTime, idx from timetable where class_id=#{class_id} and class_date=#{class_date}
  	</select>
  	
  	<select id="getList" resultMap="LessonResult">
@@ -61,6 +83,14 @@
  		order by reg_date desc
  	</select>
  	
+ 	<select id="getSalesByTid" parameterType="String" resultMap="LessonResult">
+ 		select * from classes C inner join lessonfiles L
+ 		on (C.class_id = L.class_id)
+        inner join timetable T
+        on (C.class_id = T.class_id)
+ 		where C.tid=#{tid}
+ 		order by reg_date desc
+ 	</select>
  	
  	<resultMap type="LessonVO" id="LessonResult">
  		<id property="class_id" column="class_id"/>
@@ -72,9 +102,6 @@
  		<result property="reg_date" column="reg_date"/>
  		<result property="hit" column="hit"/>
  		<result property="location" column="location"/>
- 	<!-- 	<result property="class_date" column="class_date"/>
- 		<result property="startTime" column="startTime"/>
- 		<result property="endTime" column="endTime"/> -->
  		<result property="time" column="time"/>
  		<result property="limit" column="limit"/>
  		<collection property="timetable" javaType="List" ofType="TimeTableVO" resultMap="TimeTableResult">
@@ -99,6 +126,7 @@
 		<result property="startTime" column="startTime"/>
 		<result property="endTime" column="endTime"/>
 		<result property="curPerson" column="curPerson"/>
+		<result property="idx" column="idx"/>
  	</resultMap>
  	
  </mapper>

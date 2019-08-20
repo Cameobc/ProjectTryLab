@@ -24,9 +24,27 @@ public class TutorController {
 	
 	@RequestMapping (value = "tutorMypage", method = RequestMethod.GET)
 	public void tutorMypage(HttpSession session) {
-	
-		
 
+	}
+	
+	@RequestMapping (value = "tutorCalendar", method = RequestMethod.GET)
+	public ModelAndView tutorCalendar(String class_id, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<LessonVO> list = tutorService.tutorCalendar(class_id);
+		
+		mv.addObject("list", list);
+		mv.setViewName("tutor/tutorCalendar");
+		return mv;
+	}
+	
+	@RequestMapping(value="getSalesList", method=RequestMethod.GET)
+	public ModelAndView getSales(String tid) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<LessonVO> list = tutorService.getSalesByTid(tid);
+		
+		mv.addObject("list", list);
+		mv.setViewName("tutor/tutorSales");
+		return mv;
 	}
 	
 	@RequestMapping (value = "tutorMyLesson", method = RequestMethod.GET)
@@ -34,9 +52,7 @@ public class TutorController {
 		ModelAndView mv = new ModelAndView();
 		//MemberVO m = (MemberVO)session.getAttribute("member");
 		
-		System.out.println(tid);
 		List<LessonVO> lessons = tutorService.getListByTid(tid);
-		System.out.println(lessons.size());
 		mv.addObject("lessons", lessons);
 		mv.setViewName("/tutor/tutorList");
 

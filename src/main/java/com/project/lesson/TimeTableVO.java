@@ -5,6 +5,7 @@ public class TimeTableVO {
 	private String class_date;
 	private String startTime;
 	private String endTime;
+	private int idx;
 	
 	private int curPerson;
 	
@@ -37,6 +38,12 @@ public class TimeTableVO {
 	}
 	public void setCurPerson(int curPerson) {
 		this.curPerson = curPerson;
+	}
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	
 	

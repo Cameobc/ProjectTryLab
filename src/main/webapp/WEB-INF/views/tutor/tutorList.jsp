@@ -9,11 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table class="table">
+	<table>
 		<tr>
 			<td>NO</td>
 			<td>클래스 이름</td>
 			<td>등록일</td>
+			<td>정원</td>
+			<td>스케줄</td>
 		</tr>
 		<c:forEach items="${lessons}" var="les" varStatus="i">
 			
@@ -25,6 +27,12 @@
 					</a>
 				</td>
 				<td>${les.reg_date}</td>
+				<td>${les.limit}</td>
+				<td>
+					<a href="./tutorCalendar?class_id=${les.class_id}" class="btn btn-default btn-sm">
+          				<span class="glyphicon glyphicon-calendar"></span> Calendar
+        			</a>
+				</td>
 			</tr>
 			
 		</c:forEach>

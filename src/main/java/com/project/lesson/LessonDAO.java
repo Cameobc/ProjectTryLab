@@ -1,5 +1,6 @@
 package com.project.lesson;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,16 +15,34 @@ public class LessonDAO {
 	private SqlSession session;
 	private static final String NAMESPACE = "LessonMapper.";
 
+	
+	
+	//시간삭제idx
+	public int setDeleteTime(TimeTableVO tVO) {
+		return session.delete(NAMESPACE+"setDeleteTime", tVO);
+	}
+	//date에 따른 시간정보
+	public List<TimeTableVO> getSelectTime(TimeTableVO tVO){
+		return session.selectList(NAMESPACE + "getSelectTime", tVO);
+	}
 	// 수업정보 업데이트
 	public int setUpdate(LessonVO lessonVO) throws Exception {
 		return session.update(NAMESPACE + "setUpdate", lessonVO);
 	}
 
 	// 수업정보 업데이트
-	public int setUpdateTimetable(LessonVO lessonVO) throws Exception {
-		return session.update(NAMESPACE + "setUpdateTimetable", lessonVO);
+	public int setUpdateTimetable(TimeTableVO tVO) throws Exception {
+		return session.update(NAMESPACE + "setUpdateTimetable", tVO);
 	}
-
+	//x
+	public int setUpdateTime(List<TimeTableVO> timeTB) throws Exception {
+		int result=0;
+		for(TimeTableVO tVO:timeTB) {
+			result=session.update(NAMESPACE + "setUpdateTime", tVO);
+		}
+		return result;
+	}
+	
 	// 수업정보 삭제
 	public int setDelete(String class_id) throws Exception {
 		return session.delete(NAMESPACE + "setDelete", class_id);
@@ -38,7 +57,19 @@ public class LessonDAO {
 	public LessonVO getSelect(String class_id) throws Exception {
 		return session.selectOne(NAMESPACE + "getSelect", class_id);
 	}
-
+	public List<LessonVO> tutorCalendar(String class_id) throws Exception {
+		return session.selectList(NAMESPACE + "getSelect", class_id);
+	}
+	// 수업 상세정보
+	public List<String> getSelectDate(String class_id) throws Exception {
+		return session.selectList(NAMESPACE + "getSelectDate", class_id);
+	}
+	
+	public TimeTableVO getSelectByIdx(TimeTableVO tVO) throws Exception{
+		
+		return session.selectOne(NAMESPACE+"getSelectByIdx", tVO);
+	}
+	
 	// 수업리스트
 	public List<LessonVO> getList() throws Exception {
 		return session.selectList(NAMESPACE + "getList");
@@ -72,6 +103,9 @@ public class LessonDAO {
 		return session.selectList(NAMESPACE + "getListByTid",tid);
 	}
 	
+	public List<LessonVO> getSalesByTid(String tid) throws Exception {
+		return session.selectList(NAMESPACE + "getSalesByTid",tid);
+	}
 	// 수업 상세정보
 	public LessonVO getSelectByTid(String tid) throws Exception {
 		return session.selectOne(NAMESPACE + "getSelectByTid", tid);
