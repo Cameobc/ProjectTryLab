@@ -97,7 +97,7 @@ ul {
 						<div class="thumbnails">
 							<c:forEach items="${lessons}" var="les" begin="0" end="5">
 								<div class="box">
-									<a href="./lesson/lessonSelect?class_id=${les.class_id }" class="image fit">
+									<a href="./lessons/lessonSelect?class_id=${les.class_id }" class="image fit">
 										<c:forEach items="${les.file }" var="file">
 											<c:if test="${file.thumbnail eq 1 }">
 												<img src="./resources/lessons/${file.fname }"/> 
