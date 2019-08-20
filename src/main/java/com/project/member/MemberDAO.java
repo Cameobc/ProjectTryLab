@@ -17,6 +17,10 @@ public class MemberDAO {
 	private final static String NAMESPACE = "MemberMapper.";
 	
 	
+	public int setUpdate(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpdate", memberVO);
+	}
+	
 	public MemberVO selectOne(String id) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"selectOne", id);
 	}

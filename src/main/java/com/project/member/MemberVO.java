@@ -29,27 +29,6 @@ public class MemberVO {
 	private int grade;
 	private String mail_key;
 	private MemberFileVO memberFileVO;
-	
-	
-	
-	public String getMail_key() {
-		return mail_key;
-	}
-	public void setMail_key(String mail_key) {
-		this.mail_key = mail_key;
-	}
-	public String getPw2() {
-		return pw2;
-	}
-	public void setPw2(String pw2) {
-		this.pw2 = pw2;
-	}
-	public MemberFileVO getMemberFileVO() {
-		return memberFileVO;
-	}
-	public void setMemberFileVO(MemberFileVO memberFileVO) {
-		this.memberFileVO = memberFileVO;
-	}
 	public String getId() {
 		return id;
 	}
@@ -61,6 +40,12 @@ public class MemberVO {
 	}
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+	public String getPw2() {
+		return pw2;
+	}
+	public void setPw2(String pw2) {
+		this.pw2 = pw2;
 	}
 	public String getName() {
 		return name;
@@ -92,6 +77,22 @@ public class MemberVO {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
+	public String getMail_key() {
+		return mail_key;
+	}
+	public void setMail_key(String mail_key) {
+		this.mail_key = mail_key;
+	}
+	public MemberFileVO getMemberFileVO() {
+		return memberFileVO;
+	}
+	public void setMemberFileVO(MemberFileVO memberFileVO) {
+		this.memberFileVO = memberFileVO;
+	}
+	
+	
+	
+	
 	
 	
 }
