@@ -19,6 +19,8 @@
 <c:import url="../temp/header.jsp" />
 <c:import url="../temp/font.jsp"/>
 <style type="text/css">
+
+
 ul {
 	margin: 0;
 }
@@ -102,6 +104,8 @@ img{
 	width : 80px; height : 40px !important;
 	background-color: white; border: 1px solid #f6755e;
 	color : black; padding: 0px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; 
+	text-align: center;  font-size: small;
 	
 }
 .selected {
@@ -118,8 +122,8 @@ img{
 	<div id="main">
 		<div class="list_wrap">
 			<div class="loc_wrap">
-			<form class="form-inline" action="./lessonSearch">
-			<div class="form-group">
+			<form action="./lessonList" method="GET">
+		
 				<input type="button" class="loc col-sm-4" name="location" value="종로구">
 				<input type="button" class="loc col-sm-4" name="location" value="중구">
 				<input type="button" class="loc col-sm-4" name="location" value="용산구">
@@ -145,11 +149,11 @@ img{
 				<input type="button" class="loc col-sm-4" name="location" value="강남구">
 				<input type="button" class="loc col-sm-4" name="location" value="송파구">
 				<input type="button" class="loc col-sm-4" name="location" value="강동구">
-			</div>
 			
-				<button id="loc_search">검색</button>			
-			
+				<input type="submit" value="검색" >
+				
 			</form>
+		
 			</div>
 		
 		
@@ -217,30 +221,15 @@ img{
 		$(this).toggleClass("selected");
 	});
 
+	var locations=[];
 	$("#loc_search").click(function() {
-		var locations=[];
 		$('.selected').each(function() {
 			var location=$(this).val();
 			locations.push(location);
 		});
 	
 
-	jQuery.ajaxSettings.traditional=true;
-	var url : "./lessonResult"
-	$.ajax({
-		url: url+
-		for(var i=0; i<locations.length; i++) {
-			"?location=" + locations[i]
-		}
-			+ ";"
-		
-		type:"GET",
-		data:{location:locations},
-		success:function(data) {
-			alert(locations[0]);
-			location.href=url;
-		}
-	});
+
 
 });
 
