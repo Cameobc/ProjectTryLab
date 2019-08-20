@@ -31,6 +31,29 @@ public class MemberService {
 	private MailSet mailSet;
 	
 	
+	//회원 정보 수정
+	public int setUpdate(MemberVO memberVO, MultipartFile photo, HttpSession session) throws Exception{
+		MemberFileVO fileVO = memberFileDAO.getSelect(memberVO);
+		System.out.println(fileVO.getFname());
+		String realpath = session.getServletContext().getRealPath("/resources/member");
+		System.out.println(realpath);
+		String fname = fileSaver.saveFile(realpath, photo);
+		String oname = photo.getOriginalFilename();
+		MemberFileVO memberFileVO = new MemberFileVO();
+		memberFileVO.setId(memberVO.getId());
+		memberFileVO.setFname(fname);
+		memberFileVO.setOname(oname);
+		
+		int result = memberDAO.setUpdate(memberVO);
+		result = memberFileDAO.setWrite(memberFileVO);
+		result = memberFileDAO.setDelete(fileVO);
+		if(result>0) {
+			fileSaver.deleteFile(realpath, fileVO.getFname());
+		}
+		
+		return result;
+	}
+	
 	
 	//회원정보 조회
 	public MemberVO selectOne(String id) throws Exception{

@@ -17,8 +17,7 @@ public class MemberFileService {
 	public int profileUpdate(String id, HttpSession session) throws Exception {
 		String realPath = session.getServletContext().getRealPath("/resources/member");
 		
-		
-		
 		return memberFileDAO.profileUpdate(id);
 	}
+
 }
