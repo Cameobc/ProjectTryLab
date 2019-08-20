@@ -1,5 +1,6 @@
 package com.project.member;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -14,7 +15,9 @@ import com.project.mail.MailService;
 import com.project.mail.MailSet;
 import com.project.memberProfile.MemberFileDAO;
 import com.project.memberProfile.MemberFileVO;
+import com.project.qna.QnaVO;
 import com.project.util.FileSaver;
+import com.project.util.PageMaker;
 
 @Service
 public class MemberService {
@@ -31,12 +34,23 @@ public class MemberService {
 	private MailSet mailSet;
 	
 	
+	//문의 내역 확인
+	public List<QnaVO> getQnaList(PageMaker pageMaker, HttpSession session) throws Exception{
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		String id = memberVO.getId();
+		pageMaker.makeRow();
+		pageMaker.setSearch(id);
+		int totalCount = memberDAO.totalCount(pageMaker);
+		List<QnaVO> list = memberDAO.getQnaList(pageMaker);
+		pageMaker.makePage(totalCount);
+		return list;
+	}
+	
 	//회원 정보 수정
 	public int setUpdate(MemberVO memberVO, MultipartFile photo, HttpSession session) throws Exception{
 		MemberFileVO fileVO = memberFileDAO.getSelect(memberVO);
-		System.out.println(fileVO.getFname());
 		String realpath = session.getServletContext().getRealPath("/resources/member");
-		System.out.println(realpath);
+		//System.out.println(realpath);
 		String fname = fileSaver.saveFile(realpath, photo);
 		String oname = photo.getOriginalFilename();
 		MemberFileVO memberFileVO = new MemberFileVO();
@@ -57,8 +71,6 @@ public class MemberService {
 	
 	//회원정보 조회
 	public MemberVO selectOne(String id) throws Exception{
-		
-		
 		return memberDAO.selectOne(id);
 	}
 	

@@ -1,5 +1,7 @@
 package com.project.trylab;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,8 @@ import com.project.approval.ApprovalService;
 import com.project.approval.ApprovalVO;
 import com.project.member.MemberService;
 import com.project.member.MemberVO;
+import com.project.qna.QnaVO;
+import com.project.util.PageMaker;
 
 @Controller
 @RequestMapping("/member/")
@@ -37,9 +41,6 @@ public class MemberController {
 	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
 	public ModelAndView memberUpdate(MemberVO memberVO, MultipartFile photo, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-
-
-		
 		String message = "Update Fail";
 		int result = memberService.setUpdate(memberVO, photo, session);
 		if(result>0) {
@@ -63,8 +64,11 @@ public class MemberController {
 	
 	//문의 내역
 	@RequestMapping(value = "memberQna")
-	public ModelAndView memberQna() throws Exception{
+	public ModelAndView memberQna(HttpSession session, PageMaker pageMaker) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		List<QnaVO> list = memberService.getQnaList(pageMaker, session);
+		mv.addObject("qnalist", list);
+		mv.addObject("pager", pageMaker);
 		mv.addObject("headset", "4");
 		return mv;
 	}

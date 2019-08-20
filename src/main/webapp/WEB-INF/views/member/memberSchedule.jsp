@@ -76,46 +76,17 @@
 }
 
 
-
 </style>
 </head>
 <body>
 <div class="container">
 	<div class="member_navi">
-	<div class="welcome">
-		<span>${member.id}님의 스케줄</span>
-	</div>
+		<div class="welcome">
+			<span>${member.id}님의 스케줄</span>
+		</div>
 		<div class="member_thumbnail">
 			<img id="thumbnail" src="../resources/member/${member.memberFileVO.fname}" width="100" height="100">
 			<span class="mask"></span>
-		</div>
-		<div class="member_info">
-			<table>
-				<tr>
-					<td class="td_info">ID</td>
-					<td>${member.id}</td>
-				</tr>
-				<tr>
-					<td class="td_info">NAME</td>
-					<td>${member.name}</td>
-				</tr>
-				<tr>
-					<td class="td_info">EMAIL</td>
-					<td>${member.email}</td>
-				</tr>
-				<tr>
-					<td class="td_info">PHONE</td>
-					<td>${member.phone}</td>
-				</tr>
-				<tr>
-					<td class="td_info">GRADE</td>
-					<td>
-						<c:if test="${member.grade eq 2}">
-							일반회원
-						</c:if>
-					</td>
-				</tr>
-			</table>
 		</div>
 	</div>
 <c:import url="../temp/mheader.jsp" />	

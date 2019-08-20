@@ -33,7 +33,7 @@
 
 .member_navi{
 	float:right;
-	width: 50%;
+	width: 57%;
 	margin : 0 auto;
 	height: 500px;
 	border: 2px solid #fcdcd6;
@@ -73,6 +73,10 @@
 	left: 0;
 	background: url(../resources/images/profilesub.png) 0 0;
 	background-repeat: no-repeat;
+}
+
+.member_info{
+	width: 60%;
 }
 
 .btn_div{
