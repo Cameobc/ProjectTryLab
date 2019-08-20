@@ -14,6 +14,11 @@ public class MemberFileDAO {
 	private SqlSession sqlSession;
 	private static final String NAMESPACE ="MemberFileMapper.";
 	
+	
+	public int setDelete(MemberFileVO fileVO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setDelete", fileVO);
+	}
+	
 	public int setWrite(MemberFileVO memberFileVO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"setWrite", memberFileVO);
 	}

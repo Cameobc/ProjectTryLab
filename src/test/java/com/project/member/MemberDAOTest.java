@@ -15,6 +15,12 @@ public class MemberDAOTest extends AbstractTest {
 	
 	@Test
 	public void test() throws Exception {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("iulove");
+		memberVO.setEmail("tt");
+		memberVO.setPhone("01011112222");
+		memberVO.setGender("f");
+		int result = memberDAO.setUpdate(memberVO);
+		assertNotEquals(0, result);
 	}
-
 }

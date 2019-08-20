@@ -35,8 +35,19 @@ public class MemberController {
 	
 	//회원정보 수정하기
 	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
-	public ModelAndView memberUpdate(@Valid MemberVO memberVO, BindingResult bindingResult, MultipartFile photo, HttpSession session) throws Exception{
+	public ModelAndView memberUpdate(MemberVO memberVO, MultipartFile photo, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
+
+
+		
+		String message = "Update Fail";
+		int result = memberService.setUpdate(memberVO, photo, session);
+		if(result>0) {
+			message = "Update Success";
+		}
+		mv.addObject("message", message);
+		mv.addObject("path", "../");
+		mv.setViewName("common/messageMove");
 		return mv;
 	}
 	
@@ -147,7 +158,7 @@ public class MemberController {
 		int result = memberService.setWrite(memberVO, photo, session);
 		String message="Join Fail";
 		if(result>0) {
-			message ="Join Success";	
+			message ="이메일에서 인증번호를 확인해주세요!";	
 		}
 		mv.addObject("message", message);
 		mv.addObject("path", "./memberLogin");
