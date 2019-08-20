@@ -33,7 +33,7 @@
 
 .member_navi{
 	float:right;
-	width: 50%;
+	width: 57%;
 	margin : 0 auto;
 	height: 500px;
 	border: 2px solid #fcdcd6;

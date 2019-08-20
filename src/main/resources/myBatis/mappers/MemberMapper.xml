@@ -5,6 +5,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="MemberMapper">
+<!-- totalCount -->
+<select id="totalCount" parameterType="MemberVO" resultType="Integer">
+	SELECT COUNT(*) FROM QNA WHERE
+			REF=(SELECT REF FROM QNA WHERE WRITER=#{search})
+</select>
 
 <!-- 멤버 정보 업데이트 -->
 <update id="setUpdate" parameterType="MemberVO">
@@ -12,6 +17,17 @@
 	PHONE=#{phone}, EMAIL=#{email}, GENDER=#{gender}
 	WHERE ID=#{id}
 </update>
+
+<!-- 나의 문의 내역 조회 -->
+<select id="getQnaList" parameterType="PageMaker" resultType="QnaVO" >
+	SELECT * FROM
+		(SELECT ROWNUM R, Q.* FROM
+			(SELECT * FROM QNA WHERE
+			REF=(SELECT REF FROM QNA WHERE WRITER=#{search})
+			ORDER BY NUM DESC, STEP ASC) 
+		Q)
+	WHERE R BETWEEN #{startRow} and #{lastRow}
+</select>
 
 <!-- 마이페이지 정보 조회 -->
 <select id="selectOne" parameterType="String" resultMap="member">

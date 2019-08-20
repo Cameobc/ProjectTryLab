@@ -40,14 +40,14 @@
 
 .member_header{
 	float: left;
-	width: 30%;
-	height: 500px;
+	width: 340px;
+	height: 300px;
 }
 
 .m_heaer{
 	font-family: BMJUA;
-	font-size: 1.5em;
-	width: 50%;
+	font-size: 30px;
+	width: 200px;
 	float: right;
 }
 

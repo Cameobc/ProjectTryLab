@@ -11,6 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <c:import url="../temp/header.jsp" />
 <c:import url="../temp/font.jsp"/>
+
 <style type="text/css">
 *{
 	margin: 0;
@@ -33,11 +34,10 @@
 
 .member_navi{
 	float:right;
-	width: 50%;
+	width: 57%;
 	margin : 0 auto;
-	height: 500px;
-	border: 2px solid #fcdcd6;
 	margin-right: 10%;
+	border-bottom: 2px solid #fcdcd6;
 }
 
 .member_top{
@@ -51,17 +51,21 @@
 	font-size: 1.5em;
 	padding-top: 15px;
 	width: 100%;
-	margin-left: 15px;
 	text-align: left;
+	margin-top:50px;
+}
+
+.welcome span{
+	padding-left:30px;
 }
 
 .member_thumbnail{
 	position: relative;
 	width: 100px;
 	height: 100px;
-	margin-left: 150px;
 	margin-top: 50px;
 	float: left;
+	margin-bottom: 30px;
 }
 	
 .member_thumbnail .mask{
@@ -75,50 +79,91 @@
 	background-repeat: no-repeat;
 }
 
+.qna_info{
+	float:right;
+	width: 57%;
+	margin : 0 auto;
+	margin-right: 10%;
+}
 
+.pager {
+	padding-left: 0;
+    margin: 20px 0;
+    text-align: center;
+    list-style: none;
+}
 
+.pager li{
+	text-align:center;
+	display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+.qna_talbe{
+	text-align: center;
+	
+}
+
+td a{
+	color: black;
+	text-decoration: none;
+}
+
+.td_top{
+	font-weight: bolder;
+	color : #9c836a;
+	border-bottom: 2px solid #ddd;
+	border-top: 2px solid #9c836a;
+}
 </style>
 </head>
 <body>
 <div class="container">
 	<div class="member_navi">
-	<div class="welcome">
-		<span>${member.id}님의 문의 내역</span>
-	</div>
 		<div class="member_thumbnail">
 			<img id="thumbnail" src="../resources/member/${member.memberFileVO.fname}" width="100" height="100">
 			<span class="mask"></span>
 		</div>
-		<div class="member_info">
-			<table>
-				<tr>
-					<td class="td_info">ID</td>
-					<td>${member.id}</td>
-				</tr>
-				<tr>
-					<td class="td_info">NAME</td>
-					<td>${member.name}</td>
-				</tr>
-				<tr>
-					<td class="td_info">EMAIL</td>
-					<td>${member.email}</td>
-				</tr>
-				<tr>
-					<td class="td_info">PHONE</td>
-					<td>${member.phone}</td>
-				</tr>
-				<tr>
-					<td class="td_info">GRADE</td>
-					<td>
-						<c:if test="${member.grade eq 2}">
-							일반회원
-						</c:if>
-					</td>
-				</tr>
-			</table>
+		<div class="welcome">
+			<span>${member.id}님의 문의내역</span>
 		</div>
 	</div>
 <c:import url="../temp/mheader.jsp" />	
+	<div class="qna_info">
+		<table class="qna_talbe">
+			<tr >
+				<td class="td_top">No</td><td class="td_top">제목</td><td class="td_top">글쓴이</td><td class="td_top">작성일</td>
+			</tr>
+			<c:forEach items="${qnalist}" var="qna">
+				<tr>
+					<td><a href="../qna/qnaSelect?num=${qna.num}">${qna.num}</a></td>
+					<td><c:forEach begin="1" end="${qna.depth}">[RE] </c:forEach>${qna.title}</td>
+					<td>${qna.writer }</td>
+					<td>${qna.reg_date }</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<div>
+			<ul class="pager">
+				<c:if test="${pager.curBlock>1}">
+			    	<li><a href="../qna/qnaList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" style="color: black;">뒤로</a></li>
+				</c:if>
+				
+				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+				<c:if test="${i}>0">
+					<li><a href="../qna/qnaList?curPage=${i}&kind=${pager.kind}&search=${pager.search}" style="color: black;">${i}</a></li>
+				</c:if>
+				</c:forEach>
+				
+				<c:if test="${pager.curBlock < pager.totalBlock}">
+					<li><a href="../qna/qnaList?curPage=${pager.startNum+1}&kind=${pager.kind}&search=${pager.search}" style="color: black;">다음</a></li>
+				</c:if>
+	  		</ul>
+		</div>
+	</div>
 </div>
 
 <c:import url="../temp/footer.jsp"></c:import>

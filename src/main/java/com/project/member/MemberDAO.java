@@ -1,5 +1,6 @@
 package com.project.member;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -7,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.project.qna.QnaVO;
 import com.project.util.PageMaker;
 
 @Repository
@@ -16,6 +18,14 @@ public class MemberDAO {
 	public SqlSession sqlSession;
 	private final static String NAMESPACE = "MemberMapper.";
 	
+	
+	public int totalCount(PageMaker pageMaker) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"totalCount", pageMaker);
+	}
+	
+	public List<QnaVO> getQnaList(PageMaker pageMaker) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getQnaList", pageMaker);
+	}
 	
 	public int setUpdate(MemberVO memberVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate", memberVO);
