@@ -117,6 +117,7 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 	.btn{
 		font-family: BMJUA;
 		font-size: 1.3em;
+		background-color: #548AF0 !important;
 	}
 	
 	#photo{
@@ -142,6 +143,11 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 		font-family: BMJUA;
 		font-size: 0.7em;
 		margin-bottom: 15px;		
+	}
+	
+	.del{
+		font-family: BMJUA;
+		font-size: 1.3em;
 	}
 </style>
 </head>
@@ -188,6 +194,7 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 			  	</div> 
 				<div class="member-form">
 					<input type="button" Class="btn" value="UPDATE">
+					<input type="button" class="del" value="회원탈퇴">
 				</div>  
 			</form:form>
 		</div>	
@@ -303,11 +310,8 @@ url(//fonts.googleapis.com/earlyaccess/notosanskr.css); .notosanskr *
 		});
 
 		var check3 = true;
-		if($('#photo').val()==''){
-			check3 = false;
-		}
 		
-		if(check&&check2&&check3){
+		if(check&&check2){
 			$('#frm').submit();
 		}else{
 			alert('폼을 모두 채워주세요.');

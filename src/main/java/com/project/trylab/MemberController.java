@@ -36,6 +36,11 @@ public class MemberController {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	
+	//pw업데이트
+	@RequestMapping(value = "memberPwUpdate", method = RequestMethod.GET)
+	public void memberPwUpdate() throws Exception{
+		
+	}
 	
 	//회원정보 수정하기
 	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
@@ -47,7 +52,7 @@ public class MemberController {
 			message = "Update Success";
 		}
 		mv.addObject("message", message);
-		mv.addObject("path", "../");
+		mv.addObject("path", "./memberMypage");
 		mv.setViewName("common/messageMove");
 		return mv;
 	}
