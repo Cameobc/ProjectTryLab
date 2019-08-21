@@ -1,4 +1,4 @@
-package com.project.lesson;
+﻿package com.project.lesson;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
+import com.project.util.PageMaker;
 
 @Repository
 public class LessonDAO {
@@ -71,8 +73,8 @@ public class LessonDAO {
 	}
 	
 	// 수업리스트
-	public List<LessonVO> getList() throws Exception {
-		return session.selectList(NAMESPACE + "getList");
+	public List<LessonVO> getList(PageMaker pageMaker) throws Exception {
+		return session.selectList(NAMESPACE + "getList", pageMaker);
 	}
 	
 	// 클래스 등록
@@ -110,10 +112,18 @@ public class LessonDAO {
 	public LessonVO getSelectByTid(String tid) throws Exception {
 		return session.selectOne(NAMESPACE + "getSelectByTid", tid);
 	}
-	
+
 	//조회수 증가
 	public int setUpdateHit(String class_id) throws Exception{
 		return session.update(NAMESPACE + "setUpdateHit", class_id);
 	}
+
+	//지역 검색
+	public List<LessonVO> getSearchList(String[] location) throws Exception {
+		return session.selectList(NAMESPACE+"getSearchList", location);
+		
+	}
+	
+
 
 }
