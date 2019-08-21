@@ -26,12 +26,10 @@
 	<typeAlias type="com.project.lesson.TimeTableVO" alias="TimeTableVO"/>
 	
 	<!-- 성현 -->
-	<typeAlias type="java.lang.Integer" alias="Integer"/>
-	<typeAlias type="java.lang.String" alias="String"/>
 	<typeAlias type="com.project.file.FileVO" alias="FileVO"/>
 	<typeAlias type="com.project.notice.NoticeVO" alias="NoticeVO"/>
 	<typeAlias type="com.project.qna.QnaVO" alias="QnaVO"/>
-	<typeAlias type="com.project.util.PageMaker" alias="PageMaker"/>	
+	<typeAlias type="com.project.util.PageMaker" alias="PageMaker"/>
 	
 	
 	<!-- 승한 -->

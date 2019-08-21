@@ -17,6 +17,11 @@ public class NoticeDAO {
 	private SqlSession sqlSession;
 	private static final String NAMESPACE = "NoticeMapper.";
 	
+	//hit
+	public void updateHit(int num) throws Exception {
+		sqlSession.update(NAMESPACE+"updateHit", num);
+	}
+	
 	
 	//write
 	public int setWrite(NoticeVO noticeVO) throws Exception {

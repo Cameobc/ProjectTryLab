@@ -15,36 +15,34 @@ public class FileDAO {
 	private SqlSession sqlSession;
 	private static final String NAMESPACE="FileMapper.";
 	
+	//write
 	public int setWrite(List<FileVO> files) throws Exception{
-		for(FileVO f:files) {
-			System.out.println(f.getNum());
-			System.out.println(f.getFname());
-			System.out.println(f.getOname());
-		}
-		int res = sqlSession.insert(NAMESPACE+"setWrite",files);
-		return res;
+		int result = sqlSession.insert(NAMESPACE+"setWrite",files);
+		return result;
 	}
 	
-
-	public int setDelete(int fnum) throws Exception {
-		return sqlSession.delete(NAMESPACE+"setDelete", fnum);
-	}
-	
-
 	//update
 	public int setUpdate(FileVO fileVO) throws Exception {
 		int result = sqlSession.update(NAMESPACE+"setUpdate", fileVO);
 		return result;
 	}
 	
+	//delete
+	public int setDelete(int fnum) throws Exception {
+		return sqlSession.delete(NAMESPACE+"setDelete", fnum);
+	}
+	
+	//deleteAll
 	public int setDeleteAll(int num) throws Exception {
 		return sqlSession.delete(NAMESPACE+"setDeleteAll", num);
 	}
 	
+	//select
 	public FileVO getSelect(int fnum) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getSelect", fnum);
 	}
 	
+	//list
 	public List<FileVO> getList(int num) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getList", num);
 	}

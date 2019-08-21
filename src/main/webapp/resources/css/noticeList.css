@@ -21,6 +21,13 @@
 	font-weight: 100;
 	/* border: 1px solid red; */
 }
+.search {
+	float: right;
+	margin-top: 55px;
+	height: 40px;
+	width: 400px;
+	background: #ffffff;
+}
 tr {
 	/* font-size:10px; */
 	height: 60px;

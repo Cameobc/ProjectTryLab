@@ -20,6 +20,13 @@
 	font-weight: 100;
 	display: inline;
 }
+.search {
+	float: right;
+	height: 40px;
+	width: 400px;
+	background: #ffffff;
+	padding-bottom: 50px;
+}
 #btn {
 	display: inline;
 	float:right;

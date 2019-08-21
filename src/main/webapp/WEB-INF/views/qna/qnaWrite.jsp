@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,33 +19,38 @@
 	  <div id="qna">1:1 문의</div>
 	  <br>
 	  
-	<form action="./qnaWrite" method="post" enctype="multipart/form-data">
-	  <label for="title" style="color:#9c836a;">제목</label>
-	  <div>
-	  	<input type="text" id="title" name="title">
-	  </div><br>
-	  
-	  <label for="contents" style="color:#9c836a;">내용</label>
-	  <div>
-	  	<textarea rows="5" cols="" id="contents" name="contents"></textarea>
-	  </div><br>
-	  
-	  <div style="float: left">
-		  <label for="writer" style="color:#9c836a;">이름</label>
-		  <div>
-		  	<input type="text" id="writer" name="writer">
-		  </div>	  	  
-	  </div>
+	<form:form commandName="qnaVO" enctype="multipart/form-data">
 	
-	  <div style="float: right; margin-right: 30%">
-		  <label for="email" style="color:#9c836a;">이메일</label>
-		  <div>
-		  	<input type="text" id="email" name="email">
-		  </div>
-	  </div><br><br><br>
-
+		<label for="title" style="color:#9c836a;">제목</label>
 		<div>
-			<input type="file" id="add" value="파일 추가">
+			<form:input path="title" id="title" class="form-control" />
+			<form:errors path="title" />
+		</div><br>
+		
+		<label for="contents" style="color:#9c836a;">내용</label>
+		<div>
+			<form:textarea path="contents" rows="5" cols="" id="contents" class="form-control" />
+			<form:errors path="contents" />
+		</div><br>
+
+		<div style="float: left">
+			<label for="writer" style="color:#9c836a;">이름</label>
+			<div>
+				<form:input path="writer" id="writer" class="form-control" />
+				<form:errors path="writer" />
+			</div>
+		</div>
+		
+		<div style="float: right; margin-right: 30%">
+			<label for="email" style="color:#9c836a;">이메일</label>
+			<div>
+				<form:input path="email" id="email" class="form-control" />
+				<form:errors path="email" />
+			</div>
+		</div><br><br><br>
+		
+		<div>
+			<input type="file" id="add" name="f1" value="파일 추가">
 		</div>
 
 		<div id="line"></div>
@@ -53,8 +59,12 @@
 	  		<div id="agree">필수적 개인정보 수집 및 이용에 대한 동의 <span>(필수)</span></div>
 	  	</div>
 	  	
-	  	<div id="c2"><input type="checkbox" name="chk"> 동의함</div>
+	  	<div id="c2">
+	  		<input type="checkbox" id="a1" name="chk"> 동의함
+	  		<label for="a1"></label>
+	  	</div>
 		<br><br><br>	
+		
 		<div id="agree_text">
 			<textarea rows="10" cols="111" style="padding-left: 10px; width: 780px;">
 
@@ -92,37 +102,55 @@
 				<button type="submit" id="btn">등록</button>
 			</div>
 		
-		</form>
+		</form:form>
 	
 	</div> <!-- container end -->	
 		
 <script type="text/javascript">
-/* 	function chk() {
-	 	if(document.getElementById("chk").checked == true) {
-			alert('약관 동의하였습니다.');
-		} else {
-			alert('약관 동의해주세요.');
-		}
-	} */
-	
-/* 	function chk() {
-		var chkbox = document.getElementsById('chk');
-		var chk = false;
-		for(var i=0; i<chkbox.length; i++) {
-			if(chkbox[i].checked) {
-				chk = true;
-			} else {
-				chk = false;
+	$(document).ready(function() {
+		$("#btn").click(function() {
+			var title = $("#title").val();
+			var contents = $("#contents").val();
+			var writer = $("#writer").val();
+			var email = $("#email").val();
+			
+			if(title == "") {
+				alert("제목을 입력하세요.");
+				$("#title").focus();
+				return false;
 			}
+			if(contents == "") {
+				alert("내용을 입력하세요.");
+				$("#contents").focus();
+				return false;
+			}
+			if(writer == "") {
+				alert("이름을 입력하세요.");
+				$("#writer").focus();
+				return false;
+			}
+			if(email == "") {
+				alert("이메일을 입력하세요.");
+				$("#email").focus();
+				return false;
+			}
+			if(!($("#a1").is(":checked"))) {
+				alert("약관에 동의해주세요.");
+				$("#a1").focus();
+				return false;
+			}
+			return true;
+		});
+	});	
+	
+/* 	$("#btn").click(function() {
+		if(confirm("글 작성 하시겠습니까?") == true) {
+			alert("등록되었습니다.")
+		}else {
+			return ;
 		}
-		if(chk) {
-			alert('약관 동의하였습니다.');
-			return false;
-		} else {
-			alert('약관 동의해주세요');
-		}
-	}
-	 */
+	}); */
+	
 	
 </script>		
 		

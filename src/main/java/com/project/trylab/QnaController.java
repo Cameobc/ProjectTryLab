@@ -5,9 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,10 +27,6 @@ public class QnaController {
 	@Inject
 	private QnaService qnaService;
 	
-	//hit
-	
-	
-	
 	//write
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.GET)
 	public String setWrite(QnaVO qnaVO) throws Exception {
@@ -37,9 +35,13 @@ public class QnaController {
 	
 	//write
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
-	public ModelAndView setWrite(QnaVO qnaVO, HttpSession session, List<MultipartFile> f1) throws Exception {
+	public ModelAndView setWrite(@Valid QnaVO qnaVO, BindingResult bindingResult, HttpSession session, List<MultipartFile> f1) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("qna/qnaWrite");
+			return mv;
+		}
 		int result = qnaService.setWrite(qnaVO, session, f1);
 		if(result>0) {
 			mv.setViewName("redirect:./qnaList");
@@ -49,6 +51,22 @@ public class QnaController {
 			mv.setViewName("common/messageMove");
 		}
 		return mv;
+/*		
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("qna/qnaWrite");
+		}else {
+			
+			int result = qnaService.setWrite(qnaVO, session, f1);
+			if(result>0) {
+				mv.setViewName("redirect:./qnaList");
+			}else {
+				mv.addObject("message", "글쓰기 실패");
+				mv.addObject("path", "./qnaList");
+				mv.setViewName("common/messageMove");
+			}
+		}
+		return mv;
+		*/
 	}
 	
 	//delete
@@ -75,8 +93,6 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView();
 		QnaVO qnaVO = qnaService.getSelect(num);
 		
-		//System.out.println("board size:"+qnaVO.getFiles().size());
-		
 		mv.addObject("dto", qnaVO);
 		mv.setViewName("qna/qnaUpdate");
 		
@@ -88,6 +104,7 @@ public class QnaController {
 	public ModelAndView getList(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		QnaVO qnaVO = qnaService.getSelect(num);
+		qnaService.updateHit(num); //조회수 증가
 		
 		mv.addObject("dto", qnaVO);
 		mv.setViewName("qna/qnaSelect");
@@ -118,7 +135,7 @@ public class QnaController {
 		if(result>0) {
 			message = "댓글작성 성공";
 		}
-		rd.addFlashAttribute("msg",message);
+		rd.addFlashAttribute("message",message);
 		mv.setViewName("redirect:./qnaList");
 		
 		return mv;

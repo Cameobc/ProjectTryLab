@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../temp/boot.jsp"/>
+<c:import url="../temp/header.jsp" />
 </head>
 <body>
 	<div class="container">
@@ -14,13 +15,13 @@
 		<input type="hidden" name="num" value="${num}">
 	
 			<div class="from-group">
-				<label for="writer">Writer:</label>
-		      	<input type="text" class="form-control" id="writer" name="writer">
-			</div>
-	
-			<div class="from-group">
 				<label for="title">Title:</label>
 		    	<input type="text" class="form-control" id="title" name="title">
+			</div>
+			
+			<div class="from-group">
+				<label for="writer">Writer:</label>
+		      	<input type="text" class="form-control" id="writer" name="writer">
 			</div>
 
 		     <div class="form-group">
@@ -40,6 +41,6 @@
 		$("#frm").submit();
 	});
 </script>	
-
+<c:import url="../temp/footer.jsp"/>
 </body>
 </html>

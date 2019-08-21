@@ -31,9 +31,9 @@ public class QnaService {
 		qnaDAO.updateHit(num);
 	}
 	
-	
 	//write
-	public int setWrite(QnaVO qnaVO, HttpSession session, List<MultipartFile> multipartFiles) throws Exception {
+	public int setWrite(QnaVO qnaVO, HttpSession session, List<MultipartFile> f1) throws Exception {
+		/*
 		int result = qnaDAO.setWrite(qnaVO);
 		String realPath = session.getServletContext().getRealPath("/resources/qna");
 		
@@ -53,6 +53,25 @@ public class QnaService {
 			result = fileDAO.setWrite(files);
 		}
 		return result;
+		*/
+		
+		int result = qnaDAO.setWrite(qnaVO);
+		ArrayList<FileVO> files = new ArrayList<FileVO>();
+		String realPath = session.getServletContext().getRealPath("/resources/qna");
+		System.out.println("realPath : " + realPath);
+		
+		for(MultipartFile multipartFile : f1) {
+			String fname = fileSaver.saveFile(realPath, multipartFile);
+			FileVO fileVO = new FileVO();
+			fileVO.setNum(qnaVO.getNum());
+			fileVO.setFname(fname);
+			fileVO.setOname(multipartFile.getOriginalFilename());
+			files.add(fileVO);
+		}
+		fileDAO.setWrite(files);
+		
+		return result;
+		
 	}
 	
 	//delete
