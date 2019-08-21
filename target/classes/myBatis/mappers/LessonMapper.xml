@@ -70,7 +70,7 @@
  		order by reg_date desc
  	</select>
  	
- 	<select id="getSearchList" resultMap="LessonResult" parameterType="java.util.Map">
+<!--  	<select id="getSearchList" resultMap="LessonResult" parameterType="java.util.Map">
  	 	select *
         from classes C, lessonfiles L, timetable T
  		where (C.class_id = L.class_id)
@@ -81,7 +81,7 @@
  		</foreach>
  		order by C.reg_date desc
  		
- 	</select>
+ 	</select> -->
  	
  	
  	<resultMap type="LessonVO" id="LessonResult">
