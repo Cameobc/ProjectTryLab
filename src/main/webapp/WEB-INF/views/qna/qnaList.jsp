@@ -65,14 +65,6 @@
 		        <td style="padding-top: 20px; padding-left:50px; cursor: pointer;" onclick="location.href='./qnaSelect?num=${dto.num}'">
 		        	<c:forEach begin="1" end="${dto.depth}">&nbsp;&nbsp;&nbsp;[RE] </c:forEach>${dto.title}
 		        </td>
-		        
-<%-- 			<td>
-					<c:forEach begin="1" end="${dto.depth}">[RE] </c:forEach>
-					<a href="./qnaSelect?num=${dto.num}">${dto.title}</a>
-				</td> --%>		        
-		        
-		        
-		        
 		        <td style="padding-top: 20px; width:120px; text-align: center; color: #999;">${dto.writer}</td>
 		        <td style="padding-top: 20px; width:120px; text-align: center; color: #999;">${dto.reg_date}</td>
 		        <td style="padding-top: 20px; width:120px;">${dto.hit}</td>
