@@ -1,4 +1,4 @@
-package com.project.trylab;
+﻿package com.project.trylab;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +9,24 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.lesson.CategoryVO;
 import com.project.lesson.LessonService;
 import com.project.lesson.LessonVO;
+
 import com.project.lesson.TimeTableVO;
+
+import com.project.util.PageMaker;
+
 
 import oracle.net.aso.l;
 
@@ -119,9 +127,9 @@ public class LessonController {
 	
 	///////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="lessonList", method=RequestMethod.GET)
-	public ModelAndView lessonList(HttpSession session) throws Exception {
+	public ModelAndView lessonList(HttpSession session, PageMaker pageMaker) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<LessonVO> lessons = lessonService.getList();
+		List<LessonVO> lessons = lessonService.getList(pageMaker);
 		
 		mv.addObject("lessons",lessons);
 		mv.setViewName("lessons/lessonList");
@@ -168,6 +176,13 @@ public class LessonController {
         return "lessons/jusoPopup";
 
     }
+	
+	@RequestMapping(value="lessonResult", method = RequestMethod.GET)
+	@ResponseBody
+	public List<LessonVO> getSearchList(String[] location) throws Exception {
+		System.out.println(location[0]);
+		return lessonService.getSearchList(location);
+	}
 	
 	
 	

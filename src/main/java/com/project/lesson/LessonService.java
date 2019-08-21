@@ -1,4 +1,4 @@
-package com.project.lesson;
+﻿package com.project.lesson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.util.FileSaver;
+import com.project.util.PageMaker;
 
 @Service
 public class LessonService {
@@ -147,8 +148,8 @@ public class LessonService {
 	}
 
 	// 수업리스트
-	public List<LessonVO> getList() throws Exception {
-		return lessonDAO.getList();
+	public List<LessonVO> getList(PageMaker pageMaker) throws Exception {
+		return lessonDAO.getList(pageMaker);
 	}
 
 	// 수업등록
@@ -230,8 +231,24 @@ public class LessonService {
 		return lessonDAO.getCategory();
 	}
 	
+
 	//date에 따른 시간정보 
 	public List<TimeTableVO> getSelectTime(TimeTableVO tVO) throws Exception{
 		return lessonDAO.getSelectTime(tVO);
 	}
+
+	public List<LessonVO> getSearchList(String[] location) throws Exception {
+		return lessonDAO.getSearchList(location);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

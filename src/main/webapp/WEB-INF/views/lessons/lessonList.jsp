@@ -13,9 +13,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="../resources/assets/css/main.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <c:import url="../temp/header.jsp" />
 <c:import url="../temp/font.jsp"/>
 <style type="text/css">
+
+
 ul {
 	margin: 0;
 }
@@ -87,12 +92,81 @@ img{
 .footer_text{
 	color:white;
 }
+
+.list_wrap {
+	width:100%; height: 200px; margin-left: 0px;
+}
+.loc_wrap {
+	height: 200px; margin : 0 30% 0 40%;
+	float: right;
+}
+
+.loc {
+	width : 80px; height : 40px !important;
+	background-color: white; border: 1px solid #f6755e;
+	color : black; padding: 0px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; 
+	text-align: center;  font-size: small;
+	
+}
+.selected {
+	background-color: #f6755e;
+	color : white;
+	border: 1px solid white;
+}
+
 </style>
 </head>
 <body id="top">
 
 	<!-- Main -->
 	<div id="main">
+		<div class="list_wrap">
+			<div class="loc_wrap">
+			<form action="./lessonList" method="GET">
+		
+				<input type="button" class="loc col-sm-4" name="location" value="종로구">
+				<input type="button" class="loc col-sm-4" name="location" value="중구">
+				<input type="button" class="loc col-sm-4" name="location" value="용산구">
+				<input type="button" class="loc col-sm-4" name="location" value="성동구">
+				<input type="button" class="loc col-sm-4" name="location" value="광진구">
+				<input type="button" class="loc col-sm-4" name="location" value="동대문구">
+				<input type="button" class="loc col-sm-4" name="location" value="중랑구">
+				<input type="button" class="loc col-sm-4" name="location" value="성북구">
+				<input type="button" class="loc col-sm-4" name="location" value="강북구">
+				<input type="button" class="loc col-sm-4" name="location" value="도봉구">
+				<input type="button" class="loc col-sm-4" name="location" value="노원구">
+				<input type="button" class="loc col-sm-4" name="location" value="은평구">
+				<input type="button" class="loc col-sm-4" name="location" value="서대문구">
+				<input type="button" class="loc col-sm-4" name="location" value="마포구">
+				<input type="button" class="loc col-sm-4" name="location" value="양천구">
+				<input type="button" class="loc col-sm-4" name="location" value="강서구">
+				<input type="button" class="loc col-sm-4" name="location" value="구로구">
+				<input type="button" class="loc col-sm-4" name="location" value="금천구">
+				<input type="button" class="loc col-sm-4" name="location" value="영등포구">
+				<input type="button" class="loc col-sm-4" name="location" value="동작구">
+				<input type="button" class="loc col-sm-4" name="location" value="관악구">
+				<input type="button" class="loc col-sm-4" name="location" value="서초구">
+				<input type="button" class="loc col-sm-4" name="location" value="강남구">
+				<input type="button" class="loc col-sm-4" name="location" value="송파구">
+				<input type="button" class="loc col-sm-4" name="location" value="강동구">
+			
+				<input type="submit" value="검색" >
+				
+			</form>
+		
+			</div>
+		
+		
+		
+		
+		
+		</div>
+	
+	
+	
+	
+	
 		<div class="category_wrap">
 			<ul class="category">
 				<li class="cate"><a>디자인</a></li>
@@ -136,6 +210,42 @@ img{
 	</div>
 
 	<c:import url="../temp/footer.jsp" />
+	
+<script type="text/javascript">
 
+
+	$('.loc').click(function() {
+		$(this).toggleClass("selected");
+	});
+
+	var locations=[];
+	$("#loc_search").click(function() {
+		$('.selected').each(function() {
+			var location=$(this).val();
+			locations.push(location);
+		});
+	
+
+
+
+});
+
+
+
+
+</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>
