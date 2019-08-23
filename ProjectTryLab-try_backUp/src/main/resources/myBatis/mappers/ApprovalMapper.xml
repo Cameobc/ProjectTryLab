@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="ApprovalMapper">
+
+	<select id="getTotalCount" resultType="Integer">
+		select count(id) from approval
+	</select>
+
+
+	<insert id="tutorRequest" parameterType="ApprovalVO">
+		insert into approval 
+		values (#{id}, #{nickName}, #{confirmType}, #{college}, #{major}, #{kind}, #{colStatus})
+	</insert>
+
+	<select id="tutorApproval" parameterType="PageMaker" resultMap="ApprovalList">
+		select * from
+		(select rownum R, T.* from 
+		(select A.id, G.grade, A.nickname, A.confirmType, A.college, A.major, A.kind, A.colstatus, L.fname Lfname, C.fname Cfname, M.fname Mfname from approval A, License L, Certificate C, MemberFile M, Member G 
+        where A.id=L.id
+        and L.id=C.id
+        and C.id=M.id
+        and M.id=G.id
+		order by C.num asc) T)
+		where R between #{startRow} and #{lastRow}
+	
+	</select>
+
+	<resultMap type="ApprovalVO" id="ApprovalList">
+		<id property="id" column="id" />
+		<result property="nickName"	column="nickName" />
+		<result property="confirmType"	column="confirmType" />
+		<result property="college"	column="college" />
+		<result property="major"	column="major" />
+		<result property="kind"	column="kind" />
+		<result property="colStatus"	column="colStatus" />
+		<association property="licenseVO" resultMap="licenseResult" javaType="LicenseVO" />
+		<association property="certificateVO" resultMap="certificateResult" javaType="CertificateVO" />
+		<association property="memberFileVO" resultMap="memberFile" javaType="MemberFileVO" />
+		<association property="memberVO" resultMap="memberInfo" javaType="MemberVO" />
+	</resultMap>
+	<resultMap type="LicenseVO" id="licenseResult">
+			<id property="num" column="num" />
+			<result property="id" column="id"/>
+			<result property="oname" column="oname" />
+			<result property="fname" column="Lfname"/>
+	</resultMap>
+	<resultMap type="CertificateVO" id="certificateResult">
+			<id property="num" column="num" />
+			<result property="id" column="id"/>
+			<result property="oname" column="oname" />
+			<result property="fname" column="Cfname"/>
+	</resultMap>
+	<resultMap type="MemberFileVO" id="memberFile">
+		<id property="fnum" column="fnum" />
+		<result property="id" column="id"/>
+		<result property="fname" column="Mfname"/>
+		<result property="oname" column="oname"/> 
+	</resultMap>
+	<resultMap type="MemberVO" id="memberInfo">
+		<id property="id" column="id" />
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="gender" column="gender"/>
+		<result property="grade" column="grade"/>
+	</resultMap>
+	
+
+	<select id="getSelect" parameterType="String" resultMap="ApprovalList" resultType="ApprovalVO">
+		select A.id, G.grade, G.name, A.nickname, A.confirmType, A.college, A.major, A.kind, A.colstatus, 
+		L.fname Lfname, C.fname Cfname, M.fname Mfname from approval A, License L, Certificate C, MemberFile M, Member G
+        where A.id=L.id
+        and L.id=C.id
+        and C.id=M.id
+        and M.id=G.id
+        and A.id=#{id}
+	</select>
+	
+	<delete id="regDelete" parameterType="String">
+		delete from approval where id=#{id}
+
+	</delete>
+	
+ 	<update id="tutorUpdate" parameterType="String">
+ 		update approval
+ 		set confirmType=#{confirmType}, 
+ 		
+ 		where id=#{id}
+ 	</update>
+ 
+
+
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

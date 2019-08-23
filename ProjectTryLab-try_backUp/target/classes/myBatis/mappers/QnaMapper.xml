@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="QnaMapper">
+
+
+	<!-- hit -->
+	<update id="updateHit" parameterType="Integer">
+		update qna set hit = hit + 1
+		where num=#{num}
+	</update>
+
+	<!-- write -->
+	<insert id="setWrite" parameterType="QnaVO">
+		<selectKey keyProperty="num" resultType="Integer" order="BEFORE">
+			select qna_seq.nextval from dual
+		</selectKey>
+		insert into qna 
+		values(#{num}, #{title}, #{writer}, #{contents}, #{email, jdbcType=VARCHAR}, sysdate, 0, ${num}, 0, 0)
+	</insert>
+	
+	<!-- update -->
+	<update id="setUpdate" parameterType="QnaVO">
+		update qna set title=#{title}, writer=#{writer}, contents=#{contents} where num=#{num}
+	</update>
+	
+	<!-- delete -->
+	<delete id="setDelete" parameterType="Integer">
+		delete qna where num=#{num}
+	</delete>
+	
+	<!-- select --> <!-- 밑에 resultmap id불러옴(qnaResult) -->
+	<select id="getSelect" parameterType="Integer" resultMap="qnaResult">
+		select * from qna Q FULL JOIN files F
+		on (Q.num = F.num)
+		where Q.num=#{num}
+	</select>
+	
+	
+	<!-- result map -->
+	<!-- property:VO변수명
+		 column:DB컬럼명 -->
+	<resultMap type="QnaVO" id="qnaResult">
+		<id property="num" column="num" /> 		<!-- pk -->
+		<result property="title" column="title"/>
+		<result property="writer" column="writer"/>
+		<result property="contents" column="contents"/>
+		<result property="email" column="email"/>
+		<result property="reg_date" column="reg_date"/>
+		<result property="hit" column="hit"/>
+		<result property="ref" column="ref"/>
+		<result property="step" column="step"/>
+		<result property="depth" column="depth"/>
+		<collection property="files" resultMap="fileResult" javaType="java.util.List" ofType="FileVO" />
+	</resultMap>
+	
+	<!-- fileResult -->
+	<resultMap type="FileVO" id="fileResult">
+		<id property="fnum" column="fnum"/>
+		<result property="num" column="num"/>
+		<result property="fname" column="fname"/>
+		<result property="oname" column="oname"/>
+	</resultMap>
+	
+	
+	<!-- list -->
+	<select id="getList" parameterType="PageMaker" resultType="QnaVO" >
+		select * from
+		(select rownum R, Q.* from
+		(select * from qna
+		where
+		<choose>
+			<when test="kind = 1">
+				title
+			</when>
+			<when test="kind = 2">
+				writer
+			</when>
+			<otherwise>
+				contents
+			</otherwise>
+		</choose>
+		like '%'||#{search}||'%'
+		order by ref desc, step asc) Q)
+		where R between #{startRow} and #{lastRow}
+	</select>
+
+	<!-- totalCount -->
+	<select id="getTotalCount" parameterType="PageMaker" resultType="Integer">
+		select count(num) from qna
+		<choose>
+			<when test="kind = 1">
+				where title
+			</when>
+			<when test="kind = 2">
+				where writer
+			</when>
+			<otherwise>
+				where contents
+			</otherwise>
+		</choose>
+		like '%' || #{search} || '%'
+	</select>
+
+	<!-- 답글 -->	
+	<sql id="subRef">
+	<![CDATA[
+		select ref from qna where num=#{num}
+	]]>
+	</sql>
+	
+	<sql id="subStep">
+		select step from qna where num=#{num}
+	</sql>
+	
+	<!-- reply -->
+	<insert id="setReply" parameterType="QnaVO">
+		insert into qna values 
+		(
+			qna_seq.nextval, #{title}, #{writer}, #{contents}, #{email, jdbcType=VARCHAR}, sysdate, 0,
+			(<include refid="subRef" />),
+			(<include refid="subStep" />)+1,
+			(select depth from qna where num=#{num})+1
+		)
+	</insert>
+
+	<!-- replyUpdate -->
+	<update id="setReplyUpdate" parameterType="QnaVO">
+		update qna set step=step+1
+		where ref=(<include refid="subRef" />)
+		and step>(<include refid="subStep" />)
+	</update>
+
+
+</mapper>

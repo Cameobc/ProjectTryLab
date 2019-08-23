@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+#qna {
+	width: 90%;
+	height: 30px;
+	margin-top:7%;
+	font-size: 15px;
+    color: #ff005a;
+    font-weight: bold;
+    border-bottom: 1px solid #e6e3df;
+    padding-bottom: 50px;
+}
+#title {
+	width: 90%;
+	font-size: 24px;
+	font-weight: 400;
+   /*  padding: 45px 0 40px 0;
+    border-bottom: 1px solid #e6e3df; */
+}
+td {
+	background-color: white;
+}
+#date {
+	font-size: 16px;
+    font-weight: 200;
+    color: #999;
+    text-align: right;
+    
+}
+table {
+	width: 100%;
+}
+#contents {
+	font-size: 16px;
+    line-height: 26px;
+    color: #666;
+    white-space: pre; /* 줄바꿈처리  */
+}
+.buttons {
+	margin-left: 79%;	
+}
+#line {
+	width: 90%;
+	border-bottom: 1px solid #e6e3df;
+}
+#reply {
+	margin-left: 81%;	
+}
+#btn {
+	width:12%;
+	height:10%;
+	border: 1px solid #9c836a;
+	padding: 10px;	
+	margin: 0 auto;
+	text-align: center;
+	color: #fff;
+    background: #ff005a;
+    font-weight:bold;
+    cursor: pointer; /* 마우스 손가락모양 */
+    margin-bottom: 30px;
+}
