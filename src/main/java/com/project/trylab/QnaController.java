@@ -51,22 +51,6 @@ public class QnaController {
 			mv.setViewName("common/messageMove");
 		}
 		return mv;
-/*		
-		if(bindingResult.hasErrors()) {
-			mv.setViewName("qna/qnaWrite");
-		}else {
-			
-			int result = qnaService.setWrite(qnaVO, session, f1);
-			if(result>0) {
-				mv.setViewName("redirect:./qnaList");
-			}else {
-				mv.addObject("message", "글쓰기 실패");
-				mv.addObject("path", "./qnaList");
-				mv.setViewName("common/messageMove");
-			}
-		}
-		return mv;
-		*/
 	}
 	
 	//delete

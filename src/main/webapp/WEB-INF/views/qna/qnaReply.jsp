@@ -16,7 +16,7 @@
 	
 			<div class="from-group">
 				<label for="title">Title:</label>
-		    	<input type="text" class="form-control" id="title" name="title">
+		    	<input type="text" class="form-control" id="title" name="title" value="${dto.title}">
 			</div>
 			
 			<div class="from-group">
