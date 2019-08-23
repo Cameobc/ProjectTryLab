@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
@@ -11,9 +11,12 @@
 	<head>
 		<title>Full Motion</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="./resources/assets/css/main.css" />
+		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		
 <c:import url="./temp/header.jsp"  />
+<c:import url="./temp/font.jsp"/>
 <style type="text/css">
 	
 	ul {
@@ -27,11 +30,33 @@
 	}
 	.cate {
 		width : 140px; height:50px; border: 1px black;
-		 background: #e6e6e6; float: left; vertical-align: middle;
+		 background: #e6e6e6; float: left; vertical-align: middle; font-family: 'Youth';
 	} 
 	.cate>a {
 		color :black; vertical-align: middle; text-align: center; line-height: 3em; font-weight: normal; font-size: 16px;
+		
 	}
+	.image .fit{
+	height:300px;
+}
+img{
+	height:300px;
+}
+.box{
+	background-color: white;
+	margin-bottom: 30px;
+}
+.inner{
+	clear:both;
+}
+.inner2{
+	padding:5px;
+	font-family: 'Youth'; 
+	color:black;
+}
+ul {
+	margin: 0;
+}
 
 </style>
 	</head>
@@ -52,20 +77,6 @@
 					</div>
 				</section>
 
-				
-			<!-- menu -->				
-				<div class="menu">
-					<div><a href="./notice/noticeList">NOTICE </a></div>
-					<div><a href="./qna/qnaList">QNA</a></div>
-					<div><a href="./member/memberlogoin">Login</a></div>	
-					<div><a href="./member/memberjoin">JOIN</a></div>
-				
-				</div>				
-				
-				
-
-
-
 			<!-- Main -->
 				<div id="main">
 					<div class="category_wrap">
@@ -84,65 +95,28 @@
 
 					<!-- Boxes -->
 						<div class="thumbnails">
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="./resources/images/pic01.jpg" alt="" /></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a>
+							<c:forEach items="${lessons}" var="les" begin="0" end="5">
+								<div class="box">
+									<a href="./lessons/lessonSelect?class_id=${les.class_id }" class="image fit">
+										<c:forEach items="${les.file }" var="file">
+											<c:if test="${file.thumbnail eq 1 }">
+												<img src="./resources/lessons/${file.fname }"/> 
+											</c:if>
+										</c:forEach>
+										<div class="inner2">
+											<div style="float:left; padding-top:5px">
+												<img class="img-circle" src="./resources/images/Person-Icon.png" style="width:50px;height:50px;">
+											</div>
+											<div style="font-size: 15px; font-weight: 400; padding-top:5px">${les.title }</div>
+											<div style="float:right">${les.price }</div>
+										</div>
+									</a>
 								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="./resources/images/pic02.jpg" alt="" /></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button style2 fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="./resources/images/pic03.jpg" alt="" /></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button style3 fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="./resources/images/pic04.jpg" alt="" /></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button style2 fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="./resources/image fit"><img src="images/pic05.jpg" alt="" /></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button style3 fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="./resources/images/pic06.jpg" alt="" /></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-				</div>
+							</c:forEach>
+							
+						</div><!-- end of thumnail -->
+					</div><!-- end of inner -->
+				</div><!-- end of main -->
 
 <c:import url="./temp/footer.jsp" />
 

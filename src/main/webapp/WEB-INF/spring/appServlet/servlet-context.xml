@@ -1,15 +1,14 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+<util:properties id="purchase" location="classpath:properties/*.properties"></util:properties>
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
@@ -22,36 +21,55 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-		<beans:property name="order" value="1"/>
-
+		<beans:property name="order" value="1" /> <!-- value = 누굴 가장 먼저 볼건지 default:0 -->
 	</beans:bean>
 	
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0" />
 	
 	</beans:bean>
-
+	
 		<!-- properties 파일 설정 -->
 	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
-		<beans:property name="locations" value="classpath:properties/*.properties" />
+		<beans:property name="locations">
+			<beans:list>
+				<beans:value>classpath:properties/DataSource.properties</beans:value>
+				<beans:value>classpath:properties/message.properties</beans:value>
+				<beans:value>classpath:properties/purchase.properties</beans:value>
+				<beans:value>classpath:properties/mail.properties</beans:value>
+			 </beans:list>
+		</beans:property>
 	</beans:bean>	
 	
-	<!-- 성현    --> 
+	
+	<!-- 하림 -->
+	<context:component-scan base-package="com.project.lesson" />
+	<context:component-scan base-package="com.project.file" />
+	<context:component-scan base-package="com.project.tutor" />
+	
+	<!-- 성현 -->
+	<context:component-scan base-package="com.project.notice" />
+	<context:component-scan base-package="com.project.qna" />
+	<context:component-scan base-package="com.project.file" />
+	
+	
+	<!-- 승한 -->
+	
+	<!-- 민지 -->
+	<context:component-scan base-package="com.project.purchase" />
+	<context:component-scan base-package="com.project.mail" />
+
+	<!-- 유라 -->
 	<context:component-scan base-package="com.project.trylab" />
+	<context:component-scan base-package="com.project.member" />
+	<context:component-scan base-package="com.project.memberProfile" />
+	<context:component-scan base-package="com.project.admin" />
 	<context:component-scan base-package="com.project.util" />
-	
-	<!-- 유라    --> 
-	
-	<!-- 하림    --> 
-	
-	<!-- 승한    --> 
-
-
-	
-	<!-- 공통  -->
-	
+	<context:component-scan base-package="com.project.approval"/>
+	<context:component-scan base-package="com.project.license" />
+	<context:component-scan base-package="com.project.certificate" />
 	<!-- xml 파일 읽어들이기 -->
 	<beans:import resource="classpath:/spring/*"/>
-	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+	<beans:import resource="spring-security.xml"/>
 	
 </beans:beans>

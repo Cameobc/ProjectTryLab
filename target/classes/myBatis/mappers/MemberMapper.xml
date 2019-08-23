@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="MemberMapper">
+<!-- totalCount -->
+<select id="totalCount" parameterType="MemberVO" resultType="Integer">
+	SELECT COUNT(*) FROM QNA WHERE
+			REF=(SELECT REF FROM QNA WHERE WRITER=#{search})
+</select>
+
+<!-- 멤버 정보 업데이트 -->
+<update id="setUpdate" parameterType="MemberVO">
+	UPDATE MEMBER SET 
+	PHONE=#{phone}, EMAIL=#{email}, GENDER=#{gender}
+	WHERE ID=#{id}
+</update>
+
+<!-- 나의 문의 내역 조회 -->
+<select id="getQnaList" parameterType="PageMaker" resultType="QnaVO" >
+	SELECT * FROM
+		(SELECT ROWNUM R, Q.* FROM
+			(SELECT * FROM QNA WHERE
+			REF=(SELECT REF FROM QNA WHERE WRITER=#{search})
+			ORDER BY NUM DESC, STEP ASC) 
+		Q)
+	WHERE R BETWEEN #{startRow} and #{lastRow}
+</select>
+
+<!-- 마이페이지 정보 조회 -->
+<select id="selectOne" parameterType="String" resultMap="member">
+	SELECT M.*, F.* FROM MEMBER M 
+	JOIN MEMBERFILE F ON (M.ID=F.ID)
+	WHERE M.ID=#{id}
+</select>
+
+<!-- 비밀번호 발급 위해 아이디&이메일 조회 -->
+<select id="findPw" parameterType="MemberVO" resultType="Integer">
+	SELECT COUNT(*) FROM MEMBER
+	WHERE ID=#{id} AND EMAIL=#{email}
+</select>
+
+<!-- 비밀번호 업데이트 -->
+<update id="setUpdatePw" parameterType="MemberVO">
+	UPDATE MEMBER SET PW=#{pw}
+	WHERE ID=#{id}
+</update>
+
+<!-- 아이디 찾기 -->
+<select id="getId" parameterType="MemberVO" resultType="String">
+	SELECT ID FROM MEMBER 
+	WHERE EMAIL=#{email}
+</select>
+
+<!-- 이메일 확인 -->
+<update id="updateGrade" parameterType="MemberVO">
+	UPDATE MEMBER SET GRADE=2 
+	WHERE ID=#{id} AND MAIL_KEY=#{mail_key}
+</update>
+
+<select id="getCount" resultType="java.lang.Integer" parameterType="PageMaker">
+	select count(id) from member
+	where grade!=0 and
+	<choose>
+	<when test="kind==1">
+		id
+	</when>
+	<when test="kind==2">
+		email
+	</when>
+	<otherwise>
+		grade
+	</otherwise>
+	</choose>
+	like '%'||#{search}||'%'
+
+</select>
+
+<!-- 회원 가입 -->
+<insert id="setWrite" parameterType="MemberVO">
+	 insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{gender}, 0, #{mail_key})
+</insert>
+ 
+ <!-- 중복확인 -->
+ <select id="checkMember" parameterType="java.util.Map" resultType="Integer">
+ 	SELECT COUNT(*) FROM MEMBER WHERE
+ 	<choose>
+ 		<when test="name=='id'">
+ 		ID=#{id}
+ 		</when>
+		<when test="name=='phone'">
+		PHONE=#{id}
+		</when>
+		<otherwise>
+		EMAIL=#{id}
+		</otherwise>
+ 	</choose>
+ </select>
+
+ <!-- 탈퇴 -->
+ <delete id="setDelete" parameterType="java.util.List">
+ 	delete member where id = #{id}
+ </delete>
+ 
+	<resultMap type="MemberVO" id="member">
+		<id property="id" column="id" />
+		<result property="pw" column="pw"/>
+		<result property="name" column="name" />
+		<result property="email" column="email"/>
+		<result property="phone" column="phone" />
+		<result property="gender" column="gender" />
+		<result property="grade" column="grade"/>
+		<result property="mail_key" column="mail_key"/>
+ 		<association property="memberFileVO" resultMap="fileResult" javaType="MemberFileVO" />
+ 	 
+ </resultMap>
+ <resultMap type="MemberFileVO" id="fileResult">
+ 	<id property="fnum"	column="fnum" />
+
+ 	<result property="fname" column="fname" />
+ 	<result property="oname" column="oname" />
+ </resultMap>
+ 
+ <!-- 로그인 -->
+ <select id="getSelect" resultMap="member" parameterType="MemberVO" resultType="MemberVO">
+ 	select M.*, F.*
+ 	from member M Full Join MemberFile F on (M.id=F.id)
+ 	where M.id=#{id}
+
+ </select>
+
+ 
+ 
+ 
+ 
+
+ 
+ </mapper>

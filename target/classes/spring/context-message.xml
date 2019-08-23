@@ -1,10 +1,15 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource">
+<!-- 	<bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource"> -->
+	<!-- src/main/resources/properties/message.properties -->
+		<!-- <property name="basename" value="/properties/message"></property> --> <!-- 파일이 하나 -->
+		
 	
+	<bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource">
+		<!-- <property name="basename" value="classpath:/properties/message"></property> -->
 		 <property name="basenames">
 			<list>
 				<value>classpath:/properties/message</value>
@@ -12,7 +17,7 @@
 			</list>
 		</property> 
 			<property name="defaultEncoding" value="UTF-8"></property>
-	
+		<!-- 파일이 변경되었을 때 얼마 뒤에 확인을 하러 갈 것인지. 초 단위로 변경을 확인 -->
 		<property name="cacheSeconds" value="5"></property>
 	</bean>
 </beans>

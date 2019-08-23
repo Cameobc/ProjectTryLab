@@ -1,60 +1,46 @@
 package com.project.util;
 
 public class PageMaker {
-
-	private int perPage = 10; //setter
-	private Integer curPage; //getter,setter
-	private String kind; //getter,setter
-	private String search; //getter,setter
+	// 페이지 처리
+	
+	
+	private int perPage=10;
+	
+	private Integer curPage;
+	private String kind;	// title, writer, contents
+	private String search;
+	
+	//page
+	private int totalBlock;
+	private int curBlock;
+	private int startNum;
+	private int lastNum;
+	
+	//row
+	private int startRow;
+	private int lastRow;
 	
 	public void setPerPage(int perPage) {
 		this.perPage = perPage;
 	}
-	public Integer getCurPage() {
-		if(curPage == null) {
-			this.curPage = 1;
-		}
-		return curPage;
+	public void setTotalBlock(int totalBlock) {
+		this.totalBlock = totalBlock;
 	}
-	public void setCurPage(Integer curPage) {
-		this.curPage = curPage;
-		if(curPage == null) {
-			this.curPage = 1;
-		}
+	public void setCurBlock(int curBlock) {
+		this.curBlock = curBlock;
 	}
-	public String getKind() {
-		return kind;
+	public void setStartNum(int startNum) {
+		this.startNum = startNum;
 	}
-	public void setKind(String kind) {
-		this.kind = kind;
+	public void setLastNum(int lastNum) {
+		this.lastNum = lastNum;
 	}
-	public String getSearch() {
-		if(search == null) {
-			this.search = "";
-		}
-		return search;
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
 	}
-	public void setSearch(String search) {
-		this.search = search;
+	public void setLastRow(int lastRow) {
+		this.lastRow = lastRow;
 	}
-	
-	//rownum
-	private int startRow; //getter
-	private int lastRow; //getter
-	
-	public int getStartRow() {
-		return startRow;
-	}
-	public int getLastRow() {
-		return lastRow;
-	}
-	
-	//page
-	private int totalBlock; //getter
-	private int curBlock; //getter
-	private int startNum; //getter
-	private int lastNum; //getter
-
 	public int getTotalBlock() {
 		return totalBlock;
 	}
@@ -67,42 +53,86 @@ public class PageMaker {
 	public int getLastNum() {
 		return lastNum;
 	}
+	public Integer getCurPage() {
+		if(this.curPage == null) {
+			this.curPage=1;
+		}
+		return curPage;
+	}
+	public void setCurPage(Integer curPage) {
+		this.curPage = curPage;
+		if(curPage==null)
+			this.curPage=1;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+	public String getSearch() {
+		if(search==null) {
+			this.search="";
+		}
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	
-	/////////////////////////////////////////////////////////////////////////
+	
+	public int getStartRow() {
+		return startRow;
+	}
+	public int getLastRow() {
+		return lastRow;
+	}
+	
+	//startRow, lastRow
 	public void makeRow() {
-		this.startRow = (this.getCurPage()-1) * this.perPage + 1; //startRow
-		this.lastRow = this.curPage * perPage; //lastRow
+		this.startRow=(this.getCurPage()-1)*perPage+1;
+		this.lastRow = this.curPage*perPage;
 	}
 	
 	public void makePage(int totalCount) {
-		int totalPage = totalCount / perPage; //totalPage
-		if(totalCount % perPage != 0) {
+		//1. 전체 글의 개수
+		//2. totalPage 수 구하기
+		int totalPage =totalCount/perPage;
+		if(totalCount%perPage !=0) {
 			totalPage++;
 		}
-		
-		int perBlock = 5;
-		this.totalBlock = totalPage / perBlock; //totalBlock
-		if(totalPage % perBlock != 0) {
+		//3. totalBlock
+		int perBlock=5;
+		this.totalBlock = totalPage/perBlock;
+		if(totalPage%perBlock !=0) {
 			this.totalBlock++;
 		}
-		
-		this.curBlock = curPage / perBlock; //curBlock
-		if(this.curPage % perBlock != 0) {
-			curBlock++;
+		//4. curPage 를 이용해서  curBlock 
+		this.curBlock=curPage/perBlock;
+		if(this.curPage%perBlock !=0) {
+			this.curBlock++;
 		}
+		//5. startNum, lastNum
+		this.startNum=(this.curBlock-1)*perBlock+1;
+		this.lastNum=this.curBlock*perBlock;
 		
-		this.startNum = (this.curBlock-1) * perBlock+1; //startNum
-		this.lastNum = this.curBlock * perBlock; //lastNum
-		
-		if(this.curBlock == totalBlock) {
-			this.lastNum = totalPage;
+		//6. 현재 블럭curBlock 이 마지막 블럭totalBlock 일 때
+		if(this.curBlock==totalBlock) {
+			this.lastNum=totalPage;
 		}
-		
-		
-		
 	}
 	
 	
 	
-	 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
